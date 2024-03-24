@@ -10,42 +10,27 @@
     font-size: 1.5em;
     font-weight: bold;
   }
-  
-  .menu-links,
-  .user-options {
-    display: flex;
-    gap: 1em;
-  }
-  
-  .menu-links a,
-  .user-options a {
+
+  .menu-links button,
+  .user-options button {
     color: #495057;
-    text-decoration: none;
-  }
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   
-  .menu-links a:hover,
-  .user-options a:hover {
-    color: #212529;
+    &:hover {
+      color: #212529;
+      background-color: #e9ecef;
+    }
+  
+    &:active {
+      color: #212529;
+      background-color: #ced4da;
+    }
+  
+    &.selected {
+      color: #fff;
+      background-color: #495057;
+    }
   }
-
-  .menu-links a,
-.user-options a {
-  color: #495057;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    color: #212529;
-    background-color: #e9ecef;
-  }
-
-  &:active {
-    color: #212529;
-    background-color: #ced4da;
-  }
-
-  &.selected {
-    color: #fff;
-    background-color: #495057;
-  }
-}
