@@ -9,6 +9,4 @@ import { MenuComponent } from "./menu/menu.component";
     styleUrl: './app.component.scss',
     imports: [RouterOutlet,MenuComponent]
 })
-export class AppComponent {
-    title = 'Angular';
-}
+export class AppComponent {}

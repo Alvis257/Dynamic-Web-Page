@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { MenuComponent } from './menu/menu.component';
-import { BlankFormComponent } from './blank-form/blank-form.component';
-
+import { CommonModule } from '@angular/common';
+import { MainModule } from './main/main.modul';
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent,
-    RouterModule
-  ]
+    RouterModule,
+  ],
+  imports: [
+    CommonModule,
+    MainModule
+  ],
 })
-export class AppModule { }
+export class AppModule { } 

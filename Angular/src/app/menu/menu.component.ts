@@ -7,17 +7,37 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [RouterModule],
   templateUrl: './menu.component.html',
-  styleUrl: './menu.component.scss'
+  styleUrl: './menu.component.scss',
+  imports: [RouterModule],
 })
+
 export class MenuComponent {
   constructor(private router: Router, private route: ActivatedRoute) {
     this.router.events.subscribe(() => {
       if (this.router.url === '/mani-dokumenti') {
         console.log('BlankFormComponent for "mani-dokumenti" is active');
       }
-      // Add similar checks for other routes...
+    });
+    this.router.events.subscribe(() => {
+      if (this.router.url === '/visi-dokumenti') {
+        console.log('BlankFormComponent for "visi-dokumenti" is active');
+      }
+    });
+    this.router.events.subscribe(() => {
+      if (this.router.url === '/datu-kopas') {
+        console.log('BlankFormComponent for "datu-kopas" is active');
+      }
+    });
+    this.router.events.subscribe(() => {
+      if (this.router.url == '/integracijas') {
+        console.log('BlankFormComponent for "integrācijas" is active');
+      }
+    });
+    this.router.events.subscribe(() => {
+      if (this.router.url === '/profils') {
+        console.log('BlankFormComponent for "profils" is active');
+      }
     });
   }
 }
