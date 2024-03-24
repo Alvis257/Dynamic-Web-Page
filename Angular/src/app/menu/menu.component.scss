@@ -1,0 +1,51 @@
+.menu {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .website-name {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  
+  .menu-links,
+  .user-options {
+    display: flex;
+    gap: 1em;
+  }
+  
+  .menu-links a,
+  .user-options a {
+    color: #495057;
+    text-decoration: none;
+  }
+  
+  .menu-links a:hover,
+  .user-options a:hover {
+    color: #212529;
+  }
+
+  .menu-links a,
+.user-options a {
+  color: #495057;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    color: #212529;
+    background-color: #e9ecef;
+  }
+
+  &:active {
+    color: #212529;
+    background-color: #ced4da;
+  }
+
+  &.selected {
+    color: #fff;
+    background-color: #495057;
+  }
+}
