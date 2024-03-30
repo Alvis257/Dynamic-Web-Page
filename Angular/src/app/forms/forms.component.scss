@@ -1,0 +1,24 @@
+.field {
+    margin-bottom: 1em;
+  }
+  
+  .input,
+  .checkbox {
+    width: 100%;
+    padding: 0.5em;
+    box-sizing: border-box;
+  }
+  
+  .button,
+  .submit {
+    padding: 0.5em 1em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .button:hover,
+  .submit:hover {
+    background-color: #0056b3;
+  }

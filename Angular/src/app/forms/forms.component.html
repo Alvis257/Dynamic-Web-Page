@@ -1,3 +1,10 @@
-<p>
-      forms works!
-</p>
+<div *ngIf="form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div *ngFor="let field of formData">
+                  <label>{{ field.name }}</label>
+                  <input *ngIf="field.type === 'text' || field.type === 'email' || field.type === 'password'" type="{{field.type}}" [formControlName]="field.name">
+                  <input *ngIf="field.type === 'checkbox'" type="checkbox" [formControlName]="field.name">
+                  <button *ngIf="field.type === 'button'">{{ field.label }}</button>
+            </div>
+      </form>
+</div>

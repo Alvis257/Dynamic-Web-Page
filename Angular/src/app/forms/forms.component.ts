@@ -1,44 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
+import { DataService } from '../data.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-forms',
   standalone: true,
   templateUrl: './forms.component.html',
-  styleUrls: ['./forms.component.scss']
+  styleUrls: ['./forms.component.scss'],
+  imports: [ReactiveFormsModule,CommonModule],
+  encapsulation: ViewEncapsulation.None
 })
 export class FormsComponent implements OnInit {
+
   form: FormGroup | undefined;
   formData: any;
   type: string | undefined;
 
-  constructor(private http: HttpClient) { }
+  constructor(private dataService: DataService) { }
 
-  getFormData(): Observable<any> {
-    let jsonFilePath = '';
-    if (this.type === 'first-form') {
-      jsonFilePath = 'app/forms/form-data.json';
-    } else if (this.type === 'second-form') {
-      jsonFilePath = 'app/forms/form-data.json';
-    }
-    return this.http.get(jsonFilePath);
-  }
-
-  ngOnInit(): void {
-    this.getFormData().subscribe(data => {
+  ngOnInit() {
+    this.dataService.getJsonData().subscribe(data => {
       this.formData = data;
       this.createForm();
     });
   }
 
   createForm(): void {
-    const group: { [key: string]: FormControl } = {}; // Add index signature to allow indexing with a string
+    const group: { [key: string]: FormControl } = {}; 
 
     this.formData.forEach((field: { type: string; name: string | number; }) => {
       if (field.type === 'button') return;
-      group[field.name as string] = new FormControl(''); // Cast field.name to string
+      group[field.name as string] = new FormControl('');
     });
 
     this.form = new FormGroup(group);
