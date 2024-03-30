@@ -1,0 +1,41 @@
+[
+    {
+      "type": "text",
+      "label": "First Name",
+      "name": "firstName",
+      "value": "",
+      "required": true
+    },
+    {
+      "type": "text",
+      "label": "Last Name",
+      "name": "lastName",
+      "value": "",
+      "required": true
+    },
+    {
+      "type": "email",
+      "label": "Email",
+      "name": "email",
+      "value": "",
+      "required": true
+    },
+    {
+      "type": "password",
+      "label": "Password",
+      "name": "password",
+      "value": "",
+      "required": true
+    },
+    {
+      "type": "checkbox",
+      "label": "Accept Terms",
+      "name": "terms",
+      "value": false,
+      "required": true
+    },
+    {
+      "type": "button",
+      "label": "Submit"
+    }
+  ]

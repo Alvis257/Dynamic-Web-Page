@@ -1,15 +1,11 @@
-import { Component, NgModule } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-
-import { RouterModule } from '@angular/router';
-
-
+import { Component } from '@angular/core';
+import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-menu',
   standalone: true,
   templateUrl: './menu.component.html',
-  styleUrl: './menu.component.scss',
-  imports: [RouterModule],
+  styleUrls: ['./menu.component.scss' ],
+  imports: [RouterModule]
 })
 
 export class MenuComponent {
@@ -25,8 +21,8 @@ export class MenuComponent {
       }
     });
     this.router.events.subscribe(() => {
-      if (this.router.url === '/datu-kopas') {
-        console.log('BlankFormComponent for "datu-kopas" is active');
+      if (this.router.url === '/formas') {
+        console.log('BlankFormComponent for "formas" is active');
       }
     });
     this.router.events.subscribe(() => {
