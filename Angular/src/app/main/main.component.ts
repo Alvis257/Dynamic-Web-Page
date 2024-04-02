@@ -32,8 +32,8 @@ const ELEMENT_DATA: DataStructure[] = [
   providers: [
     MainModule,
     {
-    provide: MatPaginatorIntl,
-    useClass: CustomMatPaginatorIntl
+      provide: MatPaginatorIntl,
+      useClass: CustomMatPaginatorIntl
     }
   ]
 })

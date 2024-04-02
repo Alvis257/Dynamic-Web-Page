@@ -1,10 +1,21 @@
 <div *ngIf="form">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div *ngFor="let field of formData">
-                  <label>{{ field.name }}</label>
-                  <input *ngIf="field.type === 'text' || field.type === 'email' || field.type === 'password'" type="{{field.type}}" [formControlName]="field.name">
-                  <input *ngIf="field.type === 'checkbox'" type="checkbox" [formControlName]="field.name">
-                  <button *ngIf="field.type === 'button'">{{ field.label }}</button>
-            </div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-field">
+        <div *ngFor="let field of formData; index as i" [class.config-mode]="configMode">
+          <label *ngIf="field.type === 'label'">{{ field.value }}</label>
+          <input *ngIf="field.type === 'text' || field.type === 'email' || field.type === 'password'" type="{{field.type}}" [formControlName]="field.name">
+          <input *ngIf="field.type === 'checkbox'" type="checkbox" [formControlName]="field.name">
+          <button *ngIf="field.type === 'button'">{{ field.label }}</button>
+          <div class="field-icons" *ngIf="configMode">
+            <mat-icon (click)="openFieldConfig(field)">settings</mat-icon>
+            <mat-icon (click)="confirmDelete(i)">delete</mat-icon>
+          </div>
+      </div>
+        <div class="config-buttons-container">
+          <button type="button" class="config-button" *ngIf="!configMode" (click)="openConfig()">Configure</button>
+          <div *ngIf="configMode">
+            <button type="button" class="save-button" (click)="saveConfig()">Save</button>
+            <button type="button" class="cancel-button" (click)="cancelConfig()">Cancel</button>
+          </div>
+        </div>
       </form>
-</div>
+    </div>

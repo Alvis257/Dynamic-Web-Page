@@ -1,24 +1,111 @@
-.field {
-    margin-bottom: 1em;
-  }
-  
-  .input,
-  .checkbox {
-    width: 100%;
-    padding: 0.5em;
-    box-sizing: border-box;
-  }
-  
-  .button,
-  .submit {
-    padding: 0.5em 1em;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .button:hover,
-  .submit:hover {
-    background-color: #0056b3;
-  }
+form {
+  position: relative;
+  padding-bottom: 40px;
+}
+.form-field {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px; 
+  box-sizing: border-box;
+  min-height: 50px;
+  position: relative;
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  width: 25%; 
+  box-sizing: border-box;
+}
+input[type="checkbox"] + label {
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  width: auto;
+  height: auto;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  margin: 10px;
+}
+
+input[type="checkbox"]:checked + label:before {
+  background-color: deepskyblue;
+  border-color: deepskyblue;
+}
+
+button {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 5px;
+  background-color: green;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: dodgerblue;
+}
+
+.config-mode {
+  border: 1px solid #3d3d3d;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.config-buttons-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+.config-button, .save-button, .cancel-button {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 5px;
+  background-color: rgb(55, 55, 247);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.save-button {
+  background-color: rgb(1, 117, 1);
+}
+
+.save-button:hover {
+  background-color: rgb(0, 200, 0); /* Light green */
+}
+
+.cancel-button {
+  background-color: rgb(175, 175, 24);
+}
+
+.cancel-button:hover {
+  background-color: rgb(200, 200, 0); /* Light yellow */
+}
+.field-icons {
+  display: inline-grid;
+  align-items: flex-start;
+  margin: 5px;
+}
+
+label {
+  margin: 5px;
+  display: inline-block;
+}
+
+
+
+

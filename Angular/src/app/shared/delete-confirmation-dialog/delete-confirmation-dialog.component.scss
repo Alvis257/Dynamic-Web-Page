@@ -1,0 +1,27 @@
+    h1 {
+        padding: 0 10px;
+  }
+  
+  div[mat-dialog-content] {
+    padding: 0 10px;
+  }
+  
+  div[mat-dialog-actions] {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  button {
+    margin-left: 10px;
+  }
+  
+  button[mat-button]:first-child {
+    background-color: orange;
+    color: black;
+  }
+  
+  button[mat-button]:last-child {
+    background-color: rgb(158, 2, 2);
+    color: white;
+  }

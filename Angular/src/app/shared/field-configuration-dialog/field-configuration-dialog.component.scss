@@ -1,0 +1,25 @@
+.cancel-button {
+    background-color: rgb(175, 175, 24);
+  }
+  
+.cancel-button:hover {
+    background-color: rgb(200, 200, 0); /* Light yellow */
+}
+h1{
+    margin: 10px;
+}
+.field-config-text {
+    margin: 10px;
+  }
+  .field-config-text input {
+    width: 100%;
+    max-width: 250px;
+    margin: 10px;
+    box-sizing: border-box;
+  }
+  .mat-dialog-content {
+    max-width: 500px;
+    max-height: 400px;
+    margin: 10px;
+    overflow: auto;
+  }
