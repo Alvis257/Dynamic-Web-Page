@@ -1,34 +1,34 @@
 [
   {
     "type": "label",
-    "name": "firstNameLabel",
-    "value": "First Name"
+    "name": "id",
+    "value": ""
   },
   {
     "type": "text",
-    "name": "firstName",
+    "name": "type",
     "value": "",
     "required": true
   },
   {
     "type": "label",
-    "name": "lastNameLabel",
-    "value": "Last Name"
+    "name": "name",
+    "value": ""
   },
   {
     "type": "text",
-    "name": "lastName",
+    "name": "status",
     "value": "",
     "required": true
   },
   {
     "type": "label",
-    "name": "emailLabel",
-    "value": "Email"
+    "name": "creationTime",
+    "value": ""
   },
   {
-    "type": "email",
-    "name": "email",
+    "type": "text",
+    "name": "responsible",
     "value": "",
     "required": true
   },

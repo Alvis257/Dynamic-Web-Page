@@ -44,7 +44,7 @@ export class MainComponent {
   @ViewChild('paginator')
   paginator!: MatPaginator;
   
-  displayedColumns: string[] = ['id','name', 'status', 'creationTime', 'responsible', 'options'];
+  displayedColumns: string[] = ['id','type','name', 'status', 'creationTime', 'responsible', 'options'];
   constructor( private _liveAnnouncer: LiveAnnouncer, private router: Router) { } 
   dataSource : MatTableDataSource<DataStructure> = new MatTableDataSource();
   
@@ -68,7 +68,7 @@ export class MainComponent {
   }
 
   view(element: any): void {
-    this.router.navigate(['/forms', element.id],{ queryParams: { type: element.type } });
+    this.router.navigate(['/forms', element.id], { queryParams: { type: element.type, element: JSON.stringify(element) } });
   }
 
   delete(element: any): void {

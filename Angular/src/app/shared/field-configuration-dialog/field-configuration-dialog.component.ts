@@ -10,10 +10,11 @@ import { FormsModule } from '@angular/forms';
     <div mat-dialog-content>
       <p class="field-config-text">Type: {{data.type}}</p>
       <p class="field-config-text">Name: <input [(ngModel)]="data.name"></p>
-      <p class="field-config-text">Value: <input [(ngModel)]="data.value"></p>
+      <p  class="field-config-text" *ngIf="IsLabel()">Value: <input [(ngModel)]="data.value"></p>
     </div>
     <div mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">Close</button>
+      <button class="save-button" mat-button (click)="onClickSave()">Save</button>
+      <button class="cancel-button" mat-button (click)="onNoClick()">Close</button>
     </div>
   `,
   imports: [CommonModule,FormsModule],
@@ -25,6 +26,9 @@ export class FieldConfigDialogComponent {
     public dialogRef: MatDialogRef<FieldConfigDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
     ngOnInit() {
+      if (typeof this.data.type !== 'string') {
+        this.data.type = String(this.data.type);
+      }
       if (typeof this.data.name !== 'string') {
         this.data.name = String(this.data.name);
       }
@@ -32,6 +36,8 @@ export class FieldConfigDialogComponent {
         this.data.value = String(this.data.value);
       }
     }
+  IsLabel(): boolean { return this.data.type === 'label'; }
+  
   onNoClick(): void {
     this.dialogRef.close();
   }

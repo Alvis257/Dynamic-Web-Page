@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationDialogComponent } from '../shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { FieldConfigDialogComponent } from '../shared/field-configuration-dialog/field-configuration-dialog.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-forms',
@@ -25,10 +26,16 @@ export class FormsComponent implements OnInit {
   loadeOriginal = false;
   configMode = false;
   formConfig: any;
+  jsonData: any;
+  viewJsonData: string = '';
 
-  constructor(private dataService: DataService , public dialog: MatDialog) { }
+  constructor(private dataService: DataService , public dialog: MatDialog,private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.jsonData = params['element'];
+    });
+
     if (!this.loadeOriginal) {
       this.dataService.getJsonData(this.loadeOriginal).subscribe(data => {
         this.formData = JSON.parse(data);
@@ -47,14 +54,38 @@ export class FormsComponent implements OnInit {
     const group: { [key: string]: FormControl } = {}; 
 
     const formDataArray = Array.isArray(this.formData) ? this.formData : [this.formData];
-    formDataArray.forEach((field: { type: string; name: string | number; }) => {
+    formDataArray.forEach((field: { type: string; name: string; }) => {
       if (field.type === 'button') return;
-      group[field.name as string] = new FormControl('');
+      const nameParts = field.name.split('.');
+      const initialValue = nameParts.reduce((obj, part) => obj && obj[part] ? obj[part] : '', this.jsonData);
+      group[field.name as string] = new FormControl(initialValue);
     });
   
     this.form = new FormGroup(group);
+
+    if (this.form) {
+      this.form.valueChanges.subscribe(values => {
+        for (const name in values) {
+          if (values.hasOwnProperty(name)) {
+            const nameParts = name.split('.');
+            nameParts.reduce((obj, part, index) => {
+              if (index === nameParts.length - 1) {
+                obj[part] = values[name];
+              } else {
+                obj[part] = obj[part] || {};
+              }
+              return obj[part];
+            }, this.jsonData);
+          }
+        }
+      });
+    }
   }
 
+  openJsonView(): void {
+    const jsonObject = JSON.parse(this.jsonData);
+    this.viewJsonData = JSON.stringify(jsonObject, null, 2); // The second and third parameters will format the JSON string with 2 spaces of indentation
+  }
   openConfig(): void {
     this.originalFormData = JSON.parse(JSON.stringify(this.formData));
     this.formConfig = this.formData;
@@ -74,22 +105,23 @@ export class FormsComponent implements OnInit {
 
   openFieldConfig(field: any): void {
     if (typeof field === 'object' && field !== null) {
-      // Check if the name exists in the JSON data at the first level
-      if (!this.formData.hasOwnProperty(field.name)) {
-        // If it doesn't exist, add it
-        this.formData[field.name] = '';
+      let data: { [key: string]: any } = {}; // Explicitly define the type of 'data' as '{}'
+      if(field.type == 'label') {
+        data = { name: field.name, type: field.type, value: field.value}
+        
+      }else{
+        data = { name: field.name, type: field.type}
       }
-  
+      console.log('Field data:', data);
       const dialogRef = this.dialog.open(FieldConfigDialogComponent, {
         width: '500px',
-        data: { name: field.name, value: this.formData[field.name] }
+        data: data
       });
     
       dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
         if (result) {
-          // Update the JSON data with the new value from the dialog
-          this.formData[result.name] = result.value;
+          field.name = result.name;
+          field.value = result.value;
         }
       });
     } else {
