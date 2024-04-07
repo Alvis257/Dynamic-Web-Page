@@ -52,31 +52,43 @@ export class FormsComponent implements OnInit {
 
   createForm(): void {
     const group: { [key: string]: FormControl } = {}; 
-
+  
     const formDataArray = Array.isArray(this.formData) ? this.formData : [this.formData];
-    formDataArray.forEach((field: { type: string; name: string; }) => {
+    formDataArray.forEach((field: { type: string; name: string; value?: string; dataPath?: string; }) => {
       if (field.type === 'button') return;
-      const nameParts = field.name.split('.');
-      const initialValue = nameParts.reduce((obj, part) => obj && obj[part] ? obj[part] : '', this.jsonData);
+      const dataPath = field.dataPath;
+      let initialValue = '';
+      if (this.jsonData && dataPath) {
+        initialValue = dataPath.split('.').reduce((obj: any, part: string) => obj && obj[part] !== undefined ? obj[part] : '', JSON.parse(this.jsonData));
+      }
       group[field.name as string] = new FormControl(initialValue);
+      if (field.type === 'label') {
+        field.value = initialValue;
+      }
     });
   
     this.form = new FormGroup(group);
-
+  
     if (this.form) {
       this.form.valueChanges.subscribe(values => {
-        for (const name in values) {
-          if (values.hasOwnProperty(name)) {
-            const nameParts = name.split('.');
-            nameParts.reduce((obj, part, index) => {
-              if (index === nameParts.length - 1) {
-                obj[part] = values[name];
-              } else {
-                obj[part] = obj[part] || {};
+        if (this.jsonData) {
+          let jsonDataObject = JSON.parse(this.jsonData);
+          for (const name in values) {
+            if (values.hasOwnProperty(name)) {
+              const dataPath = this.formData.find((field: { name: string; dataPath?: string; }) => field.name === name)?.dataPath;
+              if (dataPath && this.formData.find((field: { name: string; }) => field.name === name)?.type !== 'button') {
+                dataPath.split('.').reduce((obj: any, part: string, index: number, parts: string[]) => {
+                  if (index === parts.length - 1) {
+                    obj[part] = values[name];
+                  } else {
+                    obj[part] = obj[part] || {};
+                  }
+                  return obj[part];
+                }, jsonDataObject);
               }
-              return obj[part];
-            }, this.jsonData);
+            }
           }
+          this.jsonData = JSON.stringify(jsonDataObject);
         }
       });
     }
@@ -107,10 +119,10 @@ export class FormsComponent implements OnInit {
     if (typeof field === 'object' && field !== null) {
       let data: { [key: string]: any } = {}; // Explicitly define the type of 'data' as '{}'
       if(field.type == 'label') {
-        data = { name: field.name, type: field.type, value: field.value}
+        data = { name: field.name, type: field.type, dataPath: field.dataPath ,  value: field.value}
         
       }else{
-        data = { name: field.name, type: field.type}
+        data = { name: field.name, type: field.type , dataPath: field.dataPath}
       }
       console.log('Field data:', data);
       const dialogRef = this.dialog.open(FieldConfigDialogComponent, {
@@ -121,6 +133,7 @@ export class FormsComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           field.name = result.name;
+          field.dataPath = result.dataPath;
           field.value = result.value;
         }
       });

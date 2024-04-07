@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
     <div mat-dialog-content>
       <p class="field-config-text">Type: {{data.type}}</p>
       <p class="field-config-text">Name: <input [(ngModel)]="data.name"></p>
+      <p class="field-config-text">Data Path: <input [(ngModel)]="data.dataPath"></p>
       <p  class="field-config-text" *ngIf="IsLabel()">Value: <input [(ngModel)]="data.value"></p>
     </div>
     <div mat-dialog-actions>
@@ -31,6 +32,9 @@ export class FieldConfigDialogComponent {
       }
       if (typeof this.data.name !== 'string') {
         this.data.name = String(this.data.name);
+      }
+      if (typeof this.data.dataPath !== 'string') {
+        this.data.dataPath = String(this.data.dataPath);
       }
       if (typeof this.data.value !== 'string') {
         this.data.value = String(this.data.value);

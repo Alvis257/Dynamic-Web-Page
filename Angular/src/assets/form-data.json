@@ -2,58 +2,41 @@
   {
     "type": "label",
     "name": "id",
-    "value": ""
+    "value": "",
+    "dataPath": "id"
   },
   {
     "type": "text",
     "name": "type",
     "value": "",
-    "required": true
+    "required": true,
+    "dataPath": "type"
   },
   {
     "type": "label",
     "name": "name",
-    "value": ""
+    "value": "",
+    "dataPath": "name"
   },
   {
     "type": "text",
     "name": "status",
     "value": "",
-    "required": true
+    "required": true,
+    "dataPath": "status"
   },
   {
     "type": "label",
     "name": "creationTime",
-    "value": ""
+    "value": "",
+    "dataPath": "creationTime"
   },
   {
     "type": "text",
     "name": "responsible",
     "value": "",
-    "required": true
-  },
-  {
-    "type": "label",
-    "name": "passwordlable",
-    "value": "Password"
-  },
-  {
-    "type": "password",
-    "name": "password",
-    "value": "",
-    "required": true
-  },
-  {
-    "type": "label",
-    "name": "acceptTermsLabel",
-    "value": "Accept Terms"
-  },
-  {
-    "type": "checkbox",
-    "label": "Accept Terms",
-    "name": "terms",
-    "value": false,
-    "required": true
+    "required": true,
+    "dataPath": "responsible"
   },
   {
     "type": "button",
