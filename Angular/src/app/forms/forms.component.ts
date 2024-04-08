@@ -51,40 +51,48 @@ export class FormsComponent implements OnInit {
   }
 
   createForm(): void {
-    const group: { [key: string]: FormControl } = {}; 
+    const formDataArray = this.ensureFormDataIsArray(this.formData);
+    const group = this.createFormGroup(formDataArray);
+    this.form = new FormGroup(group);
+    this.subscribeToFormChanges();
+  }
   
-    const formDataArray = Array.isArray(this.formData) ? this.formData : [this.formData];
-    formDataArray.forEach((field: { type: string; name: string; value?: string; dataPath?: string; }) => {
-      if (field.type === 'button') return;
-      const dataPath = field.dataPath;
-      let initialValue = '';
-      if (this.jsonData && dataPath) {
-        initialValue = dataPath.split('.').reduce((obj: any, part: string) => obj && obj[part] !== undefined ? obj[part] : '', JSON.parse(this.jsonData));
-      }
-      group[field.name as string] = new FormControl(initialValue);
-      if (field.type === 'label') {
-        field.value = initialValue;
+  ensureFormDataIsArray(formData: any): any[] {
+    return Array.isArray(formData) ? formData : [formData];
+  }
+  
+  createFormGroup(formDataArray: any[]): { [key: string]: FormControl } {
+    const group: { [key: string]: FormControl } = {}; 
+    formDataArray.forEach(field => {
+      if (field.type !== 'button') {
+        const initialValue = this.getInitialValue(field);
+        group[field.name] = new FormControl(initialValue);
+        if (field.type === 'label') {
+          field.value = initialValue;
+        }
       }
     });
+    return group;
+  }
   
-    this.form = new FormGroup(group);
+  getInitialValue(field: any): string {
+    const dataPath = field.dataPath;
+    if (this.jsonData && dataPath) {
+      return dataPath.split('.').reduce((obj: any, part: string) => obj && obj[part] !== undefined ? obj[part] : '', JSON.parse(this.jsonData));
+    }
+    return '';
+  }
   
+  subscribeToFormChanges(): void {
     if (this.form) {
       this.form.valueChanges.subscribe(values => {
         if (this.jsonData) {
           let jsonDataObject = JSON.parse(this.jsonData);
           for (const name in values) {
             if (values.hasOwnProperty(name)) {
-              const dataPath = this.formData.find((field: { name: string; dataPath?: string; }) => field.name === name)?.dataPath;
+              const dataPath = this.formData.find((field: { name: string; }) => field.name === name)?.dataPath;
               if (dataPath && this.formData.find((field: { name: string; }) => field.name === name)?.type !== 'button') {
-                dataPath.split('.').reduce((obj: any, part: string, index: number, parts: string[]) => {
-                  if (index === parts.length - 1) {
-                    obj[part] = values[name];
-                  } else {
-                    obj[part] = obj[part] || {};
-                  }
-                  return obj[part];
-                }, jsonDataObject);
+                this.updateJsonData(dataPath, values[name], jsonDataObject);
               }
             }
           }
@@ -92,6 +100,17 @@ export class FormsComponent implements OnInit {
         }
       });
     }
+  }
+  
+  updateJsonData(dataPath: string, value: any, jsonDataObject: any): void {
+    dataPath.split('.').reduce((obj: any, part: string, index: number, parts: string[]) => {
+      if (index === parts.length - 1) {
+        obj[part] = value;
+      } else {
+        obj[part] = obj[part] || {};
+      }
+      return obj[part];
+    }, jsonDataObject);
   }
 
   openJsonView(): void {
