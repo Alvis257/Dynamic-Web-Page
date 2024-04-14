@@ -3,49 +3,65 @@
     "type": "label",
     "name": "id",
     "value": "",
-    "dataPath": "id"
+    "dataPath": "id",
+    "position": 0,
+    "style": ""
   },
   {
     "type": "text",
     "name": "type",
     "value": "",
     "required": true,
-    "dataPath": "type"
+    "dataPath": "type",
+    "position": 1,
+    "style": ""
   },
   {
     "type": "label",
     "name": "name",
     "value": "",
-    "dataPath": "name"
+    "dataPath": "name",
+    "position": 2,
+    "style": ""
   },
   {
     "type": "text",
     "name": "status",
     "value": "",
     "required": true,
-    "dataPath": "status"
+    "dataPath": "status",
+    "position": 3,
+    "style": ""
   },
   {
     "type": "label",
     "name": "creationTime",
     "value": "",
-    "dataPath": "creationTime"
+    "dataPath": "creationTime",
+    "position": 4,
+    "style": ""
   },
   {
     "type": "text",
     "name": "responsible",
     "value": "",
     "required": true,
-    "dataPath": "responsible"
+    "dataPath": "responsible",
+    "position": 5,
+    "style": ""
   },
   {
     "type": "button",
     "name":"savebutton",
-    "label": "Save"
+    "label": "Save",
+    "position": 6,
+    "style": ""
   },
   {
     "type": "button",
     "name":"canclebutton",
-    "label": "Cancel" 
+    "label": "Cancel",
+    "position": 7,
+    "style": ""
   }
 ]
