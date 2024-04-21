@@ -1,4 +1,4 @@
-import { ChangeDetectorRef,Input, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef,Input, Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormsModule } from '@angular/forms';
 import { DataService } from '../data.service';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -25,7 +25,7 @@ export class FormsComponent implements OnInit {
   formData: any;
   originalFormData: any;
   type: string | undefined;
-  loadeOriginal = true;
+  loadeOriginal = false;
   configMode = false;
   formConfig: any;
   jsonData: any;
@@ -35,7 +35,8 @@ export class FormsComponent implements OnInit {
   disableJsonView = true;
   fromSelector = false;
   formsId: number | undefined;
-
+  @Output() configSaved = new EventEmitter<any>();
+  
   constructor(private dataService: DataService, public dialog: MatDialog, private route: ActivatedRoute, private router: Router) { 
     const navigation = this.router.getCurrentNavigation();
     if (navigation && navigation.extras.state) {
@@ -48,31 +49,26 @@ export class FormsComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.jsonData = params['element'];
+      this.jsonData = params['jsonData'] ? params['jsonData'] : null;
       this.configMode = params['configMode'] === 'true';
       this.fromSelector = params['fromSelector'];
     });
-
+    console.log(this.jsonData);
     this.subscribeToFormChanges();
     if (this.fromSelector && this.fieldData) {
       this.disableJsonView = true;
-        this.createFormFromFieldData();
+      this.createFormFromFieldData();
       this.configMode = true;
     } else if (!this.fromSelector) {
-        this.loadJsonData(this.jsonData);
-        this.disableJsonView = false;
+      this.loadJsonData(this.jsonData);
+      this.disableJsonView = false;
     }
   }
-
+  
   loadJsonData(jsonData: any) {
     this.dataService.getJsonData(jsonData).subscribe(data => {
       this.formData = JSON.parse(data);
-      this.formData.forEach((field: { position: number | undefined; }, index: any) => {
-        if (field.position === undefined || isNaN(field.position)) {
-          field.position = index;
-        }
-      });
-      this.formData.sort((a: { position: number; }, b: { position: number; }) => a.position - b.position);
+      this.processFormData();
       this.originalFormData = JSON.parse(data);
       this.createForm();
       if (this.form) {
@@ -83,12 +79,7 @@ export class FormsComponent implements OnInit {
     if (!this.loadeOriginal) {
       this.dataService.getJsonData(this.loadeOriginal).subscribe(data => {
         this.formData = JSON.parse(data);
-        this.formData.forEach((field: { position: number | undefined; }, index: any) => {
-          if (field.position === undefined || isNaN(field.position)) {
-            field.position = index;
-          }
-        });
-        this.formData.sort((a: { position: number; }, b: { position: number; }) => a.position - b.position);
+        this.processFormData();
         this.originalFormData = JSON.parse(data);
         this.createForm();
         if (this.form) {
@@ -98,12 +89,7 @@ export class FormsComponent implements OnInit {
     } else {
       this.dataService.getJsonData(this.loadeOriginal).subscribe(data => {
         this.formData = JSON.parse(JSON.stringify(data));
-        this.formData.forEach((field: { position: number | undefined; }, index: any) => {
-          if (field.position === undefined || isNaN(field.position)) {
-            field.position = index;
-          }
-        });
-        this.formData.sort((a: { position: number; }, b: { position: number; }) => a.position - b.position);
+        this.processFormData();
         this.originalFormData = JSON.parse(JSON.stringify(data));
         this.createForm();
         if (this.form) {
@@ -111,6 +97,16 @@ export class FormsComponent implements OnInit {
         }
       });
     }
+  }
+  
+  
+  processFormData(): void {
+    this.formData.forEach((field: { position: number | undefined; }, index: any) => {
+      if (field.position === undefined || isNaN(field.position)) {
+        field.position = index;
+      }
+    });
+    this.formData.sort((a: { position: number; }, b: { position: number; }) => a.position - b.position);
   }
 
   createFormFromFieldData(): void {
@@ -131,7 +127,6 @@ export class FormsComponent implements OnInit {
     if (this.formChangesSubscription) {
       this.formChangesSubscription.unsubscribe();
     }
-    console.log(this.formData);
     const formDataArray = this.ensureFormDataIsArray(JSON.parse(JSON.stringify(this.formData)));
     formDataArray.forEach((field, index) => {
       if (field.position === undefined || isNaN(field.position)) {
@@ -148,7 +143,6 @@ export class FormsComponent implements OnInit {
 
     const group = this.createFormGroup(formDataArray);
     this.form = new FormGroup(group);
-    console.log(formDataArray);
     this.displayData = formDataArray;
   }
 
@@ -345,9 +339,7 @@ export class FormsComponent implements OnInit {
         }
       });
     }
-
-
-
+  
     // If jsonData is present, start the process of loading jsonData into the fields
     if (this.jsonData) {
       this.formData.forEach((field: any) => {
@@ -358,25 +350,21 @@ export class FormsComponent implements OnInit {
             this.updateJsonData(field.dataPath, field.value, jsonDataObject, field.type);
             this.jsonData = JSON.stringify(jsonDataObject);
           }
-
         }
       });
     }
-
-
+  
     this.configMode = this.fromSelector ? true : false;
     this.updateFormControlValues();
-    this.dataService.saveConfigData(JSON.stringify(this.formData));
+    //this.dataService.saveConfigData(JSON.stringify(this.formData));// Pass the formId to the saveConfigData method
     this.originalFormData = JSON.parse(JSON.stringify(this.formData));
     if (this.formChangesSubscription) {
       this.formChangesSubscription.unsubscribe();
     }
     if(this.fromSelector){
-      if (this.fromSelector) {
-        this.router.navigate(['formas'], { state: { editedType: this.type, editedForm: {id:this.formsId,data:this.formData} } });
-      }
+      this.router.navigate(['formas'], { state: { editedType: this.type, editedForm: {id:this.formsId,data:this.formData} } });
     }
-
+    this.configSaved.emit(this.formData);
   }
 
   cancelConfig(): void {

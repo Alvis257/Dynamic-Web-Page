@@ -68,7 +68,6 @@ export class MainComponent {
   }
 
   view(element: any): void {
-    console.log('View:', element);
     this.router.navigate(['/form-viewer', element.type], { queryParams: {type:element.type, jsonData: JSON.stringify(element), id: element.id } });
   }
   delete(element: any): void {

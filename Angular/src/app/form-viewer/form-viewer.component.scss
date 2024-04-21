@@ -1,0 +1,13 @@
+.example-container {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  mat-sidenav {
+    width: 250px; /* adjust this to set the width of the sidenav */
+  }
+  
+  mat-sidenav-content {
+    flex-grow: 1; /* this makes the main content fill the remaining space */
+  }

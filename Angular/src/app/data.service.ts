@@ -18,8 +18,11 @@ export class DataService {
     const formData = JSON.parse(data);
     return of(formData ? formData : []);
   }
-
   saveConfigData(data: any): void {
     localStorage.setItem('formData', JSON.stringify(data));
+  }
+
+  saveConfigDataType(key: string, data: any): void {
+    localStorage.setItem(key, JSON.stringify(data));
   }
 }
