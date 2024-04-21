@@ -1,0 +1,136 @@
+.types-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Make the container take up the full width */
+    margin: 0 auto;
+  }
+  
+  .type-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 80%; /* Set a fixed width as a percentage of the parent container's width */
+    height: 25px;
+    margin: 10px 0;
+    padding: 0 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: rgb(241, 241, 241);
+    user-select: none;
+  }
+  
+  .button-group {
+    position: absolute;
+    right: 10px;
+  }
+  
+
+  
+  .type-button .button-group {
+    position: absolute; /* Position the buttons absolutely */
+    right: 10px; /* Position the buttons 10px from the right edge of the .type-button */
+  }
+  
+  
+  .type-button:hover {
+    background-color: darkgrey;
+  }
+  
+  .type-button button {
+    border-radius: 10px; /* Round the buttons */
+    margin-left: 10px; /* Add some space between the buttons */
+  }
+  
+  .type-button .edit-button {
+    background-color: grey; 
+    border: 0px ;
+    display: flex-end;
+  }
+
+  .type-button .edit-button:hover {
+    background-color: rgb(80, 80, 80); 
+  }
+  
+  .type-button .delete-button {
+    background-color: #dc3545; /* Not too bright red */
+    border: 0px ;
+  }
+  
+  .type-button .delete-button:hover {
+    background-color: #c82333;/* Darker red on hover */
+  }
+  
+  .form-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 80%;
+    height: 25px;
+    margin: 10px auto;
+    padding: 0 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: rgb(247, 247, 247);
+    user-select: none;
+  }
+  
+  .form-button:hover {
+    background-color: darkgrey;
+  }
+  
+  .form-button button {
+    border-radius: 10px; /* Round the buttons */
+    margin-left: 10px; /* Add some space between the buttons */
+  }
+  
+  .form-button .edit-button {
+    background-color: grey; 
+    border: 0px ;
+    display: flex-end;
+  }
+
+  .form-button .edit-button:hover {
+    background-color: rgb(80, 80, 80); 
+  }
+  
+  .form-button .delete-button {
+    background-color: #dc3545; /* Not too bright red */
+    border: 0px ;
+  }
+  
+  .form-button .delete-button:hover {
+    background-color: #c82333;/* Darker red on hover */
+  }
+
+  .add-type-button {
+    background-color: #28a745; /* Angular's default add item color */
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    margin: 5px;
+    display: flex-end;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  
+  .add-type-button:hover {
+    background-color: #218838; /* Angular's default add item hover color */
+  }
+
+  .add-form-button {
+    background-color: #28a745; /* Angular's default add item color */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 5px; /* Add some space to the right of the button */
+  }
+  
+  .add-form-button:hover {
+    background-color: #218838; /* Angular's default add item hover color */
+  }

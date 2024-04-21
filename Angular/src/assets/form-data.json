@@ -1,10 +1,18 @@
 [
   {
     "type": "label",
+    "name": "id_name",
+    "value": "ID:",
+    "dataPath": "id_name",
+    "position": 0,
+    "style": ""
+  },
+  {
+    "type": "label_dynamic",
     "name": "id",
     "value": "",
     "dataPath": "id",
-    "position": 0,
+    "position": 1,
     "style": ""
   },
   {
@@ -13,7 +21,7 @@
     "value": "",
     "required": true,
     "dataPath": "type",
-    "position": 1,
+    "position": 2,
     "style": ""
   },
   {
@@ -21,7 +29,7 @@
     "name": "name",
     "value": "",
     "dataPath": "name",
-    "position": 2,
+    "position": 3,
     "style": ""
   },
   {
@@ -30,7 +38,7 @@
     "value": "",
     "required": true,
     "dataPath": "status",
-    "position": 3,
+    "position": 4,
     "style": ""
   },
   {
@@ -38,7 +46,7 @@
     "name": "creationTime",
     "value": "",
     "dataPath": "creationTime",
-    "position": 4,
+    "position": 5,
     "style": ""
   },
   {
@@ -47,21 +55,21 @@
     "value": "",
     "required": true,
     "dataPath": "responsible",
-    "position": 5,
-    "style": ""
-  },
-  {
-    "type": "button",
-    "name":"savebutton",
-    "label": "Save",
     "position": 6,
     "style": ""
   },
   {
-    "type": "button",
+    "type": "savebutton",
+    "name":"savebutton",
+    "label": "Save",
+    "position": 7,
+    "style": ""
+  },
+  {
+    "type": "canclebutton",
     "name":"canclebutton",
     "label": "Cancel",
-    "position": 7,
+    "position": 8,
     "style": ""
   }
 ]

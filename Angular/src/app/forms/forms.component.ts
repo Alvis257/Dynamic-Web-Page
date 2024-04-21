@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef,Input, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, FormsModule } from '@angular/forms';
 import { DataService } from '../data.service';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,8 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationDialogComponent } from '../shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { FieldConfigDialogComponent } from '../shared/field-configuration-dialog/field-configuration-dialog.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { NewFieldDialogComponent } from '../shared/new-field-dialog/new-field-dialog.component';
 
 @Component({
   selector: 'app-forms',
@@ -19,7 +20,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
   encapsulation: ViewEncapsulation.None
 })
 export class FormsComponent implements OnInit {
-
+  fieldData: any;
   form: FormGroup | undefined;
   formData: any;
   originalFormData: any;
@@ -32,7 +33,12 @@ export class FormsComponent implements OnInit {
   displayData: any;
   formChangesSubscription: Subscription | undefined;
   
-  constructor(private dataService: DataService, public dialog: MatDialog, private route: ActivatedRoute) { }
+  constructor(private dataService: DataService, public dialog: MatDialog, private route: ActivatedRoute, private router: Router) { 
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation && navigation.extras.state) {
+      this.fieldData = navigation.extras.state['fieldData'];
+    }
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -40,10 +46,20 @@ export class FormsComponent implements OnInit {
       this.configMode = params['configMode'] === 'true';
     });
     this.subscribeToFormChanges();
-    if (!this.loadeOriginal) {
+    if (this.fieldData) {
+      this.createFormFromFieldData();
+      this.configMode = true;
+    }else if (!this.loadeOriginal) {
       this.dataService.getJsonData(this.loadeOriginal).subscribe(data => {
-        this.originalFormData = JSON.parse(data);
+      
         this.formData = JSON.parse(data);
+        this.formData.forEach((field: { position: number | undefined; }, index: any) => {
+          if (field.position === undefined || isNaN(field.position)) {
+            field.position = index;
+          }
+        });
+        this.formData.sort((a: { position: number; }, b: { position: number; }) => a.position - b.position);
+        this.originalFormData = JSON.parse(data);
         this.createForm();
         if (this.form) {
           this.updateFormControlValues();
@@ -51,8 +67,14 @@ export class FormsComponent implements OnInit {
       });
     } else {
       this.dataService.getJsonData(this.loadeOriginal).subscribe(data => {
-        this.originalFormData = JSON.parse(data);
-        this.formData = JSON.parse(data);
+        this.formData = JSON.parse(JSON.stringify(data));
+        this.formData.forEach((field: { position: number | undefined; }, index: any) => {
+          if (field.position === undefined || isNaN(field.position)) {
+            field.position = index;
+          }
+        });
+        this.formData.sort((a: { position: number; }, b: { position: number; }) => a.position - b.position);
+        this.originalFormData = JSON.parse(JSON.stringify(data));
         this.createForm();
         if (this.form) {
           this.updateFormControlValues();
@@ -60,30 +82,47 @@ export class FormsComponent implements OnInit {
       });
     }
   }
-
+  createFormFromFieldData(): void {
+    this.formData = this.ensureFormDataIsArray(this.fieldData.forms);
+    console.log('fieldData:', this.fieldData);
+    console.log('formData:', this.formData);
+    this.formData.forEach((field: { position: number | undefined; }, index: any) => {
+      if (field.position === undefined || isNaN(field.position)) {
+        field.position = index;
+      }
+    });
+    this.formData.sort((a: { position: number; }, b: { position: number; }) => a.position - b.position);
+    this.originalFormData = JSON.parse(JSON.stringify(this.fieldData.forms));
+    this.createForm();
+    if (this.form) {
+      this.updateFormControlValues();
+    }
+  }
   createForm(): void {
     if (this.formChangesSubscription) {
       this.formChangesSubscription.unsubscribe();
     }
-    let formDataCopy = JSON.parse(JSON.stringify(this.formData));
-    const formDataArray = this.ensureFormDataIsArray(formDataCopy);
+
+    const formDataArray = this.ensureFormDataIsArray(JSON.parse(JSON.stringify(this.formData)));
     formDataArray.forEach((field, index) => {
       if (field.position === undefined || isNaN(field.position)) {
         field.position = index;
       }
+
       if (field.type === 'label') {
         const initialValue = this.getInitialValue(field);
         field.value = initialValue; // Update the label value
-      } else if (field.type !== 'button' && field.type !== 'label') {
-        const initialValue = this.getInitialValue(field);
       }
     });
+
     formDataArray.sort((a, b) => a.position - b.position);
+
     const group = this.createFormGroup(formDataArray);
     this.form = new FormGroup(group);
-  
-    this.displayData = formDataArray; 
+
+    this.displayData = formDataArray;
   }
+
 
 
   ensureFormDataIsArray(formData: any): any[] {
@@ -103,21 +142,22 @@ export class FormsComponent implements OnInit {
   }
 
   getInitialValue(field: any): string {
-    const dataPath = field.dataPath;
-    let displayValue = field.value;
-    if (this.jsonData && dataPath && !this.configMode) {
+    const dataPath = field.dataPath ? field.dataPath : '';
+    let fieldValue = field.value ? field.value : '';
+    let displayValue = '';
+
+    if (field.type === 'label') {
+      displayValue = fieldValue.toString();
+    } else if ((field.type !== 'button') && this.jsonData && dataPath && !this.configMode) {
       let value = dataPath.split('.').reduce((obj: any, part: string) => obj && obj[part] !== undefined ? obj[part] : '', JSON.parse(this.jsonData));
-      if (field.type == 'label' && typeof displayValue == 'string') {
-        displayValue = displayValue.replace(/{value}/g, value !== '' ? value : ''); // Replace {value} in displayValue
-      } else {
-        console.log('Type:', field.type ); 
-        displayValue = value !== '' ? value : displayValue;
-      }
-    } else if (this.configMode && field.type === 'label' && typeof displayValue === 'string') {
-      displayValue = displayValue.replace(/{value}/g, '{value}');
+      displayValue = value !== '' ? value : fieldValue;
+    } else {
+      displayValue = fieldValue;
     }
+
     return displayValue;
   }
+
   subscribeToFormChanges(): void {
     if (this.form) {
       this.formChangesSubscription = this.form.valueChanges.subscribe(values => {
@@ -140,23 +180,7 @@ export class FormsComponent implements OnInit {
   }
 
   updateDisplayData(): void {
-    if (this.configMode) {
-      this.displayData = this.formData;
-    } else {
-      this.displayData = JSON.parse(JSON.stringify(this.formData));
-      Object.values(this.displayData).forEach((field: any) => {
-        if (field.type === 'label' && typeof field.value === 'string' && field.value.includes('{value}')) {
-          const dataPath = field.dataPath;
-          if (this.jsonData && dataPath) {
-            let value = dataPath.split('.').reduce((obj: any, part: string) => obj && obj[part] !== undefined ? obj[part] : '', JSON.parse(this.jsonData));
-            const match = field.value.match(/{value}/);
-            if (match) {
-              field.value = field.value.replace(match[0], value !== '' ? value : '');
-            }
-          }
-        }
-      });
-    }
+    this.displayData = this.configMode ? this.formData : JSON.parse(JSON.stringify(this.formData));
   }
 
   updateJsonData(dataPath: string, value: any, jsonDataObject: any, fieldType: string): void {
@@ -191,25 +215,29 @@ export class FormsComponent implements OnInit {
   }
 
 
-  moveUp(field: any): void {
-    const index = this.formData.indexOf(field);
+  moveUp(index:number): void {
     if (index > 0) {
       this.formData[index].position--;
       this.formData[index - 1].position++;
       this.formData.sort((a: { position: number }, b: { position: number }) => a.position - b.position);
+      this.displayData = JSON.parse(JSON.stringify(this.formData));
     }
   }
 
-  moveDown(field: any): void {
-    const index = this.formData.indexOf(field);
+  moveDown(index:number): void {
     if (index < this.formData.length - 1) {
       this.formData[index].position++;
       this.formData[index + 1].position--;
       this.formData.sort((a: any, b: any) => a.position - b.position);
+      this.displayData = JSON.parse(JSON.stringify(this.formData));
     }
   }
-
   styleToObject(style: string, type: string): { [key: string]: string } {
+    if (!style) {
+      return {};
+    }
+
+
     const styleObject: { [key: string]: string } = {};
     const properties = style.split(';');
     const minSizePx = 165; // minimum size in pixels
@@ -269,68 +297,110 @@ export class FormsComponent implements OnInit {
     this.viewJsonData = JSON.stringify(jsonObject, null, 2);
   }
   openConfig(): void {
-    this.originalFormData = JSON.parse(JSON.stringify(this.formData));
-    this.formConfig = this.formData;
     this.configMode = true;
+    this.originalFormData = JSON.parse(JSON.stringify(this.formData));
+    this.displayData = JSON.parse(JSON.stringify(this.formData)); // Update displayData
   }
 
+
   saveConfig(): void {
-      // Check that this.form is defined
-      if (this.form) {
-        // Update formData with the current form values
-        Object.keys(this.form.controls).forEach(key => {
-          if (this.form) {
-            const control = this.form.get(key);
-            if (control) {
-              const field = this.formData.find((field: any) => field.name === key);
-              if (field) {
-                field.value = control.value;
-              }
+    if (this.form) {
+      Object.keys(this.form.controls).forEach(key => {
+        if (this.form) {
+          const control = this.form.get(key);
+          if (control) {
+            const field = this.formData.find((field: any) => field.name === key);
+            if (field) {
+              field.value = control.value;
             }
+          } else {
+            console.log('No control found for key:', key);
           }
-        });
-    
-        this.dataService.saveJsonData(JSON.stringify(this.formData));
-        this.updateFormControlValues();
-        this.createForm();
-        this.configMode = false;
-       // this.formData = this.originalFormData; // Corrected line
-      }
+        }
+      });
     }
 
+
+
+    // If jsonData is present, start the process of loading jsonData into the fields
+    if (this.jsonData) {
+      this.formData.forEach((field: any) => {
+        if (field.dataPath) {
+          let jsonDataObject = JSON.parse(this.jsonData);
+          const value = field.dataPath.split('.').reduce((obj: any, part: string) => obj && obj[part] !== undefined ? obj[part] : '', jsonDataObject);
+          if (value === '') {
+            this.updateJsonData(field.dataPath, field.value, jsonDataObject, field.type);
+            this.jsonData = JSON.stringify(jsonDataObject);
+          }
+
+        }
+      });
+    }
+
+
+    this.configMode = false;
+    this.updateFormControlValues();
+    this.dataService.saveConfigData(JSON.stringify(this.formData));
+    this.originalFormData = JSON.parse(JSON.stringify(this.formData));
+    if (this.formChangesSubscription) {
+      this.formChangesSubscription.unsubscribe();
+    }
+
+  }
 
   cancelConfig(): void {
     this.formData = this.originalFormData;
     this.configMode = false;
+    this.displayData = JSON.parse(JSON.stringify(this.formData)); // Update displayData
     this.createForm();
   }
 
   openFieldConfig(field: any): void {
-    if (typeof field === 'object' && field !== null) {
-      let data: { [key: string]: any } = {};
-      if (field.type == 'label') {
-        data = { name: field.name, type: field.type, dataPath: field.dataPath, value: this.configMode ? field.value : this.getInitialValue(field), position: field.position, style: field.style }
-      } else {
-        data = { name: field.name, type: field.type, dataPath: field.dataPath, position: field.position, style: field.style }
-      }
-      const dialogRef = this.dialog.open(FieldConfigDialogComponent, {
-        width: '500px',
-        data: data
-      });
+    const data = {
+      name: field.name,
+      type: field.type,
+      dataPath: field.dataPath,
+      position: field.position,
+      style: field.style,
+      value: field.type === 'label' ? field.value : '',
+    };
 
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          field.name = result.name;
-          field.dataPath = result.dataPath;
-          field.position = result.position;
-          field.style = result.style;
-          field.value = result.value;
+    const dialogRef = this.dialog.open(FieldConfigDialogComponent, {
+      width: '500px',
+      data: data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const originalField = this.formData.find((f: any) => f.name === field.name);
+        if (originalField) {
+          Object.assign(originalField, result);
+          if (this.form) {
+            const control = this.form.get(originalField.name);
+            if (control) {
+              control.setValue(originalField.value);
+            }
+          }
         }
-      });
-    } else {
-      console.error('Cannot open field configuration dialog because field is not an object:', field);
-    }
+        this.displayData = JSON.parse(JSON.stringify(this.formData));
+      }
+    });
+
   }
+
+  addField(): void {
+    const dialogRef = this.dialog.open(NewFieldDialogComponent);
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        result.position = this.formData.length;
+        this.formData.push(result);
+        this.displayData = JSON.parse(JSON.stringify(this.formData));
+        this.createForm();
+      }
+    });
+  }
+
   confirmDelete(index: number): void {
     const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
       width: '250px',
@@ -339,37 +409,38 @@ export class FormsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.formData.splice(index, 1);
+        this.displayData = JSON.parse(JSON.stringify(this.formData));
       }
     });
   }
 
   onSubmit(): void {
-    this.subscribeToFormChanges();
     if (this.form) {
       console.log(this.form.value);
-  
-      // Update jsonData and perform other checks here
-      this.formData.forEach((field: any) => {
-        if (field.type !== 'button' && field.type !== 'label') {
-          const dataPath = field.dataPath;
-          if (!this.configMode && this.jsonData && dataPath) {
-            let jsonDataObject = JSON.parse(this.jsonData);
-            const value = dataPath.split('.').reduce((obj: any, part: string) => obj && obj[part] !== undefined ? obj[part] : '', jsonDataObject);
-            if (value === '' && field.value) {
-              this.updateJsonData(dataPath, field.value.split(':')[1] || '', jsonDataObject, field.type);
-              this.jsonData = JSON.stringify(jsonDataObject);
+
+      // Create a copy of jsonData to avoid modifying the original
+      let jsonDataObject = this.jsonData ? JSON.parse(JSON.stringify(JSON.parse(this.jsonData))) : {};
+
+      // Update jsonDataObject based on the form input values
+      Object.keys(this.form.controls).forEach(key => {
+        if (this.form) {
+          const control = this.form.get(key);
+          if (control) {
+            const field = this.formData.find((field: any) => field.name === key);
+            if (field && field.dataPath) {
+              this.updateJsonData(field.dataPath, control.value, jsonDataObject, field.type);
             }
           }
         }
       });
-  
-      this.dataService.saveJsonData(JSON.stringify(this.formData));
-      this.updateFormControlValues();
-      this.configMode = false;
-      this.originalFormData = JSON.parse(JSON.stringify(this.formData));
-      if (this.formChangesSubscription) {
-        this.formChangesSubscription.unsubscribe();
-      }
+
+      // Save the updated jsonData
+      this.jsonData = JSON.stringify(jsonDataObject);
+      //this.dataService.saveJsonData(this.jsonData);
     }
+  }
+
+  onCancel():void{
+    //Todo: Implement the onCancel method
   }
 }

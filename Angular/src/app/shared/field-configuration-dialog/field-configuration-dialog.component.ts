@@ -37,12 +37,16 @@ export class FieldConfigDialogComponent {
       this.data.position = this.convertToNumber(this.data.position);
   }
   convertToString(value: any, defaultValue: string = ''): string {
-    return typeof value === 'string' ? value : defaultValue;
+    if (value === null || value === undefined) {
+      return defaultValue;
+    }
+    return value.toString();
   }
-    
+  
   convertToNumber(value: any, defaultValue: number = 0): number {
-    return typeof value === 'number' ? value : defaultValue;
-  } 
+    const numberValue = Number(value);
+    return isNaN(numberValue) ? defaultValue : numberValue;
+  }
   IsLabel(): boolean { return this.data.type === 'label'; }
   
   onNoClick(): void {

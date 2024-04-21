@@ -18,7 +18,7 @@ export class DeleteConfirmationDialogComponent {
   constructor(public dialogRef: MatDialogRef<DeleteConfirmationDialogComponent>) {}
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   onYesClick(): void {

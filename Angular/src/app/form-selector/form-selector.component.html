@@ -1,0 +1,24 @@
+<button class="add-type-button" (click)="addType()">Add Type</button>
+<div> 
+  <div *ngFor="let type of types">
+    <div class="type-button" (click)="toggleForms(type)">
+      <div>
+        <div class="button-group">
+          <button class="add-form-button" (click)="addForm(type); $event.stopPropagation()">Add Form</button>
+          <button class="edit-button" (click)="editType(type); $event.stopPropagation()">Edit</button>
+          <button class="delete-button" (click)="deleteType(type); $event.stopPropagation()">Delete</button>
+        </div>
+        {{ type.name }}
+      </div>
+    </div>
+    <div *ngIf="type.showForms">
+      <div *ngFor="let form of type.forms" class="form-button">
+        <div class="button-group">
+            <button class="edit-button" (click)="editForm(type,form)">Edit</button>
+            <button class="delete-button" (click)="deleteForm(type,form)">Delete</button>
+        </div>
+        {{ form.name }}
+      </div>
+    </div>
+  </div>
+</div>

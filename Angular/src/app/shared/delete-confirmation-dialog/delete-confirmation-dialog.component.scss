@@ -1,4 +1,4 @@
-    h1 {
+  h1 {
         padding: 0 10px;
   }
   
@@ -17,11 +17,21 @@
   }
   
   button[mat-button]:first-child {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    margin: 5px;
     background-color: orange;
     color: black;
   }
   
   button[mat-button]:last-child {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    margin: 5px;
     background-color: rgb(158, 2, 2);
     color: white;
   }

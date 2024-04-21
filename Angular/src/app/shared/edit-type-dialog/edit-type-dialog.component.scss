@@ -1,0 +1,50 @@
+/* add-dialog.component.scss */
+
+.cancel-button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 5px;
+    background-color: rgb(175, 175, 24);
+  }
+  
+  .cancel-button:hover {
+    background-color: rgb(200, 200, 0); /* Light yellow */
+  }
+  
+  .save-button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    margin: 5px;
+    background-color: rgb(1, 117, 1);
+  }
+  
+  .save-button:hover {
+    background-color: rgb(0, 200, 0); /* Light green */
+  }
+  
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  h1 {
+    margin: 10px;
+  }
+  
+  .mat-dialog-content {
+    max-width: 500px;
+    max-height: 400px;
+    margin: 10px;
+    overflow: auto;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+    max-width: 250px;
+    margin: 10px;
+    box-sizing: border-box;
+  }

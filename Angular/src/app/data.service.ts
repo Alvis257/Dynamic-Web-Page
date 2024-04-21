@@ -19,7 +19,7 @@ export class DataService {
     return of(formData ? formData : []);
   }
 
-  saveJsonData(data: any): void {
+  saveConfigData(data: any): void {
     localStorage.setItem('formData', JSON.stringify(data));
   }
 }
