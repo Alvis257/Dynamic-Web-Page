@@ -25,18 +25,24 @@ export class FormsComponent implements OnInit {
   formData: any;
   originalFormData: any;
   type: string | undefined;
-  loadeOriginal = false;
+  loadeOriginal = true;
   configMode = false;
   formConfig: any;
   jsonData: any;
   viewJsonData: string = '';
   displayData: any;
   formChangesSubscription: Subscription | undefined;
-  
+  disableJsonView = true;
+  fromSelector = false;
+  formsId: number | undefined;
+
   constructor(private dataService: DataService, public dialog: MatDialog, private route: ActivatedRoute, private router: Router) { 
     const navigation = this.router.getCurrentNavigation();
     if (navigation && navigation.extras.state) {
+      const typeObject = navigation.extras.state['type'];
+      this.type = typeObject ? typeObject.formType : undefined;
       this.fieldData = navigation.extras.state['fieldData'];
+      this.formsId = navigation.extras.state['id'];
     }
   }
 
@@ -44,14 +50,38 @@ export class FormsComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.jsonData = params['element'];
       this.configMode = params['configMode'] === 'true';
+      this.fromSelector = params['fromSelector'];
     });
+
     this.subscribeToFormChanges();
-    if (this.fieldData) {
-      this.createFormFromFieldData();
+    if (this.fromSelector && this.fieldData) {
+      this.disableJsonView = true;
+        this.createFormFromFieldData();
       this.configMode = true;
-    }else if (!this.loadeOriginal) {
+    } else if (!this.fromSelector) {
+        this.loadJsonData(this.jsonData);
+        this.disableJsonView = false;
+    }
+  }
+
+  loadJsonData(jsonData: any) {
+    this.dataService.getJsonData(jsonData).subscribe(data => {
+      this.formData = JSON.parse(data);
+      this.formData.forEach((field: { position: number | undefined; }, index: any) => {
+        if (field.position === undefined || isNaN(field.position)) {
+          field.position = index;
+        }
+      });
+      this.formData.sort((a: { position: number; }, b: { position: number; }) => a.position - b.position);
+      this.originalFormData = JSON.parse(data);
+      this.createForm();
+      if (this.form) {
+        this.updateFormControlValues();
+      }
+    });
+  
+    if (!this.loadeOriginal) {
       this.dataService.getJsonData(this.loadeOriginal).subscribe(data => {
-      
         this.formData = JSON.parse(data);
         this.formData.forEach((field: { position: number | undefined; }, index: any) => {
           if (field.position === undefined || isNaN(field.position)) {
@@ -82,17 +112,16 @@ export class FormsComponent implements OnInit {
       });
     }
   }
+
   createFormFromFieldData(): void {
-    this.formData = this.ensureFormDataIsArray(this.fieldData.forms);
-    console.log('fieldData:', this.fieldData);
-    console.log('formData:', this.formData);
+    this.formData = this.ensureFormDataIsArray(this.fieldData);
     this.formData.forEach((field: { position: number | undefined; }, index: any) => {
       if (field.position === undefined || isNaN(field.position)) {
         field.position = index;
       }
     });
     this.formData.sort((a: { position: number; }, b: { position: number; }) => a.position - b.position);
-    this.originalFormData = JSON.parse(JSON.stringify(this.fieldData.forms));
+    this.originalFormData = JSON.parse(JSON.stringify(this.fieldData));
     this.createForm();
     if (this.form) {
       this.updateFormControlValues();
@@ -102,7 +131,7 @@ export class FormsComponent implements OnInit {
     if (this.formChangesSubscription) {
       this.formChangesSubscription.unsubscribe();
     }
-
+    console.log(this.formData);
     const formDataArray = this.ensureFormDataIsArray(JSON.parse(JSON.stringify(this.formData)));
     formDataArray.forEach((field, index) => {
       if (field.position === undefined || isNaN(field.position)) {
@@ -119,7 +148,7 @@ export class FormsComponent implements OnInit {
 
     const group = this.createFormGroup(formDataArray);
     this.form = new FormGroup(group);
-
+    console.log(formDataArray);
     this.displayData = formDataArray;
   }
 
@@ -132,7 +161,7 @@ export class FormsComponent implements OnInit {
   createFormGroup(formDataArray: any[]): { [key: string]: FormControl } {
     const group: { [key: string]: FormControl } = {};
     formDataArray.forEach(field => {
-      if (field.type !== 'button') {
+      if (field.type !== 'button' && field.type !== 'savebutton'&& field.type !== 'cancelbutton') {
         const initialValue = this.getInitialValue(field);
         group[field.name] = new FormControl(initialValue);
         field.valueControl = new FormControl(initialValue);
@@ -148,7 +177,7 @@ export class FormsComponent implements OnInit {
 
     if (field.type === 'label') {
       displayValue = fieldValue.toString();
-    } else if ((field.type !== 'button') && this.jsonData && dataPath && !this.configMode) {
+    } else if ((field.type !== 'button' && field.type !== 'savebutton'&& field.type !== 'cancelbutton') && this.jsonData && dataPath && !this.configMode) {
       let value = dataPath.split('.').reduce((obj: any, part: string) => obj && obj[part] !== undefined ? obj[part] : '', JSON.parse(this.jsonData));
       displayValue = value !== '' ? value : fieldValue;
     } else {
@@ -203,7 +232,7 @@ export class FormsComponent implements OnInit {
   updateFormControlValues(): void {
     if (this.form && this.formData) {
       this.formData.forEach((field: any) => {
-        if (field.type !== 'button') {
+        if (field.type !== 'button' && field.type !== 'savebutton'&& field.type !== 'cancelbutton') {
           const initialValue = this.getInitialValue(field);
           const control = this.form ? this.form.get(field.name) : undefined;
           if (control) {
@@ -233,16 +262,13 @@ export class FormsComponent implements OnInit {
     }
   }
   styleToObject(style: string, type: string): { [key: string]: string } {
-    if (!style) {
-      return { 'flex-basis': '100%' };
-    }
 
 
     const styleObject: { [key: string]: string } = {};
     const properties = style.split(';');
     const minSizePx = 165; // minimum size in pixels
     const minSizePercent = 15; // minimum size in percent
-    if (type != 'button') {
+    if (type !== 'savebutton'&& type !== 'cancelbutton'&& type !== 'button') {
       if (!styleObject['width']) {
         styleObject['width'] = '100%';
       }
@@ -338,12 +364,17 @@ export class FormsComponent implements OnInit {
     }
 
 
-    this.configMode = false;
+    this.configMode = this.fromSelector ? true : false;
     this.updateFormControlValues();
     this.dataService.saveConfigData(JSON.stringify(this.formData));
     this.originalFormData = JSON.parse(JSON.stringify(this.formData));
     if (this.formChangesSubscription) {
       this.formChangesSubscription.unsubscribe();
+    }
+    if(this.fromSelector){
+      if (this.fromSelector) {
+        this.router.navigate(['formas'], { state: { editedType: this.type, editedForm: {id:this.formsId,data:this.formData} } });
+      }
     }
 
   }
@@ -416,7 +447,6 @@ export class FormsComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form) {
-      console.log(this.form.value);
 
       // Create a copy of jsonData to avoid modifying the original
       let jsonDataObject = this.jsonData ? JSON.parse(JSON.stringify(JSON.parse(this.jsonData))) : {};

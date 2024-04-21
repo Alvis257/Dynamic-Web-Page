@@ -1,6 +1,6 @@
 [
   {
-    "id": 2,
+    "id":2,
     "name": "second-form",
     "formType": "second-type",
     "forms": [
@@ -68,22 +68,21 @@
             "style": ""
           },
           {
-            "type": "savebutton",
-            "name":"savebutton",
+            "type": "saveButton",
+            "name":"saveButton",
             "label": "Save",
             "position": 7,
             "style": ""
           },
           {
-            "type": "canclebutton",
-            "name":"canclebutton",
+            "type": "cancelButton",
+            "name":"cancelButton",
             "label": "Cancel",
             "position": 8,
             "style": ""
           }
         ]
-      },
-      {
+      },{
         "formId": 2,
         "name": "formTwo",
         "fields": [
@@ -147,15 +146,15 @@
             "style": ""
           },
           {
-            "type": "savebutton",
-            "name":"savebutton",
+            "type": "saveButton",
+            "name":"saveButton",
             "label": "Save",
             "position": 7,
             "style": ""
           },
           {
-            "type": "canclebutton",
-            "name":"canclebutton",
+            "type": "cancelButton",
+            "name":"cancelButton",
             "label": "Cancel",
             "position": 8,
             "style": ""

@@ -23,7 +23,7 @@
     </div>
     <div class="config-buttons-container">
         <div class="left-side">
-          <button type="button" class="viewJson-button" (click)="openJsonView()">View Json</button>
+          <button *ngIf="!disableJsonView" type="button" class="viewJson-button" (click)="openJsonView()">View Json</button>
         </div>
         <div class="right-side">
           <button type="button" class="config-button" *ngIf="!configMode" (click)="openConfig()">Configure</button>

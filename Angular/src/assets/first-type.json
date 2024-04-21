@@ -68,15 +68,15 @@
             "style": ""
           },
           {
-            "type": "savebutton",
-            "name":"savebutton",
+            "type": "saveButton",
+            "name":"saveButton",
             "label": "Save",
             "position": 7,
             "style": ""
           },
           {
-            "type": "canclebutton",
-            "name":"canclebutton",
+            "type": "cancelButton",
+            "name":"cancelButton",
             "label": "Cancel",
             "position": 8,
             "style": ""
@@ -146,15 +146,15 @@
             "style": ""
           },
           {
-            "type": "savebutton",
-            "name":"savebutton",
+            "type": "saveButton",
+            "name":"saveButton",
             "label": "Save",
             "position": 7,
             "style": ""
           },
           {
-            "type": "canclebutton",
-            "name":"canclebutton",
+            "type": "cancelButton",
+            "name":"cancelButton",
             "label": "Cancel",
             "position": 8,
             "style": ""

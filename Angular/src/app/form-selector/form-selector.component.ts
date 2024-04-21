@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewEncapsulation} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Form, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,102 +21,111 @@ import { HttpClient } from '@angular/common/http';
 
 
 export class FormSelectorComponent {
-  
+
   selectedType: string | undefined;
   formsForType: Form[] | undefined;
   showForms = false;
-  types: { name: string, forms: any, showForms: boolean }[] = [];
-  constructor(private http: HttpClient, private route: ActivatedRoute,private dialog: MatDialog,private router: Router) {
-    
+  types: { name: string, formType: string, forms: any, showForms: boolean }[] = [];
+  constructor(private http: HttpClient, private route: ActivatedRoute, private dialog: MatDialog, private router: Router) {
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation && navigation.extras.state) {
+      const editedType = navigation.extras.state['editedType'];
+      const editedForm = navigation.extras.state['editedForm'];
+      this.loadTypes().then(() => {
+        if (editedType && editedForm) {
+          this.saveEditedForm(editedType, editedForm);
+        }
+      });
+    }
+  }
+  async loadTypes() {
+    const firstType = await this.http.get<{ name: string, formType: string, forms: any, showForms: boolean }[]>('assets/first-type.json').toPromise().catch(() => []) as { name: string, formType: string, forms: any, showForms: boolean }[];
+    const secondType = await this.http.get<{ name: string, formType: string, forms: any, showForms: boolean }[]>('assets/second-type.json').toPromise().catch(() => []) as { name: string, formType: string, forms: any, showForms: boolean }[];
+    this.types = [...firstType, ...secondType];
+    localStorage.setItem('types', JSON.stringify(this.types));
   }
 
-ngOnInit() {
-  this.http.get<{ name: string, forms: any, showForms: boolean }[]>('assets/first-type.json').subscribe(data => {
-    this.types = data;
-  });
-  this.http.get<{ name: string, forms: any, showForms: boolean }[]>('assets/second-type.json').subscribe(data => {
-    this.types = [...this.types, ...data];
-  });
+  ngOnInit() {
+    this.types = JSON.parse(localStorage.getItem('types') || '[]');
 
-  this.route.params.subscribe(params => {
-    let formId = params['id'];
-    this.loadForm(formId);
-  });
-}
+    this.route.params.subscribe(params => {
+      let formId = params['id'];
+    });
+  }
 
-addType() {
-  const dialogRef = this.dialog.open(AddDialogComponent);
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      this.types.push({ name: result, forms: [], showForms: false});
-    }
-  });
-}
-
-addForm(type:any) {
-  const dialogRef = this.dialog.open(AddDialogComponent);
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      type.forms.push({ name: result });
-    }
-  });
-}
-
-editForm(form: any, type: any) {
-  this.router.navigate(['formas/forms'], { state: { fieldData: form.fields, type: type } });
-}
-
-deleteForm(type:any, form:any) {
-  const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent);
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      const index = type.forms.indexOf(form);
-      if (index > -1) {
-        type.forms.splice(index, 1);
+  saveEditedForm(editedType: string, editedForm: any) {
+    const type = this.types.find(type => type.formType === editedType);
+    if (type) {
+      const formIndex = type.forms.findIndex((form: { formId: any; }) => form.formId === editedForm.id);
+      if (formIndex !== -1) {
+        type.forms[formIndex].fields = editedForm.data;
       }
     }
-  });
-}
+  }
+  addType() {
+    const dialogRef = this.dialog.open(AddDialogComponent);
 
-editType(type:any) {
-  const dialogRef = this.dialog.open(EditTypeDialogComponent, {
-    data: { name: type.name, formType: type.formType }
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      type.name = result.name;
-      type.formType = result.formType;
-    }
-  });
-}
-
-deleteType(type:any) {
-  const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent);
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      const index = this.types.indexOf(type);
-      if (index > -1) {
-        this.types.splice(index, 1);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.types.push({ name: result, formType: result, forms: [], showForms: false });
       }
-    }
-  });
-}
-toggleForms(type: { name: string, forms: Form[], showForms: boolean }) {
-  type.showForms = !type.showForms;
-}
+    });
+  }
 
+  addForm(type: any) {
+    const dialogRef = this.dialog.open(AddDialogComponent);
 
-loadForm(id: string) {
-  // Logic to load the form with the given ID
-}
-getFormsForType(type: string): Form[] {
-  // Logic to get the forms for the selected type
-  return []; // Placeholder return statement, replace with actual logic
-}
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        type.forms.push({ name: result });
+      }
+    });
+  }
+
+  editForm(type: any, form: any) {
+    this.router.navigate(['formas/forms'], { state: { type: type, fieldData: form.fields, id: form.formId }, queryParams: { fromSelector: 'true' } });
+  }
+
+  deleteForm(type: any, form: any) {
+    const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const index = type.forms.indexOf(form);
+        if (index > -1) {
+          type.forms.splice(index, 1);
+        }
+      }
+    });
+  }
+
+  editType(type: any) {
+    const dialogRef = this.dialog.open(EditTypeDialogComponent, {
+      data: { name: type.name, formType: type.formType }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        type.name = result.name;
+        type.formType = result.formType;
+      }
+    });
+  }
+
+  deleteType(type: any) {
+    const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const index = this.types.indexOf(type);
+        if (index > -1) {
+          this.types.splice(index, 1);
+        }
+      }
+    });
+  }
+  toggleForms(type: { name: string, forms: Form[], showForms: boolean }) {
+    type.showForms = !type.showForms;
+  }
 
 }
