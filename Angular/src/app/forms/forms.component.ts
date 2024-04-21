@@ -234,7 +234,7 @@ export class FormsComponent implements OnInit {
   }
   styleToObject(style: string, type: string): { [key: string]: string } {
     if (!style) {
-      return {};
+      return { 'flex-basis': '100%' };
     }
 
 
