@@ -1,0 +1,16 @@
+<mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened>
+      <mat-nav-list>
+        <div *ngFor="let node of menuData">
+          <h3 matSubheader>{{ node.type }}</h3>
+          <a mat-list-item *ngFor="let form of node.forms" (click)="view(form)">{{ form.name }}</a>
+        </div>
+      </mat-nav-list>
+
+    </mat-drawer>
+    <div>
+        <div mat-drawer-content>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+  </mat-drawer-container>
