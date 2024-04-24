@@ -1,6 +1,6 @@
 import { ChangeDetectorRef,Input, Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormsModule } from '@angular/forms';
-import { DataService } from '../data.service';
+import { DataService } from '../Service/data.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';

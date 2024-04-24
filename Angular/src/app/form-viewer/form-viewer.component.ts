@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DataService } from '../data.service'; // replace with the path to your data service
+import { DataService } from '../Service/data.service'; // replace with the path to your data service
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';

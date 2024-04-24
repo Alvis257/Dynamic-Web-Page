@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { Inject } from '@angular/core';
-import { DataService } from './data.service';
+import { DataService } from './Service/data.service';
 
 
 @Component({
