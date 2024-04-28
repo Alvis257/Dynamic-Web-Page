@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +8,26 @@ import { Observable, of } from 'rxjs';
 export class DataService {
 
   constructor(private http: HttpClient) { }
-  
-  getJsonData(loadeOriginal:boolean): Observable<any> {
-    const data = localStorage.getItem('formData');
-    if (!data || loadeOriginal === true) {
-      return this.http.get('http://localhost:4200/assets/form-data.json');
-    }
 
-    const formData = JSON.parse(data);
-    return of(formData ? formData : []);
+  getTypeNames(loadOriginal:boolean): string[] {
+    if (loadOriginal) {
+      localStorage.removeItem('typeNames');
+      localStorage.removeItem('types');
+    }
+    return JSON.parse(localStorage.getItem('typeNames') || '["first-type", "second-type"]');
   }
+
+  getTypes(typeNames: string[]): Observable<any>[] {
+    return typeNames.map(typeName => 
+      this.http.get(`assets/${typeName}.json`).pipe(
+        catchError(error => {
+          console.error('Error loading type:', typeName, error);
+          return of([]);
+        })
+      )
+    );
+  }
+
   saveConfigData(data: any): void {
     localStorage.setItem('formData', JSON.stringify(data));
   }

@@ -71,7 +71,6 @@ export class MainComponent {
     this.router.navigate(['/form-viewer', element.type], { queryParams: {type:element.type, jsonData: JSON.stringify(element), id: element.id } });
   }
   delete(element: any): void {
-    console.log('Delete:', element);
     // Add your delete logic here
   }
 

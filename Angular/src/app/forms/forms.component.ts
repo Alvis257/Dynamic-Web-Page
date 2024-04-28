@@ -10,6 +10,8 @@ import { FieldConfigDialogComponent } from '../shared/field-configuration-dialog
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { NewFieldDialogComponent } from '../shared/new-field-dialog/new-field-dialog.component';
+import { FormService } from '../Service/form.service';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-forms',
@@ -35,68 +37,57 @@ export class FormsComponent implements OnInit {
   disableJsonView = true;
   fromSelector = false;
   formsId: number | undefined;
-  @Output() configSaved = new EventEmitter<any>();
+  formName: string | undefined;
   
-  constructor(private dataService: DataService, public dialog: MatDialog, private route: ActivatedRoute, private router: Router) { 
+  constructor(private dataService: DataService, private formService: FormService, public dialog: MatDialog, private route: ActivatedRoute, private router: Router) { 
     const navigation = this.router.getCurrentNavigation();
+    console.log('navigation', navigation); 
     if (navigation && navigation.extras.state) {
       const typeObject = navigation.extras.state['type'];
       this.type = typeObject ? typeObject.formType : undefined;
       this.fieldData = navigation.extras.state['fieldData'];
       this.formsId = navigation.extras.state['id'];
+      this.fromSelector = navigation.extras.state['fromSelector'];
+      this.configMode = navigation.extras.state['configMode'];
+      this.formName = navigation.extras.state['formName'];
     }
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.jsonData = params['jsonData'] ? params['jsonData'] : null;
-      this.configMode = params['configMode'] === 'true';
-      this.fromSelector = params['fromSelector'];
+      if(!this.fromSelector){
+        this.jsonData = params['jsonData'] ? params['jsonData'] : null;
+        this.configMode = params['configMode'] === 'true';
+        this.formsId = params['formId'];
+        this.type = params['type'];
+        this.fromSelector = params['fromSelector'];
+      }
+
+      this.subscribeToFormChanges();
+      if (this.fromSelector && this.fieldData) {
+        this.disableJsonView = true;
+        this.createFormFromFieldData();
+        this.configMode = true;
+      } else if (!this.fromSelector && this.type && this.formsId) {
+        this.loadJsonData(this.type, this.formsId);
+        this.disableJsonView = false;
+      }
     });
-    console.log(this.jsonData);
-    this.subscribeToFormChanges();
-    if (this.fromSelector && this.fieldData) {
-      this.disableJsonView = true;
-      this.createFormFromFieldData();
-      this.configMode = true;
-    } else if (!this.fromSelector) {
-      this.loadJsonData(this.jsonData);
-      this.disableJsonView = false;
-    }
   }
   
-  loadJsonData(jsonData: any) {
-    this.dataService.getJsonData(jsonData).subscribe(data => {
-      this.formData = JSON.parse(data);
+  loadJsonData(type: string | undefined, formId: any) {
+    if (type === undefined || formId === undefined) {
+      throw new Error('Type and Form ID must be defined');
+    }
+    this.formService.getForm(type, formId).subscribe(data => {
+      this.formData = data;
       this.processFormData();
-      this.originalFormData = JSON.parse(data);
+      this.originalFormData = JSON.parse(JSON.stringify(data));
       this.createForm();
       if (this.form) {
         this.updateFormControlValues();
       }
     });
-  
-    if (!this.loadeOriginal) {
-      this.dataService.getJsonData(this.loadeOriginal).subscribe(data => {
-        this.formData = JSON.parse(data);
-        this.processFormData();
-        this.originalFormData = JSON.parse(data);
-        this.createForm();
-        if (this.form) {
-          this.updateFormControlValues();
-        }
-      });
-    } else {
-      this.dataService.getJsonData(this.loadeOriginal).subscribe(data => {
-        this.formData = JSON.parse(JSON.stringify(data));
-        this.processFormData();
-        this.originalFormData = JSON.parse(JSON.stringify(data));
-        this.createForm();
-        if (this.form) {
-          this.updateFormControlValues();
-        }
-      });
-    }
   }
   
   
@@ -356,15 +347,18 @@ export class FormsComponent implements OnInit {
   
     this.configMode = this.fromSelector ? true : false;
     this.updateFormControlValues();
-    //this.dataService.saveConfigData(JSON.stringify(this.formData));// Pass the formId to the saveConfigData method
+  
     this.originalFormData = JSON.parse(JSON.stringify(this.formData));
     if (this.formChangesSubscription) {
       this.formChangesSubscription.unsubscribe();
     }
     if(this.fromSelector){
-      this.router.navigate(['formas'], { state: { editedType: this.type, editedForm: {id:this.formsId,data:this.formData} } });
+      this.router.navigate(['formas'], { state: { editedType: this.type, editedForm: {id:this.formsId,formName:this.formName,data:this.formData} } });
+    }else  if (this.type && this.formsId) {
+      this.formService.saveFormFields(this.type, this.formsId, this.formData); // Save form fields using form.service
+    } else {
+      throw new Error('Type or Form ID is undefined');
     }
-    this.configSaved.emit(this.formData);
   }
 
   cancelConfig(): void {
