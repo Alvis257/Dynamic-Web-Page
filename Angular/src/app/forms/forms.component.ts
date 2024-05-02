@@ -124,9 +124,9 @@ export class FormsComponent implements OnInit {
         field.position = index;
       }
 
-      if (field.type === 'label') {
+      if (field.type === 'label' || field.type === 'label_dynamic') {
         const initialValue = this.getInitialValue(field);
-        field.value = initialValue; // Update the label value
+        field.value = initialValue; 
       }
     });
 
@@ -160,15 +160,15 @@ export class FormsComponent implements OnInit {
     let fieldValue = field.value ? field.value : '';
     let displayValue = '';
 
-    if (field.type === 'label') {
+    if (field.type == 'label') {
       displayValue = fieldValue.toString();
-    } else if ((field.type !== 'button' && field.type !== 'savebutton'&& field.type !== 'cancelbutton') && this.jsonData && dataPath && !this.configMode) {
+    } else if (((field.type !== 'button' && field.type !== 'savebutton'&& field.type !== 'cancelbutton') || field.type === 'label_dynamic' ) && this.jsonData && dataPath && !this.configMode) {
       let value = dataPath.split('.').reduce((obj: any, part: string) => obj && obj[part] !== undefined ? obj[part] : '', JSON.parse(this.jsonData));
       displayValue = value !== '' ? value : fieldValue;
     } else {
       displayValue = fieldValue;
     }
-
+    
     return displayValue;
   }
 
@@ -345,13 +345,14 @@ export class FormsComponent implements OnInit {
       });
     }
   
-    this.configMode = this.fromSelector ? true : false;
+    
     this.updateFormControlValues();
-  
+
     this.originalFormData = JSON.parse(JSON.stringify(this.formData));
     if (this.formChangesSubscription) {
       this.formChangesSubscription.unsubscribe();
     }
+    this.configMode = this.fromSelector ? true : false;
     if(this.fromSelector){
       this.router.navigate(['formas'], { state: { editedType: this.type, editedForm: {id:this.formsId,formName:this.formName,data:this.formData} } });
     }else  if (this.type && this.formsId) {
@@ -359,6 +360,7 @@ export class FormsComponent implements OnInit {
     } else {
       throw new Error('Type or Form ID is undefined');
     }
+    this.createForm();
   }
 
   cancelConfig(): void {
