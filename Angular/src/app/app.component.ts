@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { Inject } from '@angular/core';
 import { DataService } from './Service/data.service';
@@ -10,6 +11,16 @@ import { DataService } from './Service/data.service';
     standalone: true,
     templateUrl: 'app.component.html',
     styleUrls: ['./app.component.scss'],
-    imports: [MenuComponent, RouterModule],
+    imports: [MenuComponent, RouterModule, CommonModule, RouterModule],
 })
-export class AppComponent {}
+export class AppComponent {
+  showMenu = true;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.showMenu = !event.urlAfterRedirects.includes('login') && !event.urlAfterRedirects.includes('forgot-password');
+      }
+    });
+  }
+}

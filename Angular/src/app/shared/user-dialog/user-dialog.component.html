@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>{{ data.index !== undefined ? 'Edit' : 'Add' }} User</h2>
+
+<form [formGroup]="userForm">
+  <mat-dialog-content>
+    <mat-form-field>
+        <input matInput formControlName="username" placeholder="Username">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="email" placeholder="Email">
+    </mat-form-field>
+    <mat-form-field *ngIf="data.index === undefined">
+        <input matInput formControlName="password" placeholder="Password">
+      </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="role" placeholder="Role">
+    </mat-form-field>
+    <div formGroupName="rights">
+        <label>
+          <input type="checkbox" formControlName="admin"> Admin
+        </label>
+        <label>
+          <input type="checkbox" formControlName="read"> Read
+        </label>
+        <label>
+          <input type="checkbox" formControlName="write"> Write
+        </label>
+        <label>
+          <input type="checkbox" formControlName="delete"> Delete
+        </label>
+        <label>
+          <input type="checkbox" formControlName="share"> Share
+        </label>
+      </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button type="cancel" (click)="onCancel()">Cancel</button>
+    <button mat-button type="submit" (click)="onSubmit()">{{ data.index !== undefined ? 'Update' : 'Add' }} User</button>
+  </mat-dialog-actions>
+</form>

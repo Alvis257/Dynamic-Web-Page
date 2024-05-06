@@ -1,0 +1,67 @@
+.user-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .user-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .user-details {
+    flex-grow: 1;
+  }
+  
+  .user-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  button {
+    padding: 10px 20px; /* Increase padding to make the button bigger */
+    font-size: 12px; /* Increase font size to make the text bigger */
+
+    border: 1px solid transparent; /* Reduce border thickness */
+  }
+  
+/* Add User button */
+button[color="primary"] {
+    background-color: green;
+    color: white;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+  
+  button[color="primary"]:hover {
+    background-color: darkgreen;
+  }
+
+  /* Edit button */
+  button[color="accent"] {
+    background-color: grey;
+    border-radius: 20px;
+    color: white;
+  }
+  button[color="accent"]:hover {
+    background-color: darkgrey; /* Change background color on hover */
+  }
+  /* Delete button */
+  button[color="warn"] {
+    background-color: #dc3545; 
+    border-radius: 20px;
+    color: white;
+  }
+
+  button[color="warn"]:hover {
+    background-color: #c82333; /* Change background color on hover */
+  }

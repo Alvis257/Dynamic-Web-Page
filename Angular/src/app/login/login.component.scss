@@ -1,0 +1,27 @@
+.login-card {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .login-field {
+    width: 100%;
+  }
+  
+  mat-card-actions {
+    justify-content: flex-end;
+  }
+  
+  mat-card-footer {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 20px;
+  }
+  
+  button {
+    text-transform: none;
+  }
+  
+  button:hover {
+    cursor: pointer;
+  }

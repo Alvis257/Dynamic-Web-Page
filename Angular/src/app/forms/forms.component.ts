@@ -11,7 +11,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { NewFieldDialogComponent } from '../shared/new-field-dialog/new-field-dialog.component';
 import { FormService } from '../Service/form.service';
-import { Console } from 'console';
 
 @Component({
   selector: 'app-forms',
@@ -168,7 +167,7 @@ export class FormsComponent implements OnInit {
     } else {
       displayValue = fieldValue;
     }
-    
+
     return displayValue;
   }
 

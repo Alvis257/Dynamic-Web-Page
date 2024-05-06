@@ -1,0 +1,15 @@
+<button mat-raised-button color="primary" (click)="openDialog()">Add User</button>
+
+<div class="user-list">
+  <div class="user-box" *ngFor="let user of users; index as i">
+    <div class="user-details">
+      <h2>{{ user.username }}</h2>
+      <p>{{ user.email }}</p>
+      <p>{{ user.role }}</p>
+    </div>
+    <div class="user-actions">
+      <button mat-button color="accent" (click)="openDialog(user, i)">Edit</button>
+      <button mat-button color="warn" (click)="deleteUser(i)">Delete</button>
+    </div>
+  </div>
+</div>

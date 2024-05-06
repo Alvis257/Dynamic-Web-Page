@@ -1,0 +1,40 @@
+h2 {
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+  
+  mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Add gap between fields */
+  }
+  
+  mat-dialog-actions {
+    display: flex;
+    justify-content: space-between; /* Add space between buttons */
+  }
+  
+  button {
+    color: white;
+    font-size: 12px; /* Increase font size to make the text bigger */
+    padding: 10px 20px; /* Increase padding to make the button bigger */
+    border: 1px solid transparent; 
+  }
+  
+  button[type="submit"] {
+    border-radius: 20px;
+    background-color: green;
+  }
+  button[type="submit"]:hover {
+    background-color: darkgreen;
+  }
+  button[type="cancel"] {
+    border-radius: 20px;
+    background-color: rgb(175, 175, 24);
+  }
+  button[type="cancel"]:hover {
+    background-color: rgb(200, 200, 0); /* Light yellow */
+  }
+  div[formGroupName="rights"] label {
+    color: black;
+  }

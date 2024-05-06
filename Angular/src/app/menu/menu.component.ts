@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
+import { AuthService } from '../Service/AuthService.service';
 @Component({
   selector: 'app-menu',
   standalone: true,
@@ -9,31 +10,10 @@ import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 })
 
 export class MenuComponent {
-  constructor(private router: Router, private route: ActivatedRoute) {
-    this.router.events.subscribe(() => {
-      if (this.router.url === '/mani-dokumenti') {
-        console.log('BlankFormComponent for "mani-dokumenti" is active');
-      }
-    });
-    this.router.events.subscribe(() => {
-      if (this.router.url === '/visi-dokumenti') {
-        console.log('BlankFormComponent for "visi-dokumenti" is active');
-      }
-    });
-    this.router.events.subscribe(() => {
-      if (this.router.url === '/formas') {
-        console.log('BlankFormComponent for "formas" is active');
-      }
-    });
-    this.router.events.subscribe(() => {
-      if (this.router.url == '/integracijas') {
-        console.log('BlankFormComponent for "integrācijas" is active');
-      }
-    });
-    this.router.events.subscribe(() => {
-      if (this.router.url === '/profils') {
-        console.log('BlankFormComponent for "profils" is active');
-      }
-    });
+  constructor(private router: Router, private route: ActivatedRoute,private authService: AuthService,) {}
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
