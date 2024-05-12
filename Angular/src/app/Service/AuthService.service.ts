@@ -1,24 +1,28 @@
 import { Injectable } from '@angular/core';
 import { UserService } from './User.service';
-
+import { User } from '../Interface/User';
+import * as emailjs from 'emailjs-com';
+import { Console } from 'console';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private users = [
-    { username: 'simple', password: 'password', role: 'user', email: 'simple@example.com' },
-    { username: 'admin', password: 'password', role: 'admin', email: 'admin@example.com' }
-  ];
+  // private users = [
+  //   { username: 'simple', password: 'password', role: 'user', resetCode:'', email: 'simple@example.com' },
+  //   { username: 'admin', password: 'password', role: 'admin', resetCode:'',email: 'admin@example.com' }
+  // ];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) { 
+    emailjs.init('LHO-vWp0D8DksFeYw');
+  }
 
   login(username: string, password: string): Promise<boolean> {
     const users = this.userService.getUsers();
     return new Promise((resolve, reject) => {
-      const user = this.users.find(u => u.username === username && u.password === password);
+      const user = users.find(u => u.username === username && u.password === password);
       if (user) {
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        //this.setSessionTimeout();
+        sessionStorage.setItem('username', user.username);
+        sessionStorage.setItem('rights', JSON.stringify(user.rights));
         resolve(true);
       } else {
         resolve(false);
@@ -27,44 +31,64 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('currentUser');
+    sessionStorage.removeItem('currentUser');
     clearTimeout(Number(localStorage.getItem('sessionTimeoutId')));
   }
 
-sendResetCode(email: string): { resetCode: string; resetSent: boolean; } | null {
-    const user = this.users.find(u => u.email === email);
-    if (user) {
-        // Generate a reset code and return it
-        const resetCode = Math.random().toString(36).substring(2, 15);
-        const resetSent = true;
-        const reset = { resetCode, resetSent };
-        return reset;
-    }
-    return null;
-}
-
-resetPassword(newPassword: string): void {
-    // Reset the password
-}
-
-  forgotPassword(username: string): string {
-    const user = this.users.find(u => u.username === username);
-    if (user) {
-      return `Password reset link has been sent to ${user.email}`;
-    }
-    return `User not found`;
+  getUserByEmail(email: string): User | null {
+    const users = this.userService.getUsers();
+    const user = users.find(u => u.email === email);
+    return user || null;
   }
 
-//   setSessionTimeout(): void {
-//     const timeoutId = setTimeout(() => {
-//       alert('Session has expired. Please log in again.');
-//       this.logout();
-//     }, 0); // 1 hour
-//     localStorage.setItem('sessionTimeoutId', String(timeoutId));
-//   }
+  async sendResetCode(email: string): Promise<{ resetCode: string; resetSent: boolean; } | null> {
+    const users = this.userService.getUsers();
+    const user = users.find(u => u.email === email);
+    if (user) {
+      // Generate a reset code and return it
+      const resetCode = Math.random().toString(36).substring(2, 15);
+      const resetSent = await this.sendEmail(email, resetCode);
+      if (resetSent) {
+        this.userService.updateResetCode(user.username, resetCode);
+      }
+      return { resetCode, resetSent };
+    }
+    return null;
+  }
+  
+  sendEmail(to: string, resetCode: string): Promise<any> {
+    const templateParams = {
+      to_name: to,
+      message: resetCode,
+      from_name:"DGS Automate",
+    };
+    
+    return emailjs.send('service_vdx73bk', 'template_21x2swq', templateParams)
+      .then(response => {
+        console.log('Email successfully sent!', response);
+        return response;
+      })
+      .catch(err => {
+        console.error('Failed to send email:', err);
+        throw err;
+      });
+  }
 
-//   resetSessionTimeout(): void {
-//     clearTimeout(Number(localStorage.getItem('sessionTimeoutId')));
-//     this.setSessionTimeout();
-//   }
+  resetPassword(username: string, resetCode: string, newPassword: string): boolean {
+    const users = this.userService.getUsers();
+    const user = users.find(u => u.username === username);
+    if (user && this.checkResetCode(user.email, resetCode)) {
+      return this.userService.changePassword(username, newPassword);
+    }
+    return false;
+  }
+  
+  checkResetCode(email: string, resetCode: string): boolean {
+    const users = this.userService.getUsers();
+    const user = users.find(u => u.email === email);
+    if (user && user.resetCode === resetCode) {
+      return true;
+    }
+    return false;
+  }
 }

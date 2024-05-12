@@ -3,6 +3,7 @@ export interface User {
   email: string;
   password: string;
   role: string;
+  resetCode?: string;
   rights: {
     admin: boolean;
     read: boolean;

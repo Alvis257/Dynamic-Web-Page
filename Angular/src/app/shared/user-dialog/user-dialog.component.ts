@@ -21,6 +21,7 @@ export class UserFormComponent {
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
     role: ['', Validators.required],
+    resetCode:[''],
     rights: this.fb.group({
       admin: false,
       read: false,

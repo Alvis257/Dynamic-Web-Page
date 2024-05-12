@@ -43,9 +43,24 @@ export class MainComponent {
   sort!: MatSort;
   @ViewChild('paginator')
   paginator!: MatPaginator;
-  
+  public rights!: {
+    admin: boolean;
+    read: boolean;
+    write: boolean;
+    delete: boolean;
+    share: boolean;
+  };
   displayedColumns: string[] = ['id','type','name', 'status', 'creationTime', 'responsible', 'options'];
+ 
   constructor( private _liveAnnouncer: LiveAnnouncer, private router: Router) { } 
+
+  ngOnInit(): void {
+    const rightsItem = sessionStorage.getItem('rights');
+    if (rightsItem !== null) {
+      this.rights = JSON.parse(rightsItem);
+    }
+  }
+
   dataSource : MatTableDataSource<DataStructure> = new MatTableDataSource();
   
   ngAfterViewInit() {
@@ -71,7 +86,7 @@ export class MainComponent {
     this.router.navigate(['/form-viewer', element.type], { queryParams: {type:element.type, jsonData: JSON.stringify(element), id: element.id } });
   }
   delete(element: any): void {
-    // Add your delete logic here
+
   }
 
 }

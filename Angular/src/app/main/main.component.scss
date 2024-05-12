@@ -55,3 +55,28 @@ mat-table {
 mat-cell, mat-header-cell {
   padding: 16px;
 }
+
+table button {
+  border-radius: 10px;
+  margin-left: 10px;
+  padding: 7px 10px;
+  border: 0px;
+}
+
+table button:nth-child(1) {
+  background-color: grey;
+  color: white;
+}
+
+table button:nth-child(1):hover {
+  background-color: rgb(80, 80, 80);
+}
+
+table button:nth-child(2) {
+  color: white;
+  background-color: #dc3545;
+}
+
+table button:nth-child(2):hover {
+  background-color: #c82333;
+}

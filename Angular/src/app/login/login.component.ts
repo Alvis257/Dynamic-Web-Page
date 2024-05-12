@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule], // Add FormsModule to the imports array
-  templateUrl: 'login.component.html', // Provide the correct string value for the templateUrl property
+  imports: [FormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+  templateUrl: 'login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
@@ -31,7 +31,6 @@ export class LoginComponent {
   }
 
   forgotPassword(): void {
-    this.authService.forgotPassword(this.username);
     this.router.navigate(['/forgot-password']);
   }
 }

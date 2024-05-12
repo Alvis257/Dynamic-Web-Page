@@ -69,7 +69,11 @@ button {
 }
 
 button:hover {
-  background-color: dodgerblue;
+  background-color: rgb(23, 193, 88)
+}
+
+button:disabled {
+  background-color: rgb(86, 86, 86)
 }
 
 .config-mode {
@@ -120,7 +124,6 @@ button:hover {
 .cancel-button {
   background-color: rgb(175, 175, 24);
 }
-
 .cancel-button:hover {
   background-color: rgb(200, 200, 0); /* Light yellow */
 }

@@ -37,10 +37,16 @@ export class FormsComponent implements OnInit {
   fromSelector = false;
   formsId: number | undefined;
   formName: string | undefined;
-  
+  public rights!: {
+    admin: boolean;
+    read: boolean;
+    write: boolean;
+    delete: boolean;
+    share: boolean;
+  };
+
   constructor(private dataService: DataService, private formService: FormService, public dialog: MatDialog, private route: ActivatedRoute, private router: Router) { 
     const navigation = this.router.getCurrentNavigation();
-    console.log('navigation', navigation); 
     if (navigation && navigation.extras.state) {
       const typeObject = navigation.extras.state['type'];
       this.type = typeObject ? typeObject.formType : undefined;
@@ -53,6 +59,14 @@ export class FormsComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    const rightsItem = sessionStorage.getItem('rights');
+    if (rightsItem !== null) {
+      this.rights = JSON.parse(rightsItem);
+    }
+
+    let group: any = {};
+
     this.route.queryParams.subscribe(params => {
       if(!this.fromSelector){
         this.jsonData = params['jsonData'] ? params['jsonData'] : null;
@@ -70,10 +84,22 @@ export class FormsComponent implements OnInit {
       } else if (!this.fromSelector && this.type && this.formsId) {
         this.loadJsonData(this.type, this.formsId);
         this.disableJsonView = false;
+        this.formData.forEach((field: any) => {
+          group[field.name] = new FormControl({value: field.value, disabled: !this.hasWriteOrAdminAccess()});
+        });
+      
+        this.form = new FormGroup(group);
       }
     });
   }
+
+  hasWriteOrAdminAccess(): boolean {
+    return this.rights?.write || this.rights?.admin;
+  }
   
+  hasAdminAccess(): boolean {
+    return this.rights?.admin;
+  }
   loadJsonData(type: string | undefined, formId: any) {
     if (type === undefined || formId === undefined) {
       throw new Error('Type and Form ID must be defined');

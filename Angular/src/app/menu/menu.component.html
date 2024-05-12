@@ -3,8 +3,8 @@
   <div class="menu-links">
     <button routerLink="/mani-dokumenti">Mani dokumenti</button>
     <button routerLink="/visi-dokumenti">Visi dokumenti</button>
-    <button routerLink="/formas">Formas</button>
-    <button routerLink="/lietotaji">Lietotāji</button>
+    <button routerLink="/formas" *ngIf="rights.admin">Formas</button>
+    <button routerLink="/lietotaji" *ngIf="rights.admin">Lietotāji</button>
   </div>
   <div class="user-options">
     <button routerLink="/valoda">Valoda</button>

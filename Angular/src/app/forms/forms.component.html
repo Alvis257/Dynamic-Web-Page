@@ -8,26 +8,26 @@
         <input *ngIf="field.type === 'checkbox'" type="checkbox" [formControlName]="field.name">
         <button *ngIf="field.type === 'saveButton'" [ngStyle]="fieldStyleToObject(field.style)" (click)="onSubmit()">{{ field.label }}</button>
         <button *ngIf="field.type === 'cancelButton'" [ngStyle]="fieldStyleToObject(field.style)" (click)="onCancel()">{{ field.label }}</button>
-        <div class="field-icons" *ngIf="configMode">
+        <div class="field-icons" *ngIf="configMode  && hasAdminAccess()">
           <mat-icon (click)="openFieldConfig(field)">settings</mat-icon> 
           <mat-icon (click)="confirmDelete(i)">delete</mat-icon>
         </div>
-        <div class="field-icons" *ngIf="configMode">
+        <div class="field-icons" *ngIf="configMode  && hasAdminAccess()">
           <mat-icon (click)="moveUp(i)">arrow_upward</mat-icon>
           <mat-icon (click)="moveDown(i)">arrow_downward</mat-icon> 
         </div>
       </div>
     </div>
     <div *ngIf="configMode" class="config-buttons-container" >
-      <button mat-raised-button class="add-field-button" *ngIf="configMode" (click)="addField()">Add field</button>
+      <button mat-raised-button class="add-field-button" *ngIf="configMode  && hasAdminAccess()" (click)="addField()">Add field</button>
     </div>
     <div class="config-buttons-container">
         <div class="left-side">
-          <button *ngIf="!disableJsonView" type="button" class="viewJson-button" (click)="openJsonView()">View Json</button>
+          <button *ngIf="!disableJsonView  && hasAdminAccess()" type="button" class="viewJson-button" (click)="openJsonView()">View Json</button>
         </div>
         <div class="right-side">
-          <button type="button" class="config-button" *ngIf="!configMode" (click)="openConfig()">Configure</button>
-          <div *ngIf="configMode">
+          <button type="button" class="config-button" *ngIf="!configMode  && hasAdminAccess()" (click)="openConfig()">Configure</button>
+          <div *ngIf="configMode && rights.admin">
             <button type="button" class="save-button" (click)="saveConfig()">Save</button>
             <button type="button" class="cancel-button" (click)="cancelConfig()">Cancel</button>
           </div>
@@ -36,7 +36,7 @@
   </form>
 </div>
 
-<div *ngIf="viewJsonData" class="json-container">
+<div *ngIf="viewJsonData  && hasAdminAccess()" class="json-container">
 <button (click)="viewJsonData = ''">Close</button>
 <pre>{{ viewJsonData }}</pre>
 </div>
