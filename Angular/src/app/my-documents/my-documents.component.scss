@@ -1,3 +1,73 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+.mat-header-row,
+.mat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mat-cell {
+  padding: 16px;
+}
+.mat-header-cell {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+.mat-raised-button {
+  margin-right: 10px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-table {
+  width: 100%;
+  max-height: 500px;
+  overflow: auto;
+  margin: 20px 0;
+}
+
+mat-table {
+  width: calc(100% - 20px); 
+  max-height: 500px;
+  overflow: auto;
+  margin: 20px 10px; 
+}
+
+mat-cell, mat-header-cell {
+  padding: 16px;
+}
+
+table button {
+  border-radius: 10px;
+  margin-left: 10px;
+  padding: 7px 10px;
+  border: 0px;
+}
+
+table button:nth-child(1) {
+  background-color: grey;
+  color: white;
+}
+
+table button:nth-child(1):hover {
+  background-color: rgb(80, 80, 80);
+}
+
+table button:nth-child(2) {
+  color: white;
+  background-color: #dc3545;
+}
+
+table button:nth-child(2):hover {
+  background-color: #c82333;
+}
+
 .example-full-width {
     width: 100%;
   }
@@ -10,4 +80,22 @@
   
   .half-width {
     width: 49%;
+  }
+
+  ::ng-deep .selected {
+    background-color: #3f51b5 !important; 
+    color: white !important;
+  }
+  
+  ::ng-deep .selected:hover, .selected:active, .selected:focus {
+    background-color: #3f51b5 !important;
+  }
+  
+  ::ng-deep .not-selected {
+    background-color: #e0e0e0 !important;
+    color: black !important;
+  }
+  
+  ::ng-deep .not-selected:hover {
+    background-color: #aeaeae !important;
   }

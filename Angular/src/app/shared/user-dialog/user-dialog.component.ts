@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 
 export class UserFormComponent {
   userForm: FormGroup = this.fb.group({
+    userID: [''],
     username: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],

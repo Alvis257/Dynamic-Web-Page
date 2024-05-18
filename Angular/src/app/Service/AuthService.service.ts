@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserService } from './User.service';
+import { UserService } from './user.service';
 import { User } from '../Interface/User';
 import * as emailjs from 'emailjs-com';
 import { Console } from 'console';

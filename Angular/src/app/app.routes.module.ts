@@ -6,7 +6,7 @@ import {FormSelectorComponent} from './form-selector/form-selector.component';
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
-import { AuthGuard } from './Service/AuthGuard.service';
+import { AuthGuard } from './Service/authGuard.service';
 import { UsersComponent } from './users/users.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import {MyDocumentsComponent} from './my-documents/my-documents.component';

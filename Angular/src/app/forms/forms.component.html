@@ -24,6 +24,7 @@
     <div class="config-buttons-container">
         <div class="left-side">
           <button *ngIf="!disableJsonView  && hasAdminAccess()" type="button" class="viewJson-button" (click)="openJsonView()">View Json</button>
+          <button *ngIf="isOwner() || hasShareRights()" type="button" class="viewJson-button" (click)="ShareDocument()">Share Document</button>
         </div>
         <div class="right-side">
           <button type="button" class="config-button" *ngIf="!configMode  && hasAdminAccess()" (click)="openConfig()">Configure</button>

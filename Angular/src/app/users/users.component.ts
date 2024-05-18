@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from '../Interface/User';
-import { UserService } from '../Service/User.service';
+import { UserService } from '../Service/user.service';
 import { UserFormComponent } from '../shared/user-dialog/user-dialog.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';

@@ -11,6 +11,7 @@ export class UserService {
         if (this.users.length === 0) {
             this.users = [
               {
+                userID:1,
                 username: 'simple',
                 password: 'password',
                 role: 'user',
@@ -25,6 +26,7 @@ export class UserService {
                 }
               },
               {
+                userID:2,
                 username: 'admin',
                 password: 'password',
                 role: 'admin',
@@ -46,11 +48,23 @@ export class UserService {
   getUsers(): User[] {
     return this.users;
   }
+
+  getCurrentUser(): User | null {
+    const currentUsername = sessionStorage.getItem('username');
+    if (currentUsername) {
+      const user = this.users.find(u => u.username === currentUsername);
+      return user || null;
+    }
+    return null;
+  }
+  
   getUserByEmail(email: string): User | null {
     const user = this.users.find(u => u.email === email);
     return user || null;
   }
   addUser(user: User): void {
+    const maxUserId = Math.max(...this.users.map(u => u.userID), 0);
+    user.userID = maxUserId + 1;
     this.users.push(user);
     localStorage.setItem('users', JSON.stringify(this.users));
   }

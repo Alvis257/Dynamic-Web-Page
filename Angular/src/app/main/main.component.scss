@@ -1,18 +1,24 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
-.search-bar {
-  margin-bottom: 20px;
-}
+// .search-bar {
+//   margin-bottom: 20px;
+// }
 
-.search-bar input[type="text"] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
+// .search-bar input[type="text"] {
+//   width: 100%;
+//   padding: 12px 20px;
+//   margin: 8px 0;
+//   box-sizing: border-box;
+//   border: 2px solid #ccc;
+//   border-radius: 4px;
+// }
+.example-full-width {
+  width: 90%;
+  margin-top:20px;
+  margin-left:20px;
+  margin-right:20px;
+  justify-content: center;
 }
-
 .mat-header-row,
 .mat-row {
   display: flex;
@@ -20,6 +26,7 @@
   justify-content: space-between;
 }
 .mat-cell {
+  
   padding: 16px;
 }
 .mat-header-cell {
@@ -36,6 +43,7 @@
 
 .mat-form-field {
   width: 100%;
+  justify-content: center;
 }
 
 .mat-table {
@@ -57,13 +65,15 @@ mat-cell, mat-header-cell {
 }
 
 table button {
+
   border-radius: 10px;
-  margin-left: 10px;
+  margin-left: 20px;
   padding: 7px 10px;
   border: 0px;
 }
 
 table button:nth-child(1) {
+  
   background-color: grey;
   color: white;
 }

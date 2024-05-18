@@ -1,0 +1,33 @@
+<div class="popup">
+  <h1 mat-dialog-title>Document sharing</h1>
+  <div mat-dialog-content>
+    <p class="field-config-text">
+      <label for="removeUsers">Remove users from sharing</label>
+      <mat-checkbox [(ngModel)]="removeUsers">Remove</mat-checkbox>
+    </p>
+    <p class="field-config-text">
+      <label for="sharedUsers">Shared Users</label>
+      <mat-select id="sharedUsers" [(value)]="selectedSharedUser" (selectionChange)="onSharedUserChange($event.value)">
+        <mat-option [value]="null">None</mat-option>
+        <mat-option *ngFor="let user of sharedUsers" [value]="user.userID">{{ user.username }}</mat-option>
+      </mat-select>
+    </p>
+    <p class="field-config-text">
+      <label for="users">Users</label>
+      <mat-select id="users" multiple [(value)]="selectedUsers">
+        <mat-option *ngFor="let user of users" [value]="user.userID">{{ user.username }}</mat-option>
+      </mat-select>
+    </p>
+    <p class="field-config-text">
+      <label for="rights">Rights:</label>
+      <mat-checkbox [(ngModel)]="selectedRights.read">Read</mat-checkbox>
+      <mat-checkbox [(ngModel)]="selectedRights.write">Write</mat-checkbox>
+      <mat-checkbox [(ngModel)]="selectedRights.delete">Delete</mat-checkbox>
+      <mat-checkbox [(ngModel)]="selectedRights.share">Share</mat-checkbox>
+    </p>
+  </div>
+  <div mat-dialog-actions>
+    <button class="save-button" mat-button (click)="shareDocument()">Share</button>
+    <button class="cancel-button" mat-button (click)="onNoClick()">Cancel</button>
+  </div>
+</div>

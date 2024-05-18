@@ -8,20 +8,11 @@ import { DataStructure } from '../Interface/DataStructure';
 import { Router } from '@angular/router'; 
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomMatPaginatorIntl } from './CustomMatPaginatorIntl';
-
-const ELEMENT_DATA: DataStructure[] = [
-  { id: 1, name: 'Item 1', status: 'Active', creationTime: new Date('2022-01-01'), responsible: 'John Doe', type: 'first-type'},
-  { id: 2, name: 'Item 2', status: 'Inactive', creationTime: new Date('2022-01-02'), responsible: 'Jane Doe', type: 'first-type'},
-  { id: 3, name: 'Item 3', status: 'Active', creationTime: new Date('2022-01-03'), responsible: 'John Smith', type: 'first-type'},
-  { id: 4, name: 'Item 4', status: 'Inactive', creationTime: new Date('2022-01-04'), responsible: 'Jane Smith', type: 'second-type'},
-  { id: 5, name: 'Item 5', status: 'Active', creationTime: new Date('2022-01-05'), responsible: 'John Johnson', type: 'second-type'},
-  { id: 6, name: 'Item 6', status: 'Inactive', creationTime: new Date('2022-01-06'), responsible: 'Jane Johnson', type: 'first-type'},
-  { id: 7, name: 'Item 7', status: 'Active', creationTime: new Date('2022-01-07'), responsible: 'John Williams', type: 'first-type' },
-  { id: 8, name: 'Item 8', status: 'Inactive', creationTime: new Date('2022-01-08'), responsible: 'Jane Williams', type: 'second-type' },
-  { id: 9, name: 'Item 9', status: 'Active', creationTime: new Date('2022-01-09'), responsible: 'John Brown', type: 'first-type'},
-  { id: 10, name: 'Item 10', status: 'Inactive', creationTime: new Date('2022-01-10'), responsible: 'Jane Brown', type: 'second-type' }
-];
-
+import { ApplicationDataService } from '../Service/aplicationData.service';
+import { DeleteConfirmationDialogComponent } from '../shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { UserService } from '../Service/user.service';
+import { ShareDocumentService } from '../Service/shareDocument.service';
 
 @Component({
   selector: 'app-main',
@@ -41,52 +32,96 @@ const ELEMENT_DATA: DataStructure[] = [
 export class MainComponent {
   @ViewChild(MatSort)
   sort!: MatSort;
+
   @ViewChild('paginator')
   paginator!: MatPaginator;
-  public rights!: {
-    admin: boolean;
-    read: boolean;
-    write: boolean;
-    delete: boolean;
-    share: boolean;
+
+  public rights = {
+    admin: false,
+    read: false,
+    write: false,
+    delete: false,
+    share: false
   };
+
   displayedColumns: string[] = ['id','type','name', 'status', 'creationTime', 'responsible', 'options'];
- 
-  constructor( private _liveAnnouncer: LiveAnnouncer, private router: Router) { } 
+  dataSource : MatTableDataSource<DataStructure> = new MatTableDataSource();
+
+  constructor( private _liveAnnouncer: LiveAnnouncer, private router: Router,public dialog: MatDialog,private applicationDataService: ApplicationDataService,private userService: UserService,private shareDocumentService: ShareDocumentService) { } 
 
   ngOnInit(): void {
-    const rightsItem = sessionStorage.getItem('rights');
-    if (rightsItem !== null) {
-      this.rights = JSON.parse(rightsItem);
+    const rightsItem = this.userService.getCurrentUser()?.rights;
+    if (rightsItem) {
+      this.rights = rightsItem;
     }
   }
 
-  dataSource : MatTableDataSource<DataStructure> = new MatTableDataSource();
+ 
   
   ngAfterViewInit() {
-    this.dataSource = new MatTableDataSource(ELEMENT_DATA);
-    if(this.paginator) {
-    this.dataSource.paginator = this.paginator ;
+    // Use the service to get the data
+    const data = this.applicationDataService.getAllApplications();
+    this.dataSource = new MatTableDataSource(data);
+    if (this.paginator) {
+      this.dataSource.paginator = this.paginator;
     }
 
-    if(this.sort) {
+    if (this.sort) {
       this.dataSource.sort = this.sort;
-    } 
+    }
   }
 
-  announceSortChange(sortState:Sort) {
+  announceSortChange(sortState: Sort) {
     if(sortState.direction) {
-      this._liveAnnouncer.announce('sorted ${sortState.direction}ending' );
+      this._liveAnnouncer.announce(`sorted ${sortState.direction} ending` );
+      this.dataSource.sort = this.sort;
     }else {
       this._liveAnnouncer.announce('sorting cleared');
+      this.dataSource.sort = null;
     }
   }
 
+  hasReadRights(id:number,Owner:string): boolean {
+    const currentUserID = this.userService.getCurrentUser()?.userID;
+    const UserName = this.userService.getCurrentUser()?.username; 
+    const isOwner = Owner === UserName;
+    if(!currentUserID) return false;  
+
+    const sharedRights = this.shareDocumentService.getUserRights(currentUserID, id);
+    if(sharedRights == undefined){
+      return this.rights?.admin || this.rights?.read || isOwner;
+    }
+
+    return this.rights?.admin || sharedRights.read || this.rights?.read || isOwner;
+  }
+
+  hasDeleteRights(id:number,Owner:string): boolean { 
+    const currentUserID = this.userService.getCurrentUser()?.userID;
+    const UserName = this.userService.getCurrentUser()?.username; 
+    const isOwner = Owner === UserName;
+
+    if(!currentUserID) return false;  
+    const sharedRights = this.shareDocumentService.getUserRights(currentUserID, id);
+    if(sharedRights == undefined){
+      return this.rights?.admin || this.rights?.delete || isOwner;
+    }
+    return this.rights?.admin || sharedRights.delete || this.rights?.delete || isOwner;
+  }
   view(element: any): void {
-    this.router.navigate(['/form-viewer', element.type], { queryParams: {type:element.type, jsonData: JSON.stringify(element), id: element.id } });
+    const jsonData = this.applicationDataService.getApplicationById(element.id);
+    this.router.navigate(['/form-viewer', element.type], { queryParams: {type:element.type, jsonData: JSON.stringify(jsonData), id: element.id } });
   }
   delete(element: any): void {
+    const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
+      width: '250px',
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.applicationDataService.deleteApplication(element.id);
+        this.dataSource.data = this.applicationDataService.getAllApplications();
+      }
+    });
   }
 
 }

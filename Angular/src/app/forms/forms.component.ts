@@ -11,6 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { NewFieldDialogComponent } from '../shared/new-field-dialog/new-field-dialog.component';
 import { FormService } from '../Service/form.service';
+import { UserService } from '../Service/user.service';
+import { ShareDocumentComponent } from '../shared/share-document-dialog/share-document-dialog.component';
+import { ShareDocumentService } from '../Service/shareDocument.service';
 
 @Component({
   selector: 'app-forms',
@@ -21,6 +24,7 @@ import { FormService } from '../Service/form.service';
   encapsulation: ViewEncapsulation.None
 })
 export class FormsComponent implements OnInit {
+
   fieldData: any;
   form: FormGroup | undefined;
   formData: any;
@@ -45,17 +49,25 @@ export class FormsComponent implements OnInit {
     share: boolean;
   };
 
-  constructor(private dataService: DataService, private formService: FormService, public dialog: MatDialog, private route: ActivatedRoute, private router: Router) { 
-    const navigation = this.router.getCurrentNavigation();
-    if (navigation && navigation.extras.state) {
-      const typeObject = navigation.extras.state['type'];
-      this.type = typeObject ? typeObject.formType : undefined;
-      this.fieldData = navigation.extras.state['fieldData'];
-      this.formsId = navigation.extras.state['id'];
-      this.fromSelector = navigation.extras.state['fromSelector'];
-      this.configMode = navigation.extras.state['configMode'];
-      this.formName = navigation.extras.state['formName'];
-    }
+  constructor(
+    private dataService: DataService,
+    private userService: UserService,
+    private formService: FormService,
+    private shareDocumentService: ShareDocumentService,
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router
+    ) { 
+      const navigation = this.router.getCurrentNavigation();
+      if (navigation && navigation.extras.state) {
+        const typeObject = navigation.extras.state['type'];
+        this.type = typeObject ? typeObject.formType : undefined;
+        this.fieldData = navigation.extras.state['fieldData'];
+        this.formsId = navigation.extras.state['id'];
+        this.fromSelector = navigation.extras.state['fromSelector'];
+        this.configMode = navigation.extras.state['configMode'];
+        this.formName = navigation.extras.state['formName'];
+      }
   }
 
   ngOnInit() {
@@ -94,12 +106,44 @@ export class FormsComponent implements OnInit {
   }
 
   hasWriteOrAdminAccess(): boolean {
-    return this.rights?.write || this.rights?.admin;
+    const currentUserID = this.userService.getCurrentUser()?.userID;
+    if(!currentUserID) return false;  
+
+    const sharedRights = this.shareDocumentService.getUserRights(currentUserID, JSON.parse(this.jsonData).id);
+    if(sharedRights == undefined){
+      return this.rights?.admin || this.rights?.write;
+    }
+    return this.rights?.admin || sharedRights.write || this.rights?.write;
   }
   
+  hasShareRights():boolean{
+    const currentUserID = this.userService.getCurrentUser()?.userID;
+    if(!currentUserID) return false;  
+
+    const sharedRights = this.shareDocumentService.getUserRights(currentUserID, JSON.parse(this.jsonData).id);
+
+    if(sharedRights == undefined){
+      return this.rights?.admin || this.rights?.share;
+    }
+
+    return this.rights?.admin || this.rights?.share || sharedRights.share ;
+  }
   hasAdminAccess(): boolean {
     return this.rights?.admin;
   }
+
+  isOwner(): any {
+    const currentUser = this.userService.getCurrentUser(); 
+    const isAdmin = this.rights?.admin;
+    return this.jsonData.Owner === currentUser || isAdmin;
+  }
+
+  ShareDocument(): void {
+    this.dialog.open(ShareDocumentComponent, {
+      data: { documentId: JSON.parse(this.jsonData).id }
+    });
+  }
+
   loadJsonData(type: string | undefined, formId: any) {
     if (type === undefined || formId === undefined) {
       throw new Error('Type and Form ID must be defined');
@@ -456,11 +500,8 @@ export class FormsComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form) {
-
-      // Create a copy of jsonData to avoid modifying the original
       let jsonDataObject = this.jsonData ? JSON.parse(JSON.stringify(JSON.parse(this.jsonData))) : {};
 
-      // Update jsonDataObject based on the form input values
       Object.keys(this.form.controls).forEach(key => {
         if (this.form) {
           const control = this.form.get(key);
@@ -473,9 +514,7 @@ export class FormsComponent implements OnInit {
         }
       });
 
-      // Save the updated jsonData
       this.jsonData = JSON.stringify(jsonDataObject);
-      //this.dataService.saveJsonData(this.jsonData);
     }
   }
 
