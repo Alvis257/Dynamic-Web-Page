@@ -40,8 +40,8 @@ import { MatInputModule } from '@angular/material/input';
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
-    <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-button (click)="onAdd()">Add</button>
+    <button mat-button class="cancel-button" (click)="onCancel()">Cancel</button>
+    <button mat-button class="save-button" (click)="onAdd()">Add</button>
   </div>
 `,
   imports: [CommonModule, MatFormFieldModule, MatSelectModule, FormsModule, MatDialogModule, MatInputModule],

@@ -3,7 +3,7 @@ export interface DataStructure {
     name: string;
     Owner: string;
     status: string;
-    creationTime: Date;
+    creationTime:  Date | string ;
     responsible: string;
     type: string;
     JsonData: any;

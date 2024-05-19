@@ -108,8 +108,10 @@ export class MainComponent {
     return this.rights?.admin || sharedRights.delete || this.rights?.delete || isOwner;
   }
   view(element: any): void {
-    const jsonData = this.applicationDataService.getApplicationById(element.id);
-    this.router.navigate(['/form-viewer', element.type], { queryParams: {type:element.type, jsonData: JSON.stringify(jsonData), id: element.id } });
+    const entry = this.applicationDataService.getApplicationById(element.id);
+    console.log('element',element.type);
+    console.log('Entry',entry);
+    this.router.navigate(['/form-viewer', element.type], { queryParams: {type:element.type, jsonData: JSON.stringify(entry), id: element.id } });
   }
   delete(element: any): void {
     const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {

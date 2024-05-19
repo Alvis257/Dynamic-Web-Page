@@ -12,6 +12,10 @@ export class UserService {
             this.users = [
               {
                 userID:1,
+                name: 'Simple User',
+                surname: 'User',
+                createdDate: new Date(),
+                lastUpdatedDate: new Date(),
                 username: 'simple',
                 password: 'password',
                 role: 'user',
@@ -28,6 +32,10 @@ export class UserService {
               {
                 userID:2,
                 username: 'admin',
+                name: 'Admin User',
+                surname: 'User',
+                createdDate: new Date(),
+                lastUpdatedDate: new Date(),
                 password: 'password',
                 role: 'admin',
                 email: 'admin@example.com',
@@ -70,6 +78,7 @@ export class UserService {
   }
 
   updateUser(index: number, user: User): void {
+    user.lastUpdatedDate = new Date();
     this.users[index] = user;
     localStorage.setItem('users', JSON.stringify(this.users));
   }

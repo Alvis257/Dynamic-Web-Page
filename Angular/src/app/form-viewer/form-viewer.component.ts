@@ -50,7 +50,7 @@ export class FormViewerComponent implements OnInit {
       this.type = params['type'];
       this.jsonData = params['jsonData'] ? JSON.parse(params['jsonData']) : null;
       this.menuData = [];
-  
+      console.log(params);
       if (this.type) {
         const types = this.typeService.getTypes();
         const data = types.filter(t => t.formType === this.type);
@@ -81,6 +81,7 @@ export class FormViewerComponent implements OnInit {
     }
   }
   view(form: Form): void {
+    console.log(this.jsonData);
     this.router.navigate([form.name], { 
       relativeTo: this.route, 
       queryParams: { 

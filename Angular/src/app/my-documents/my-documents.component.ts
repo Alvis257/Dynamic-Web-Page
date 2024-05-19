@@ -19,6 +19,8 @@ import { UserService } from '../Service/user.service';
 import { ShareDocumentService } from '../Service/shareDocument.service';
 import { DeleteConfirmationDialogComponent } from '../shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { NewDocumentDialogComponent } from '../shared/new-document-dialog/new-document-dialog.component';
+import { TypeService } from '../Service/type.service';
 
 @Component({
   selector: 'app-my-documents',
@@ -53,7 +55,7 @@ export class MyDocumentsComponent {
   dataSource: MatTableDataSource<DataStructure> = new MatTableDataSource();
   selectedButton: 'myDocuments' | 'sharedWithMe' = 'myDocuments';
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private router: Router, public dialog: MatDialog, private applicationDataService: ApplicationDataService, private userService: UserService, private shareDocumentService: ShareDocumentService) { }
+  constructor(private _liveAnnouncer: LiveAnnouncer, private router: Router, public dialog: MatDialog,private typeService:TypeService, private applicationDataService: ApplicationDataService, private userService: UserService, private shareDocumentService: ShareDocumentService) { }
 
   ngAfterViewInit() {
     // Use the service to get the data
@@ -91,7 +93,22 @@ export class MyDocumentsComponent {
       this.dataSource.sort = this.sort;
     }
   }
-
+  openNewDocumentDialog() {
+    const types = this.typeService.getTypes();
+    const users = this.userService.getUsers();
+    console.log(types);
+    const dialogRef = this.dialog.open(NewDocumentDialogComponent, {
+      width: '500px',
+      data: { types, users }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.applicationDataService.addApplication(result);
+      }
+    });
+  }
+  
   selectSharedWithMe(): void {
     this.selectedButton = 'sharedWithMe';
     const currentUser = this.userService.getCurrentUser();
@@ -110,7 +127,7 @@ export class MyDocumentsComponent {
       this.dataSource.sort = null;
     }
   }
-  
+
   hasReadRights(id:number,Owner:string): boolean {
     const currentUserID = this.userService.getCurrentUser()?.userID;
     const UserName = this.userService.getCurrentUser()?.username; 

@@ -7,6 +7,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { User } from '../../Interface/User';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { create } from 'domain';
+import { last } from 'rxjs';
+
 @Component({
   selector: 'app-user-dialog',
   standalone: true,
@@ -19,7 +22,11 @@ export class UserFormComponent {
   userForm: FormGroup = this.fb.group({
     userID: [''],
     username: ['', Validators.required],
+    name: [''],
+    surname: [''],
     email: ['', [Validators.required, Validators.email]],
+    createdDate: [''],
+    lastUpdatedDate: [''],
     password: ['', Validators.required],
     role: ['', Validators.required],
     resetCode:[''],

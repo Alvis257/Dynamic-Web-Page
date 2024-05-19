@@ -11,9 +11,15 @@ mat-checkbox::ng-deep .mat-checkbox-ripple .mat-ripple-element {
   display: none;
 }
 
-mat-select {
-  background-color: #f0f0f0;
-  color: #000;
-  border: 1px solid #ccc;
+// mat-select {
+//   background-color: #f0f0f0;
+//   color: #000;
+//   border: 1px solid #ccc;
+//   border-radius: 4px;
+// }
+
+.mat-select {
+  padding: 10px;
   border-radius: 4px;
+  border: 1px solid #ccc;
 }

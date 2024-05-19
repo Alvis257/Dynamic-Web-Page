@@ -2,6 +2,10 @@ export interface User {
 
   userID: number;
   username: string;
+  name: string;
+  surname: string;
+  createdDate: Date | string;
+  lastUpdatedDate: Date | string;
   email: string;
   password: string;
   role: string;

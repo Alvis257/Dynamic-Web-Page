@@ -10,6 +10,7 @@ import { AuthGuard } from './Service/authGuard.service';
 import { UsersComponent } from './users/users.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import {MyDocumentsComponent} from './my-documents/my-documents.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,7 +21,7 @@ const routes: Routes = [
   { path: 'visi-dokumenti', component: MainComponent , canActivate: [AuthGuard] },
   { path: 'formas', component: FormSelectorComponent , canActivate: [AuthGuard] },
   { path: 'lietotaji', component: UsersComponent , canActivate: [AuthGuard] },
-  { path: 'profils', component: BlankFormComponent , canActivate: [AuthGuard] },
+  { path: 'profils', component: ProfileComponent , canActivate: [AuthGuard] },
   { path: 'forms', component: FormsComponent , canActivate: [AuthGuard] },
   { path: 'formas/forms', component: FormsComponent , canActivate: [AuthGuard] },
   { path: 'form-viewer', component: FormViewerComponent , canActivate: [AuthGuard] , children: [

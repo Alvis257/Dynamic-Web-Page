@@ -88,6 +88,10 @@ export class FormsComponent implements OnInit {
         this.fromSelector = params['fromSelector'];
       }
 
+      console.info('Form Data:', this.fieldData);
+      console.info('Type:', this.type);
+      console.info('Forms ID:', this.formsId);
+      console.info('Config Mode:', this.jsonData);
       this.subscribeToFormChanges();
       if (this.fromSelector && this.fieldData) {
         this.disableJsonView = true;
@@ -108,14 +112,16 @@ export class FormsComponent implements OnInit {
   hasWriteOrAdminAccess(): boolean {
     const currentUserID = this.userService.getCurrentUser()?.userID;
     if(!currentUserID) return false;  
-
+    console.log('Current User ID:',this.jsonData);
+    if(JSON.parse(this.jsonData).id === undefined || JSON.parse(this.jsonData).id === null) return false;
     const sharedRights = this.shareDocumentService.getUserRights(currentUserID, JSON.parse(this.jsonData).id);
+
     if(sharedRights == undefined){
       return this.rights?.admin || this.rights?.write;
     }
     return this.rights?.admin || sharedRights.write || this.rights?.write;
   }
-  
+
   hasShareRights():boolean{
     const currentUserID = this.userService.getCurrentUser()?.userID;
     if(!currentUserID) return false;  
@@ -133,7 +139,7 @@ export class FormsComponent implements OnInit {
   }
 
   isOwner(): any {
-    const currentUser = this.userService.getCurrentUser(); 
+    const currentUser = this.userService.getCurrentUser()?.rights; 
     const isAdmin = this.rights?.admin;
     return this.jsonData.Owner === currentUser || isAdmin;
   }

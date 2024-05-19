@@ -7,16 +7,20 @@
     </p>
     <p class="field-config-text">
       <label for="sharedUsers">Shared Users</label>
-      <mat-select id="sharedUsers" [(value)]="selectedSharedUser" (selectionChange)="onSharedUserChange($event.value)">
-        <mat-option [value]="null">None</mat-option>
-        <mat-option *ngFor="let user of sharedUsers" [value]="user.userID">{{ user.username }}</mat-option>
-      </mat-select>
+      <mat-form-field>
+        <mat-select id="sharedUsers" [(value)]="selectedSharedUser" (selectionChange)="onSharedUserChange($event.value)">
+          <mat-option [value]="null">None</mat-option>
+          <mat-option *ngFor="let user of sharedUsers" [value]="user.userID">{{ user.username }}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </p>
     <p class="field-config-text">
       <label for="users">Users</label>
-      <mat-select id="users" multiple [(value)]="selectedUsers">
-        <mat-option *ngFor="let user of users" [value]="user.userID">{{ user.username }}</mat-option>
-      </mat-select>
+      <mat-form-field>
+        <mat-select id="users" multiple [(value)]="selectedUsers">
+          <mat-option *ngFor="let user of users" [value]="user.userID">{{ user.username }}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </p>
     <p class="field-config-text">
       <label for="rights">Rights:</label>
@@ -27,7 +31,7 @@
     </p>
   </div>
   <div mat-dialog-actions>
-    <button class="save-button" mat-button (click)="shareDocument()">Share</button>
     <button class="cancel-button" mat-button (click)="onNoClick()">Cancel</button>
+    <button class="save-button" mat-button (click)="shareDocument()">Share</button>
   </div>
 </div>

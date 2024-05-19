@@ -1,0 +1,19 @@
+<div class="profile-container">
+    <div class="profile-box">
+      <h2>My Profile</h2>
+    </div>
+    <div class="info-box">
+      <p>Name: {{ user?.name }}</p>
+      <p>Surname: {{ user?.surname }}</p>
+      <p>Systems user name: {{ user?.username }}</p>
+      <p>Email: {{ user?.email }}</p>
+      <p>Created Time: {{ user?.createdDate}}</p>
+      <p>Last Update Time: {{ user?.lastUpdatedDate}}</p>
+      <button (click)="changePassword()">Change Password</button>
+    </div>
+    <div class="document-data-box">
+      <h2>Document Data</h2>
+      <p>Document Count: {{ documentCount }}</p>
+      <p>Shared Document Count: {{ sharedDocumentCount }}</p>
+    </div>
+  </div>

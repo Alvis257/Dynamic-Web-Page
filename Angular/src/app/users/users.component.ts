@@ -34,6 +34,7 @@ export class UsersComponent implements OnInit {
         if (result.index !== undefined) {
           this.userService.updateUser(result.index, result.user);
         } else {
+          result.user.createdDate = new Date();
           this.userService.addUser(result.user);
         }
       }

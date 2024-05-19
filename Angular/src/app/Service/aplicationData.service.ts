@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
 })
 export class ApplicationDataService {
     private localStorageKey = 'element_data';
-    private loadDefaultData = true;
+    private loadDefaultData = false;
   
     constructor(private http: HttpClient, private userService: UserService, private router: Router) {
       if (this.loadDefaultData) {
@@ -107,18 +107,19 @@ export class ApplicationDataService {
           return;
         }
       }
+      const formattedDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
       const newApplication: DataStructure = {
         ...application,
         id: newId,
         Owner: currentUser,
         status: 'created',
-        creationTime: new Date(),
+        creationTime: formattedDate,
         JsonData: {
           ...application,
           id: newId,
           Owner: currentUser,
           status: 'created',
-          creationTime: new Date()
+          creationTime: formattedDate
         }
       };
       applications.push(newApplication);
