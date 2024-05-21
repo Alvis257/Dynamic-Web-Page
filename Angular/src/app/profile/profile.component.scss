@@ -16,3 +16,15 @@
   h2 {
     text-align: center;
   }
+
+  .change-button {
+    border-radius: 10px;
+    padding: 7px 10px;
+    border: 0px;
+    background-color: grey;
+    color: white;
+  }
+  
+  .change-button:hover {
+    background-color: rgb(80, 80, 80);
+  }

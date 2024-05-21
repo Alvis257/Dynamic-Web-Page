@@ -1,14 +1,20 @@
 <div class="menu">
   <div class="website-name">DGS</div>
   <div class="menu-links">
-    <button routerLink="/mani-dokumenti">Mani dokumenti</button>
-    <button routerLink="/visi-dokumenti">Visi dokumenti</button>
-    <button routerLink="/formas" *ngIf="rights.admin">Formas</button>
-    <button routerLink="/lietotaji" *ngIf="rights.admin">Lietotāji</button>
+    <button routerLink="/mani-dokumenti"  i18n>Mani dokumenti</button>
+    <button routerLink="/visi-dokumenti"  i18n>Visi dokumenti</button>
+    <button routerLink="/formas" *ngIf="rights?.admin"  i18n>Formas</button>
+    <button routerLink="/lietotaji" *ngIf="rights?.admin"  i18n>Lietotāji</button>
   </div>
   <div class="user-options">
-    <button routerLink="/valoda">Valoda</button>
-    <button routerLink="/profils">Profils</button>
-    <button (click)="logout()">Log Out</button>
+    <div class="dropdown">
+      <button class="dropbtn"  i18n>Valodas</button>
+      <div class="dropdown-content">
+        <button [class.active]="selectedLanguage === 'en'" (click)="selectedLanguage = 'en'"  i18n>Angļu</button>
+        <button [class.active]="selectedLanguage === 'lv'" (click)="selectedLanguage = 'lv'"  i18n>Latviešu</button>
+      </div>
+    </div>
+    <button routerLink="/profils" i18n>Profils</button>
+    <button (click)="logout()"  i18n>Iziet</button>
   </div>
 </div>

@@ -3,17 +3,17 @@
       <h2>My Profile</h2>
     </div>
     <div class="info-box">
-      <p>Name: {{ user?.name }}</p>
-      <p>Surname: {{ user?.surname }}</p>
-      <p>Systems user name: {{ user?.username }}</p>
-      <p>Email: {{ user?.email }}</p>
-      <p>Created Time: {{ user?.createdDate}}</p>
-      <p>Last Update Time: {{ user?.lastUpdatedDate}}</p>
-      <button (click)="changePassword()">Change Password</button>
+      <p i18n>Vārds: {{ user?.name }}</p>
+      <p i18n>Uzvārds: {{ user?.surname }}</p>
+      <p i18n>Sistēmas lietotājs: {{ user?.username }}</p>
+      <p i18n>E-pasts: {{ user?.email }}</p>
+      <p i18n>Izveidots: {{ user?.createdDate}}</p>
+      <p i18n>Pēdējo reiz atjaunināts: {{ user?.lastUpdatedDate}}</p>
+      <button class="change-button" (click)="changePassword()" i18n>Nomainīt paroli</button>
     </div>
     <div class="document-data-box">
-      <h2>Document Data</h2>
-      <p>Document Count: {{ documentCount }}</p>
-      <p>Shared Document Count: {{ sharedDocumentCount }}</p>
+      <h2 i18n>Documentu dati</h2>
+      <p i18n>Dokumentu skaits: {{ documentCount }}</p>
+      <p i18n>Dalīto dokumentu skaits: {{ sharedDocumentCount }}</p>
     </div>
   </div>
