@@ -90,8 +90,10 @@ export class FormSelectorComponent {
         const newForm = { name: result };
         type.forms.push(newForm);
         this.formService.addForm(type.name, newForm.name);
+        window.location.reload();
       }
     });
+
   }
 
   editForm(type: any, form: any) {

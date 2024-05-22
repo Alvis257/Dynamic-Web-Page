@@ -14,6 +14,7 @@ import { FormService } from '../Service/form.service';
 import { UserService } from '../Service/user.service';
 import { ShareDocumentComponent } from '../shared/share-document-dialog/share-document-dialog.component';
 import { ShareDocumentService } from '../Service/shareDocument.service';
+import { config } from 'process';
 
 @Component({
   selector: 'app-forms',
@@ -58,6 +59,7 @@ export class FormsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
     ) { 
+      
       const navigation = this.router.getCurrentNavigation();
       if (navigation && navigation.extras.state) {
         const typeObject = navigation.extras.state['type'];
@@ -76,7 +78,8 @@ export class FormsComponent implements OnInit {
     if (rightsItem !== null) {
       this.rights = JSON.parse(rightsItem);
     }
-
+    console.info(this.configMode);
+    console.info('Rights:', this.rights);
     let group: any = {};
 
     this.route.queryParams.subscribe(params => {
@@ -141,7 +144,11 @@ export class FormsComponent implements OnInit {
   isOwner(): any {
     const currentUser = this.userService.getCurrentUser()?.rights; 
     const isAdmin = this.rights?.admin;
-    return this.jsonData.Owner === currentUser || isAdmin;
+    if(this.jsonData === undefined || this.jsonData === null){
+      return isAdmin;
+    }else{
+      return this.jsonData.Owner === currentUser || isAdmin;
+    }
   }
 
   ShareDocument(): void {
@@ -323,7 +330,7 @@ export class FormsComponent implements OnInit {
   }
   styleToObject(style: string, type: string): { [key: string]: string } {
 
-
+    if(style === undefined || style === null) return {};
     const styleObject: { [key: string]: string } = {};
     const properties = style.split(';');
     const minSizePx = 165; // minimum size in pixels

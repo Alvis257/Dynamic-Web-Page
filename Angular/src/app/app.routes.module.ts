@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { BlankFormComponent } from './blank-form/blank-form.component';
 import { MainComponent } from './main/main.component';
 import { FormsComponent } from './forms/forms.component';
 import {FormSelectorComponent} from './form-selector/form-selector.component';
@@ -12,7 +11,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import {MyDocumentsComponent} from './my-documents/my-documents.component';
 import { ProfileComponent } from './profile/profile.component';
 
-const routes: Routes = [
+export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
@@ -28,5 +27,3 @@ const routes: Routes = [
     { path: ':type', component: FormsComponent , canActivate: [AuthGuard] }
   ] },
 ];
-
-export default routes;
