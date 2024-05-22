@@ -1,27 +1,34 @@
-import { ChangeDetectorRef,Input, Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, FormsModule } from '@angular/forms';
-import { DataService } from '../Service/data.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteConfirmationDialogComponent } from '../shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
-import { FieldConfigDialogComponent } from '../shared/field-configuration-dialog/field-configuration-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { TranslateModule } from '@ngx-translate/core';
+import { FieldConfigDialogComponent } from '../shared/field-configuration-dialog/field-configuration-dialog.component';
+import { DeleteConfirmationDialogComponent } from '../shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { NewFieldDialogComponent } from '../shared/new-field-dialog/new-field-dialog.component';
+import { ShareDocumentComponent } from '../shared/share-document-dialog/share-document-dialog.component';
+import { DataService } from '../Service/data.service';
 import { FormService } from '../Service/form.service';
 import { UserService } from '../Service/user.service';
-import { ShareDocumentComponent } from '../shared/share-document-dialog/share-document-dialog.component';
 import { ShareDocumentService } from '../Service/shareDocument.service';
-import { config } from 'process';
+import { ApplicationDataService } from '../Service/aplicationData.service';
 
 @Component({
   selector: 'app-forms',
   standalone: true,
   templateUrl: './forms.component.html',
   styleUrls: ['./forms.component.scss'],
-  imports: [ReactiveFormsModule, CommonModule, MatIconModule, FormsModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule, 
+    MatIconModule, 
+    FormsModule,
+    TranslateModule
+  ],
   encapsulation: ViewEncapsulation.None
 })
 export class FormsComponent implements OnInit {
@@ -51,6 +58,7 @@ export class FormsComponent implements OnInit {
   };
 
   constructor(
+    private applicationDataService: ApplicationDataService,
     private dataService: DataService,
     private userService: UserService,
     private formService: FormService,
@@ -516,18 +524,19 @@ export class FormsComponent implements OnInit {
       let jsonDataObject = this.jsonData ? JSON.parse(JSON.stringify(JSON.parse(this.jsonData))) : {};
 
       Object.keys(this.form.controls).forEach(key => {
-        if (this.form) {
-          const control = this.form.get(key);
-          if (control) {
-            const field = this.formData.find((field: any) => field.name === key);
-            if (field && field.dataPath) {
-              this.updateJsonData(field.dataPath, control.value, jsonDataObject, field.type);
-            }
+          if (this.form) {
+              const control = this.form.get(key);
+              if (control) {
+                  const field = this.formData.find((field: any) => field.name === key);
+                  if (field && field.dataPath) {
+                      this.updateJsonData(field.dataPath, control.value, jsonDataObject, field.type);
+                  }
+              }
           }
-        }
       });
 
       this.jsonData = JSON.stringify(jsonDataObject);
+      this.applicationDataService.updateApplication(jsonDataObject);
     }
   }
 

@@ -1,52 +1,52 @@
-<h2 mat-dialog-title>{{ data.index !== undefined ? 'Edit' : 'Add' }} User</h2>
+<h2 mat-dialog-title>{{ (data.index !== undefined ? 'userDialog.title.edit' : 'userDialog.title.add') | translate }}</h2>
 
 <form [formGroup]="userForm">
   <mat-dialog-content>
-    <label>Name:</label>
+    <label>{{ 'userDialog.name' | translate }}:</label>
     <mat-form-field>
-      <input matInput formControlName="name" placeholder="Name">
+      <input matInput formControlName="name" placeholder="{{ 'userDialog.name' | translate }}">
     </mat-form-field>
-    <label>Surname:</label>
+    <label>{{ 'userDialog.surname' | translate }}:</label>
     <mat-form-field>
-      <input matInput formControlName="surname" placeholder="Surname">
+      <input matInput formControlName="surname" placeholder="{{ 'userDialog.surname' | translate }}">
     </mat-form-field>
-    <label>Username:</label>
+    <label>{{ 'userDialog.username' | translate }}:</label>
     <mat-form-field>
-      <input matInput formControlName="username" placeholder="Username">
+      <input matInput formControlName="username" placeholder="{{ 'userDialog.username' | translate }}">
     </mat-form-field>
-    <label>Email:</label>
+    <label>{{ 'userDialog.email' | translate }}:</label>
     <mat-form-field>
-      <input matInput formControlName="email" placeholder="Email">
+      <input matInput formControlName="email" placeholder="{{ 'userDialog.email' | translate }}">
     </mat-form-field>
-    <label *ngIf="data.index === undefined">Password:</label>
+    <label *ngIf="data.index === undefined">{{ 'userDialog.temporaryPassword' | translate }}:</label>
     <mat-form-field *ngIf="data.index === undefined">
-      <input matInput formControlName="password" placeholder="Password">
+      <input matInput formControlName="password" placeholder="{{ 'userDialog.temporaryPassword' | translate }}">
     </mat-form-field>
-    <label>Role:</label>
+    <label>{{ 'userDialog.role' | translate }}:</label>
     <mat-form-field>
-      <input matInput formControlName="role" placeholder="Role">
+      <input matInput formControlName="role" placeholder="{{ 'userDialog.role' | translate }}">
     </mat-form-field>
+    <label>{{ 'userDialog.rights' | translate }}:</label>
     <div formGroupName="rights">
       <label>
-        <input type="checkbox" formControlName="admin"> Admin
+        <input type="checkbox" formControlName="admin"> {{ 'userDialog.admin' | translate }}
       </label>
       <label>
-        <input type="checkbox" formControlName="read"> Read
+        <input type="checkbox" formControlName="read"> {{ 'userDialog.read' | translate }}
       </label>
       <label>
-        <input type="checkbox" formControlName="write"> Write
+        <input type="checkbox" formControlName="write"> {{ 'userDialog.write' | translate }}
       </label>
       <label>
-        <input type="checkbox" formControlName="delete"> Delete
+        <input type="checkbox" formControlName="delete"> {{ 'userDialog.delete' | translate }}
       </label>
       <label>
-        <input type="checkbox" formControlName="share"> Share
+        <input type="checkbox" formControlName="share"> {{ 'userDialog.share' | translate }}
       </label>
     </div>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-button type="cancel" (click)="onCancel()">Cancel</button>
-    <button mat-button type="submit" (click)="onSubmit()">{{ data.index !== undefined ? 'Update' : 'Add' }}
-      User</button>
+    <button mat-button type="cancel" (click)="onCancel()">{{ 'userDialog.cancelButton' | translate }}</button>
+    <button mat-button type="submit" (click)="onSubmit()">{{ (data.index !== undefined ? 'userDialog.submitButton.edit' : 'userDialog.submitButton.add') | translate }}</button>
   </mat-dialog-actions>
 </form>

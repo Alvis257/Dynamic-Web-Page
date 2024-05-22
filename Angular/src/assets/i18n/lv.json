@@ -1,0 +1,169 @@
+{
+  "menu": {
+    "DGS": "DGS",
+    "Manidokumenti": "Mani dokumenti",
+    "Visidokumenti": "Visi dokumenti",
+    "Formas": "Formas",
+    "Lietotajukontrole": "Lietotāju kontrole",
+    "Valodas": "Valodas",
+    "Anglu": "Angļu",
+    "Latviesu":"Latviešu",
+    "Profils": "Profils",
+    "Iziet": "Iziet"
+  },
+  "paginator": {
+    "itemsPerPageLabel": "Vienības uz lapu",
+    "nextPageLabel": "Nākošā lapa",
+    "previousPageLabel": "Iepriekšējā lapa",
+    "firstPageLabel": "Pirmā lapa",
+    "lastPageLabel": "Pēdējā lapa"
+  },
+  "search": {
+    "label": "Meklēt",
+    "placeholder": "Meklēt dokumentu"
+  },
+  "table": {
+    "id": "ID",
+    "type": "Tips",
+    "name": "Vārds",
+    "status": "Status",
+    "creationTime": "Izveidošanas laiks",
+    "responsible": "Atbildīgais",
+    "options": "Iespējas",
+    "view": "Skatīt",
+    "delete": "Dzēst"
+  },
+  "buttonGroup": {
+    "myDocuments": "Mani dokumenti",
+    "sharedWithMe": "Kopīgotie ar mani dokumenti"
+  },
+  "login": {
+    "title": "Ienākt",
+    "username": "Lietotāj Vārds",
+    "password": "Parole",
+    "submit": "Ienākt",
+    "forgotPassword": "Aizmirsu Paroli"
+  },
+  "profile": {
+    "title": "Mans Profils",
+    "name": "Vārds",
+    "surname": "Uzvārds",
+    "username": "Sistēmas lietotājs",
+    "email": "E-pasts",
+    "createdDate": "Izveidots",
+    "lastUpdatedDate": "Pēdējo reiz atjaunināts",
+    "changePassword": "Nomainīt paroli",
+    "documentData": "Documentu dati",
+    "documentCount": "Dokumentu skaits",
+    "sharedDocumentCount": "Dalīto dokumentu skaits"
+  },
+  "users": {
+    "addButton": "Pievienot Lietotāju",
+    "editButton": "Rediģēt",
+    "deleteButton": "Dzēst"
+  },
+  "addField": {
+    "title": "Pievienot jaunu lauku",
+    "type": "Tips",
+    "buttonName": "Pogas nosaukums",
+    "name": "Nosaukums",
+    "dataPath": "Datu Ceļš",
+    "style": "Stils",
+    "value": "Vērtība",
+    "cancelButton": "Atcelt",
+    "addButton": "Pievienot"
+  },
+  "documentSharing": {
+    "title": "Dokumenta kopīgošana",
+    "removeUsersFromSharing": "Noņemt lietotājus no kopīgošanas",
+    "remove": "Noņem",
+    "sharedUsers": "Kopīgotie lietotāji",
+    "none": "Neviens",
+    "users": "Lietotāji",
+    "rights": "Tiesības",
+    "read": "Lasīt",
+    "write": "Rakstīt",
+    "delete": "Dzēst",
+    "share": "Kopīgot",
+    "cancelButton": "Atcelt",
+    "shareDocumentButton": "Kopīgot dokumentu"
+  },
+  "userDialog": {
+    "title": {
+      "edit": "Rediģēt lietotāju",
+      "add": "Pievienot lietotāju"
+    },
+    "name": "Vārds",
+    "surname": "Uzvārds",
+    "username": "Lietotājvārds",
+    "email": "E-pasts",
+    "temporaryPassword": "Īslaicīgā parole",
+    "role": "Loma",
+    "rights": "Tiesības",
+    "admin": "Admin",
+    "read": "Lasīt",
+    "write": "Rakstīt",
+    "delete": "Dzēst",
+    "share": "Koplietot",
+    "cancelButton": "Atcelt",
+    "submitButton": {
+      "edit": "Atjaunot lietotāju",
+      "add": "Pievienot lietotāju"
+    }
+  },
+  "newDocument": {
+    "title": "Jauna dokumenta izveide",
+    "name": "Nosaukums",
+    "type": "Tips",
+    "responsible": "Atbildīgais",
+    "cancelButton": "Atcelt",
+    "saveButton": "Izveidot"
+  },
+  "fieldConfig": {
+    "title": "Lauka konfigurācija",
+    "type": "Tips",
+    "name": "Nosaukums",
+    "dataPath": "Datu Ceļš",
+    "position": "Pozīcija",
+    "value": "Vērtība",
+    "style": "Stils",
+    "saveButton": "Saglabāt",
+    "cancelButton": "Atcelt"
+  },
+  "editType": {
+    "title": "Rediģēt tipu",
+    "name": "Nosaukums",
+    "typeName": "Tipa nosaukums",
+    "saveButton": "Saglabāt",
+    "cancelButton": "Atcelt"
+  },
+  "deleteConfirmation": {
+    "title": "Izdzēst",
+    "content": "Vai jūs esat pārliecināti ka vēlaties izdzēst ?",
+    "noButton": "Nē",
+    "yesButton": "Jā"
+  },
+  "changePassword": {
+    "title": "Paroles nomaiņa",
+    "newPassword": "Jaunā parole",
+    "saveButton": "Saglabāt",
+    "cancelButton": "Atcelt"
+  },
+  "form": {
+    "saveButton": "Saglabāt",
+    "cancelButton": "Atcelt",
+    "addFieldButton": "Pievienot lauku",
+    "viewJsonButton": "Apskatīt Json",
+    "shareDocumentButton": "Kopīgot dokumentu",
+    "configButton": "Konfigurācija",
+    "saveConfigButton": "Saglabāt",
+    "cancelConfigButton": "Atcelt",
+    "closeButton": "Aizvērt"
+  },
+  "formSelector": {
+    "addTypeButton": "Pievienot Tipu",
+    "addFormButton": "Pievienot Formu",
+    "editButton": "Rediģēt",
+    "deleteButton": "Dzēst"
+  }
+}

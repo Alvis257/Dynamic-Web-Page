@@ -132,12 +132,23 @@ export class ApplicationDataService {
       localStorage.setItem(this.localStorageKey, JSON.stringify(applications));
     }
   
-    updateApplication(updatedApplication: DataStructure): void {
+    updateApplication(jsonData: any): void {
       let applications = this.getAllApplications();
-      const index = applications.findIndex(app => app.id === updatedApplication.id);
+      const index = applications.findIndex(app => app.id === jsonData.id);
       if (index !== -1) {
-        applications[index] = updatedApplication;
-        localStorage.setItem(this.localStorageKey, JSON.stringify(applications));
+          const { id, Owner, creationTime, type, ...updatableFields } = jsonData;
+          const updatedApplication: DataStructure = {
+              ...applications[index],
+              ...updatableFields,
+              JsonData: {
+                  ...applications[index].JsonData,
+                  ...jsonData
+              }
+          };
+          applications[index] = updatedApplication;
+          localStorage.setItem(this.localStorageKey, JSON.stringify(applications));
+      } else {
+          throw new Error('Application not found');
       }
     }
   }

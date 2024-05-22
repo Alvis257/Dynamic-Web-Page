@@ -4,14 +4,25 @@ import { UserService } from '../../Service/user.service';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../Interface/User';
 import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ShareRights } from '../../Interface/ShareRights';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AppModule } from '../../app.module';
+import { AppComponent } from '../../app.component';
 @Component({
   selector: 'app-share-document',
   standalone: true,
-  imports: [FormsModule,CommonModule,MatSelectModule,MatCheckboxModule], 
+  imports: [
+    FormsModule,
+    CommonModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    AppModule,
+    TranslateModule,
+  ],
+  providers: [AppComponent], 
   templateUrl: `./share-document-dialog.component.html`,
   styleUrls: ['./share-document-dialog.component.scss']
 })
@@ -24,7 +35,17 @@ export class ShareDocumentComponent {
   sharedUsers: User[] = [];
   selectedSharedUser: number | null = null;
 
-  constructor(public dialogRef: MatDialogRef<ShareDocumentComponent>, private shareDocumentService: ShareDocumentService, private userService: UserService, @Inject(MAT_DIALOG_DATA) public data: { documentId: number }) {
+  constructor(
+      public dialogRef: MatDialogRef<ShareDocumentComponent>,
+      private shareDocumentService: ShareDocumentService,
+      private userService: UserService,
+      private translate: TranslateService,
+      @Inject(MAT_DIALOG_DATA) public data: { documentId: number },
+    ) {
+    const storedLanguage = sessionStorage.getItem('selectedLanguage');
+    const languageToUse = storedLanguage ? storedLanguage : 'lv';
+    this.translate.use(languageToUse);
+  
     const currentUserID = this.userService.getCurrentUser()?.userID;
     this.users = this.userService.getUsers().filter(user => user.userID !== currentUserID);
     const sharedUserIds = this.shareDocumentService.findSharedUsers(this.data.documentId);

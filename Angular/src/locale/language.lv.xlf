@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="myProfile" datatype="html">
+        <source>My Profile</source>
+        <target>Mans profils</target>
+      </trans-unit>
+      <trans-unit id="name" datatype="html">
+        <source>Name:</source>
+        <target>Vārds:</target>
+      </trans-unit>
+      <trans-unit id="surname" datatype="html">
+        <source>Surname:</source>
+        <target>Uzvārds:</target>
+      </trans-unit>
+      <trans-unit id="username" datatype="html">
+        <source>System User:</source>
+        <target>Sistēmas lietotājs:</target>
+      </trans-unit>
+      <trans-unit id="email" datatype="html">
+        <source>Email:</source>
+        <target>E-pasts:</target>
+      </trans-unit>
+      <trans-unit id="createdDate" datatype="html">
+        <source>Created:</source>
+        <target>Izveidots:</target>
+      </trans-unit>
+      <trans-unit id="lastUpdatedDate" datatype="html">
+        <source>Last Updated:</source>
+        <target>Pēdējo reiz atjaunināts:</target>
+      </trans-unit>
+      <trans-unit id="changePassword" datatype="html">
+        <source>Change Password</source>
+        <target>Nomainīt paroli</target>
+      </trans-unit>
+      <trans-unit id="documentData" datatype="html">
+        <source>Document Data</source>
+        <target>Documentu dati</target>
+      </trans-unit>
+      <trans-unit id="documentCount" datatype="html">
+        <source>Number of Documents:</source>
+        <target>Dokumentu skaits:</target>
+      </trans-unit>
+      <trans-unit id="sharedDocumentCount" datatype="html">
+        <source>Number of Shared Documents:</source>
+        <target>Dalīto dokumentu skaits:</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

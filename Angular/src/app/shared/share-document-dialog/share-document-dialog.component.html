@@ -1,21 +1,21 @@
 <div class="popup">
-  <h1 mat-dialog-title>Document sharing</h1>
+  <h1 mat-dialog-title>{{ 'documentSharing.title' | translate }}</h1>
   <div mat-dialog-content>
     <p class="field-config-text">
-      <label for="removeUsers">Remove users from sharing</label>
-      <mat-checkbox [(ngModel)]="removeUsers">Remove</mat-checkbox>
+      <label for="removeUsers">{{ 'documentSharing.removeUsersFromSharing' | translate }}</label>
+      <mat-checkbox [(ngModel)]="removeUsers">{{ 'documentSharing.remove' | translate }}</mat-checkbox>
     </p>
     <p class="field-config-text">
-      <label for="sharedUsers">Shared Users</label>
+      <label for="sharedUsers">{{ 'documentSharing.sharedUsers' | translate }}</label>
       <mat-form-field>
         <mat-select id="sharedUsers" [(value)]="selectedSharedUser" (selectionChange)="onSharedUserChange($event.value)">
-          <mat-option [value]="null">None</mat-option>
+          <mat-option [value]="null">{{ 'documentSharing.none' | translate }}</mat-option>
           <mat-option *ngFor="let user of sharedUsers" [value]="user.userID">{{ user.username }}</mat-option>
         </mat-select>
       </mat-form-field>
     </p>
     <p class="field-config-text">
-      <label for="users">Users</label>
+      <label for="users">{{ 'documentSharing.users' | translate }}</label>
       <mat-form-field>
         <mat-select id="users" multiple [(value)]="selectedUsers">
           <mat-option *ngFor="let user of users" [value]="user.userID">{{ user.username }}</mat-option>
@@ -23,15 +23,15 @@
       </mat-form-field>
     </p>
     <p class="field-config-text">
-      <label for="rights">Rights:</label>
-      <mat-checkbox [(ngModel)]="selectedRights.read">Read</mat-checkbox>
-      <mat-checkbox [(ngModel)]="selectedRights.write">Write</mat-checkbox>
-      <mat-checkbox [(ngModel)]="selectedRights.delete">Delete</mat-checkbox>
-      <mat-checkbox [(ngModel)]="selectedRights.share">Share</mat-checkbox>
+      <label for="rights">{{ 'documentSharing.rights' | translate }}:</label>
+      <mat-checkbox [(ngModel)]="selectedRights.read">{{ 'documentSharing.read' | translate }}</mat-checkbox>
+      <mat-checkbox [(ngModel)]="selectedRights.write">{{ 'documentSharing.write' | translate }}</mat-checkbox>
+      <mat-checkbox [(ngModel)]="selectedRights.delete">{{ 'documentSharing.delete' | translate }}</mat-checkbox>
+      <mat-checkbox [(ngModel)]="selectedRights.share">{{ 'documentSharing.share' | translate }}</mat-checkbox>
     </p>
   </div>
   <div mat-dialog-actions>
-    <button class="cancel-button" mat-button (click)="onNoClick()">Cancel</button>
-    <button class="save-button" mat-button (click)="shareDocument()">Share</button>
+    <button class="cancel-button" mat-button (click)="onNoClick()">{{ 'documentSharing.cancelButton' | translate }}</button>
+    <button class="save-button" mat-button (click)="shareDocument()">{{ 'documentSharing.shareDocumentButton' | translate }}</button>
   </div>
 </div>

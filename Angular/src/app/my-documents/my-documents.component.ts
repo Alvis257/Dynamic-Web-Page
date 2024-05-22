@@ -21,12 +21,25 @@ import { DeleteConfirmationDialogComponent } from '../shared/delete-confirmation
 import { MatDialog } from '@angular/material/dialog';
 import { NewDocumentDialogComponent } from '../shared/new-document-dialog/new-document-dialog.component';
 import { TypeService } from '../Service/type.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-my-documents',
   standalone: true,
   animations: [],
-  imports: [CommonModule, FormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatPaginator, MatTableModule, MatIconModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatCardModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatButtonModule, 
+    MatPaginator, 
+    MatTableModule, 
+    MatIconModule,
+    TranslateModule
+  ],
+  
   templateUrl: './my-documents.component.html',
   styleUrls: ['./my-documents.component.scss'],
   providers: [
@@ -55,7 +68,7 @@ export class MyDocumentsComponent {
   dataSource: MatTableDataSource<DataStructure> = new MatTableDataSource();
   selectedButton: 'myDocuments' | 'sharedWithMe' = 'myDocuments';
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private router: Router, public dialog: MatDialog,private typeService:TypeService, private applicationDataService: ApplicationDataService, private userService: UserService, private shareDocumentService: ShareDocumentService) { }
+  constructor(private _liveAnnouncer: LiveAnnouncer, private router: Router, public dialog: MatDialog, private typeService: TypeService, private applicationDataService: ApplicationDataService, private userService: UserService, private shareDocumentService: ShareDocumentService) { }
 
   ngAfterViewInit() {
     // Use the service to get the data
@@ -101,14 +114,14 @@ export class MyDocumentsComponent {
       width: '500px',
       data: { types, users }
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.applicationDataService.addApplication(result);
       }
     });
   }
-  
+
   selectSharedWithMe(): void {
     this.selectedButton = 'sharedWithMe';
     const currentUser = this.userService.getCurrentUser();
@@ -128,28 +141,28 @@ export class MyDocumentsComponent {
     }
   }
 
-  hasReadRights(id:number,Owner:string): boolean {
+  hasReadRights(id: number, Owner: string): boolean {
     const currentUserID = this.userService.getCurrentUser()?.userID;
-    const UserName = this.userService.getCurrentUser()?.username; 
+    const UserName = this.userService.getCurrentUser()?.username;
     const isOwner = Owner === UserName;
-    if(!currentUserID) return false;  
+    if (!currentUserID) return false;
 
     const sharedRights = this.shareDocumentService.getUserRights(currentUserID, id);
-    if(sharedRights == undefined){
+    if (sharedRights == undefined) {
       return this.rights?.admin || this.rights?.read || isOwner;
     }
 
     return this.rights?.admin || sharedRights.read || this.rights?.read || isOwner;
   }
 
-  hasDeleteRights(id:number,Owner:string): boolean { 
+  hasDeleteRights(id: number, Owner: string): boolean {
     const currentUserID = this.userService.getCurrentUser()?.userID;
-    const UserName = this.userService.getCurrentUser()?.username; 
+    const UserName = this.userService.getCurrentUser()?.username;
     const isOwner = Owner === UserName;
 
-    if(!currentUserID) return false;  
+    if (!currentUserID) return false;
     const sharedRights = this.shareDocumentService.getUserRights(currentUserID, id);
-    if(sharedRights == undefined){
+    if (sharedRights == undefined) {
       return this.rights?.admin || this.rights?.delete || isOwner;
     }
     return this.rights?.admin || sharedRights.delete || this.rights?.delete || isOwner;

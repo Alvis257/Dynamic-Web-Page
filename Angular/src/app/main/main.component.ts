@@ -47,7 +47,7 @@ export class MainComponent {
   displayedColumns: string[] = ['id','type','name', 'status', 'creationTime', 'responsible', 'options'];
   dataSource : MatTableDataSource<DataStructure> = new MatTableDataSource();
 
-  constructor( private _liveAnnouncer: LiveAnnouncer, private router: Router,public dialog: MatDialog,private applicationDataService: ApplicationDataService,private userService: UserService,private shareDocumentService: ShareDocumentService) { } 
+  constructor(private _liveAnnouncer: LiveAnnouncer, private router: Router,public dialog: MatDialog,private applicationDataService: ApplicationDataService,private userService: UserService,private shareDocumentService: ShareDocumentService) { } 
 
   ngOnInit(): void {
     const rightsItem = this.userService.getCurrentUser()?.rights;

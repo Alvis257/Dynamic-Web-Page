@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { UserService } from './user.service';
 import { User } from '../Interface/User';
 import * as emailjs from 'emailjs-com';
@@ -11,7 +11,7 @@ export class AuthService {
   //   { username: 'simple', password: 'password', role: 'user', resetCode:'', email: 'simple@example.com' },
   //   { username: 'admin', password: 'password', role: 'admin', resetCode:'',email: 'admin@example.com' }
   // ];
-
+  languageChange: EventEmitter<string> = new EventEmitter();
   constructor(private userService: UserService) { 
     emailjs.init('LHO-vWp0D8DksFeYw');
   }

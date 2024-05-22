@@ -31,7 +31,10 @@ h1 {
   .cancel-button {
     background-color: rgb(175, 175, 24);
   }
-  
+  label {
+    color: black;
+    margin-left: 10px;
+  }
   .cancel-button:hover {
     background-color: rgb(200, 200, 0); /* Light yellow */
   }

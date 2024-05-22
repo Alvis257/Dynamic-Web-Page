@@ -6,14 +6,16 @@ import { User } from '../Interface/User';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangePasswordDialogComponent } from '../shared/change-password-dialog/change-password-dialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
+
 export class ProfileComponent  implements OnInit {
   user: User | null = null;
   documentCount: number;

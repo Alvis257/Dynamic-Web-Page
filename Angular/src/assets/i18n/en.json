@@ -1,0 +1,171 @@
+{
+  "menu": {
+    "DGS": "DGS",
+    "Manidokumenti": "My Documents",
+    "Visidokumenti": "All Documents",
+    "Formas": "Forms",
+    "Lietotajukontrole": "User Control",
+    "Valodas": "Languages",
+    "Anglu": "English",
+    "Latviesu": "Latvian",
+    "Profils": "Profile",
+    "Iziet": "Logout"
+  },
+  "paginator": {
+    "itemsPerPageLabel": "Items per page",
+    "nextPageLabel": "Next page",
+    "previousPageLabel": "Previous page",
+    "firstPageLabel": "First page",
+    "lastPageLabel": "Last page"
+  },
+  "search": {
+    "label": "Search",
+    "placeholder": "Search document"
+  },
+  "table": {
+    "id": "ID",
+    "type": "Type",
+    "name": "Name",
+    "status": "Status",
+    "creationTime": "Creation Time",
+    "responsible": "Responsible",
+    "options": "Options",
+    "view": "View",
+    "delete": "Delete"
+  },
+  "buttonGroup": {
+    "myDocuments": "My Documents",
+    "sharedWithMe": "Shared with Me"
+  },
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Submit",
+    "forgotPassword": "Forgot Password"
+  },
+  "profile": {
+    "title": "My Profile",
+    "name": "Name",
+    "surname": "Surname",
+    "username": "System User",
+    "email": "Email",
+    "createdDate": "Created",
+    "lastUpdatedDate": "Last Updated",
+    "changePassword": "Change Password",
+    "documentData": "Document Data",
+    "documentCount": "Number of Documents",
+    "sharedDocumentCount": "Number of Shared Documents"
+  },
+  "users": {
+    "addButton": "Add User",
+    "editButton": "Edit",
+    "deleteButton": "Delete"
+  },
+  "addField": {
+    "title": "Add New Field",
+    "type": "Type",
+    "buttonName": "Button Name",
+    "name": "Name",
+    "dataPath": "Data Path",
+    "style": "Style",
+    "value": "Value",
+    "cancelButton": "Cancel",
+    "addButton": "Add"
+  },
+  "documentSharing": {
+    "title": "Document Sharing",
+    "removeUsersFromSharing": "Remove users from sharing",
+    "remove": "Remove",
+    "sharedUsers": "Shared Users",
+    "none": "None",
+    "users": "Users",
+    "rights": "Rights",
+    "read": "Read",
+    "write": "Write",
+    "delete": "Delete",
+    "share": "Share",
+    "cancelButton": "Cancel",
+    "shareDocumentButton": "Share Document"
+  },
+  "userDialog": {
+    "title": {
+      "add": "Add User",
+      "edit": "Edit User"
+    },
+    "name": "Name",
+    "surname": "Surname",
+    "username": "Username",
+    "email": "Email",
+    "temporaryPassword": "Temporary Password",
+    "role": "Role",
+    "rights": "Rights",
+    "admin": "Admin",
+    "read": "Read",
+    "write": "Write",
+    "delete": "Delete",
+    "share": "Share",
+    "cancelButton": "Cancel",
+    "submitButton": {
+      "edit": "Update User",
+      "add": "Add User"
+    }
+  },
+  "newDocument": {
+    "title": "New Document Creation",
+    "name": "Name",
+    "type": "Type",
+    "responsible": "Responsible",
+    "cancelButton": "Cancel",
+    "saveButton": "Create"
+  },
+  "fieldConfig": {
+    "title": "Field Configuration",
+    "type": "Type",
+    "name": "Name",
+    "dataPath": "Data Path",
+    "position": "Position",
+    "value": "Value",
+    "style": "Style",
+    "saveButton": "Save",
+    "cancelButton": "Cancel"
+  },
+  "editType": {
+    "title": "Edit Type",
+    "name": "Name",
+    "typeName": "Type Name",
+    "saveButton": "Save",
+    "cancelButton": "Cancel"
+  },
+  "deleteConfirmation": {
+    "title": "Delete",
+    "content": "Are you sure you want to delete?",
+    "noButton": "No",
+    "yesButton": "Yes"
+  },
+  "changePassword": {
+    "title": "Change Password",
+    "newPassword": "New Password",
+    "saveButton": "Save",
+    "cancelButton": "Cancel"
+  },
+  "form": {
+    "saveButton": "Save",
+    "cancelButton": "Cancel",
+    "addFieldButton": "Add Field",
+    "viewJsonButton": "View Json",
+    "shareDocumentButton": "Share Document",
+    "configButton": "Configuration",
+    "saveConfigButton": "Save",
+    "cancelConfigButton": "Cancel",
+    "closeButton": "Close"
+  },
+  "formSelector": {
+    "addTypeButton": "Add Type",
+    "addFormButton": "Add Form",
+    "editButton": "Edit",
+    "deleteButton": "Delete"
+  }
+  
+  
+}

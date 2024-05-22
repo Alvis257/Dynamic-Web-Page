@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>{{ 'addField.title' | translate }}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>{{ 'addField.type' | translate }}</mat-label>
+    <mat-select class="mat-select" [(ngModel)]="type">
+        <mat-option *ngFor="let type of types" [value]="type.value">{{type.label}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="type === 'saveButton' || type === 'cancelButton'">
+    <mat-label>{{ 'addField.buttonName' | translate }}</mat-label>
+    <input matInput [(ngModel)]="label">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ 'addField.name' | translate }}</mat-label>
+    <input matInput [(ngModel)]="name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ 'addField.dataPath' | translate }}</mat-label>
+    <input matInput [(ngModel)]="dataPath">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ 'addField.style' | translate }}</mat-label>
+    <input matInput [(ngModel)]="style">
+  </mat-form-field>
+  <mat-form-field *ngIf="type === 'label'">
+    <mat-label>{{ 'addField.value' | translate }}</mat-label>
+    <input matInput [(ngModel)]="value">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="cancel-button" (click)="onCancel()">{{ 'addField.cancelButton' | translate }}</button>
+  <button mat-button class="save-button" (click)="onAdd()">{{ 'addField.addButton' | translate }}</button>
+</div>

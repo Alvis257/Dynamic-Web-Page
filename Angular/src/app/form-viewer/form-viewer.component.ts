@@ -1,19 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
-import { DataService } from '../Service/data.service'; // replace with the path to your data service
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { TypeService } from '../Service/type.service';
-import { FormService } from '../Service/form.service';
-import { PLATFORM_ID } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 interface DataItem {
   formType: string;
   id:number;
   name: string;
-  // other properties...
 }
 interface Form {
   name: string;
@@ -27,9 +23,10 @@ interface MenuNode {
 @Component({
   selector: 'app-form-viewer',
   standalone: true,
-  imports: [MatListModule, RouterModule, MatSidenavModule,CommonModule],
+  imports: [MatListModule, RouterModule, MatSidenavModule,CommonModule , TranslateModule],
   templateUrl: './form-viewer.component.html',
-  styleUrls: ['./form-viewer.component.scss']
+  styleUrls: ['./form-viewer.component.scss'],
+  
 })
 export class FormViewerComponent implements OnInit {
   DataItem: DataItem[] = [];

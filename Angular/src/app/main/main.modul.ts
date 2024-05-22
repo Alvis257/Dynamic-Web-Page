@@ -5,9 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   declarations: [
     MainComponent
@@ -15,10 +14,10 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     MatSort,
-    BrowserAnimationsModule,
     MatTableModule,
     MatPaginator,
     MatInputModule,
+    TranslateModule,
     RouterModule
   ],
 

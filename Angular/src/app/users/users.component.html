@@ -1,4 +1,4 @@
-<button mat-raised-button color="primary" (click)="openDialog()">Add User</button>
+<button mat-raised-button color="primary" (click)="openDialog()">{{ 'users.addButton' | translate }}</button>
 
 <div class="user-list">
   <div class="user-box" *ngFor="let user of users; index as i">
@@ -8,8 +8,8 @@
       <p>{{ user.role }}</p>
     </div>
     <div class="user-actions">
-      <button mat-button color="accent" (click)="openDialog(user, i)">Edit</button>
-      <button mat-button color="warn" (click)="deleteUser(i)">Delete</button>
+      <button mat-button color="accent" (click)="openDialog(user, i)">{{ 'users.editButton' | translate }}</button>
+      <button mat-button color="warn" (click)="deleteUser(i)">{{ 'users.deleteButton' | translate }}</button>
     </div>
   </div>
 </div>

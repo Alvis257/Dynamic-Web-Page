@@ -1,64 +1,70 @@
 <mat-card>
-    <mat-card-content>
-      <button style="margin-bottom: 20px;" mat-mini-fab color="primary" aria-label="Add new document" (click)="openNewDocumentDialog()">
-        <mat-icon>add</mat-icon>
-      </button>
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Search</mat-label>
-        <input matInput placeholder="Search documents">
-      </mat-form-field>
-<div class="button-group">
-  <button mat-raised-button [ngClass]="{'selected': selectedButton === 'myDocuments', 'not-selected': selectedButton !== 'myDocuments'}" (click)="selectMyDocuments()" class="half-width">My Documents</button>
-  <button mat-raised-button [ngClass]="{'selected': selectedButton === 'sharedWithMe', 'not-selected': selectedButton !== 'sharedWithMe'}" (click)="selectSharedWithMe()" class="half-width">Shared with me</button>
+  <mat-card-content>
+    <button style="margin-bottom: 20px;" mat-mini-fab color="primary" aria-label="Add new document"
+      (click)="openNewDocumentDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>{{ 'search.label' | translate }}</mat-label>
+      <input matInput [placeholder]="'search.placeholder' | translate">
+    </mat-form-field>
+    <div class="button-group">
+      <button mat-raised-button
+        [ngClass]="{'selected': selectedButton === 'myDocuments', 'not-selected': selectedButton !== 'myDocuments'}"
+        (click)="selectMyDocuments()" class="half-width">{{ 'buttonGroup.myDocuments' | translate }}</button>
+      <button mat-raised-button
+        [ngClass]="{'selected': selectedButton === 'sharedWithMe', 'not-selected': selectedButton !== 'sharedWithMe'}"
+        (click)="selectSharedWithMe()" class="half-width">{{ 'buttonGroup.sharedWithMe' | translate }}</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+<div style="margin-top:20px;" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.id' | translate }}</th>
+      <td mat-cell *matCellDef="let element">{{element.id}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.type' | translate }}</th>
+      <td mat-cell *matCellDef="let element">{{element.type}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.name' | translate }}</th>
+      <td mat-cell *matCellDef="let element">{{element.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.status' | translate }}</th>
+      <td mat-cell *matCellDef="let element">{{element.status}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="creationTime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.creationTime' | translate }}</th>
+      <td mat-cell *matCellDef="let element">{{element.creationTime}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="responsible">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.responsible' | translate }}</th>
+      <td mat-cell *matCellDef="let element">{{element.responsible}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <th mat-header-cell style="text-align: center;" *matHeaderCellDef>{{ 'table.options' | translate }}</th>
+      <td mat-cell style="text-align: center;" *matCellDef="let element">
+        <button mat-button (click)="view(element)" *ngIf="hasReadRights(element.id,element.Owner)">{{ 'table.view' |
+          translate }}</button>
+        <button mat-button (click)="delete(element)" *ngIf="hasDeleteRights(element.id,element.Owner)">{{ 'table.delete'
+          | translate }}</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator #paginator [length]="100" [pageSizeOptions]="[5, 10, 20]" label="f" aria-label="select page"
+    showFirstLastButtons>
+  </mat-paginator>
 </div>
-    </mat-card-content>
-  </mat-card>
-  <div style="margin-top:20px;" class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
-
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-            <td mat-cell *matCellDef="let element">{{element.id}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="type">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
-            <td mat-cell *matCellDef="let element">{{element.type}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-            <td mat-cell *matCellDef="let element">{{element.name}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-            <td mat-cell *matCellDef="let element">{{element.status}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="creationTime">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Creation Time</th>
-            <td mat-cell *matCellDef="let element">{{element.creationTime}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="responsible">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Responsible</th>
-            <td mat-cell *matCellDef="let element">{{element.responsible}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="options">
-            <th mat-header-cell style = "text-align: center;" *matHeaderCellDef >Options</th>
-            <td mat-cell style="text-align: center;" *matCellDef="let element">
-              <button mat-button (click)="view(element)" *ngIf="hasReadRights(element.id,element.Owner)">View</button>
-              <button mat-button (click)="delete(element)" *ngIf="hasDeleteRights(element.id,element.Owner)" >Delete</button>
-            </td>
-          </ng-container>
-        
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
-    </table>
-    <mat-paginator #paginator [length] = "100" [pageSizeOptions]="[5, 10, 20]" label = "f" aria-label="select page"  showFirstLastButtons>
-    <span id="mat-paginator-page-size-label-0">Ite per page:</span>
-    </mat-paginator>
-</div>
-

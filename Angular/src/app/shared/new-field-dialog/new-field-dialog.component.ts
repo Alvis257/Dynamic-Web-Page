@@ -5,46 +5,26 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AppComponent } from '../../app.component';
+import { AppModule } from '../../app.module';
+
 
 @Component({
   selector: 'app-new-field-dialog',
   standalone: true,
-  template: `
-  <h1 mat-dialog-title>Add new field</h1>
-  <div mat-dialog-content>
-    <mat-form-field>
-      <mat-label>Type</mat-label>
-      <mat-select class="mat-select" [(ngModel)]="type">
-          <mat-option *ngFor="let type of types" [value]="type.value">{{type.label}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field *ngIf="type === 'saveButton' || type === 'cancelButton'">
-      <mat-label>Button Label</mat-label>
-      <input matInput [(ngModel)]="label">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input matInput [(ngModel)]="name">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Data Path</mat-label>
-      <input matInput [(ngModel)]="dataPath">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Style</mat-label>
-      <input matInput [(ngModel)]="style">
-    </mat-form-field>
-    <mat-form-field *ngIf="type === 'label'">
-      <mat-label>Value</mat-label>
-      <input matInput [(ngModel)]="value">
-    </mat-form-field>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button class="cancel-button" (click)="onCancel()">Cancel</button>
-    <button mat-button class="save-button" (click)="onAdd()">Add</button>
-  </div>
-`,
-  imports: [CommonModule, MatFormFieldModule, MatSelectModule, FormsModule, MatDialogModule, MatInputModule],
+  templateUrl: './new-field-dialog.component.html',
+  imports: [
+    CommonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule,
+    MatDialogModule,
+    MatInputModule,
+    AppModule,
+    TranslateModule,
+  ],
+  providers: [AppComponent],
   styleUrls: ['./new-field-dialog.component.scss']
 
 })
@@ -66,7 +46,12 @@ export class NewFieldDialogComponent {
   value = '';
   label = '';
 
-  constructor(public dialogRef: MatDialogRef<NewFieldDialogComponent>) { }
+
+  constructor(public dialogRef: MatDialogRef<NewFieldDialogComponent>, private translate: TranslateService) { 
+    const storedLanguage = sessionStorage.getItem('selectedLanguage');
+    const languageToUse = storedLanguage ? storedLanguage : 'lv';
+    this.translate.use(languageToUse);
+  }
 
   onCancel(): void {
     this.dialogRef.close();
@@ -80,7 +65,7 @@ export class NewFieldDialogComponent {
       style: this.style,
       value: this.value,
       label: this.label,
-      position: -1, // Will be set to the last position in formData
+      position: -1,
     };
 
     this.dialogRef.close(data);

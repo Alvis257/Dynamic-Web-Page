@@ -6,8 +6,8 @@
         <label *ngIf="field.type === 'label_dynamic'">{{ field.value }}</label>
         <input *ngIf="field.type === 'text' || field.type === 'email' || field.type === 'password'" type="{{field.type}}" [formControlName]="field.name">
         <input *ngIf="field.type === 'checkbox'" type="checkbox" [formControlName]="field.name">
-        <button *ngIf="field.type === 'saveButton'" [ngStyle]="fieldStyleToObject(field.style)" (click)="onSubmit()">{{ field.label }}</button>
-        <button *ngIf="field.type === 'cancelButton'" [ngStyle]="fieldStyleToObject(field.style)" (click)="onCancel()">{{ field.label }}</button>
+        <button *ngIf="field.type === 'saveButton'" [ngStyle]="fieldStyleToObject(field.style)" (click)="onSubmit()">{{ 'form.saveButton' | translate }}</button>
+        <button *ngIf="field.type === 'cancelButton'" [ngStyle]="fieldStyleToObject(field.style)" (click)="onCancel()">{{ 'form.cancelButton' | translate }}</button>
         <div class="field-icons" *ngIf="configMode  && hasAdminAccess()">
           <mat-icon (click)="openFieldConfig(field)">settings</mat-icon> 
           <mat-icon (click)="confirmDelete(i)">delete</mat-icon>
@@ -19,18 +19,18 @@
       </div>
     </div>
     <div *ngIf="configMode" class="config-buttons-container" >
-      <button mat-raised-button class="add-field-button" *ngIf="configMode  && hasAdminAccess()" (click)="addField()">Add field</button>
+      <button mat-raised-button class="add-field-button" *ngIf="configMode  && hasAdminAccess()" (click)="addField()">{{ 'form.addFieldButton' | translate }}</button>
     </div>
     <div class="config-buttons-container">
         <div class="left-side">
-          <button *ngIf="!disableJsonView  && hasAdminAccess()" type="button" class="viewJson-button" (click)="openJsonView()">View Json</button>
-          <button *ngIf="isOwner() || hasShareRights()" type="button" class="viewJson-button" (click)="ShareDocument()">Share Document</button>
+          <button *ngIf="!disableJsonView  && hasAdminAccess()" type="button" class="viewJson-button" (click)="openJsonView()">{{ 'form.viewJsonButton' | translate }}</button>
+          <button *ngIf="isOwner() || hasShareRights()" type="button" class="viewJson-button" (click)="ShareDocument()">{{ 'form.shareDocumentButton' | translate }}</button>
         </div>
         <div class="right-side">
-          <button type="button" class="config-button" *ngIf="!configMode  && hasAdminAccess()" (click)="openConfig()">Configure</button>
+          <button type="button" class="config-button" *ngIf="!configMode  && hasAdminAccess()" (click)="openConfig()">{{ 'form.configButton' | translate }}</button>
           <div *ngIf="configMode && rights.admin">
-            <button type="button" class="save-button" (click)="saveConfig()">Save</button>
-            <button type="button" class="cancel-button" (click)="cancelConfig()">Cancel</button>
+            <button type="button" class="save-button" (click)="saveConfig()">{{ 'form.saveConfigButton' | translate }}</button>
+            <button type="button" class="cancel-button" (click)="cancelConfig()">{{ 'form.cancelConfigButton' | translate }}</button>
           </div>
         </div>
       </div>
@@ -38,6 +38,6 @@
 </div>
 
 <div *ngIf="viewJsonData  && hasAdminAccess()" class="json-container">
-<button (click)="viewJsonData = ''">Close</button>
+<button (click)="viewJsonData = ''">{{ 'form.closeButton' | translate }}</button>
 <pre>{{ viewJsonData }}</pre>
 </div>

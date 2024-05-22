@@ -13,11 +13,12 @@ import { FormService } from '../Service/form.service';
 import { DataService } from '../Service/data.service';
 import { forkJoin } from 'rxjs';
 import { Console } from 'console';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-form-selector',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatIconModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatIconModule, FormsModule,TranslateModule],
   templateUrl: './form-selector.component.html',
   styleUrls: ['./form-selector.component.scss'],
   encapsulation: ViewEncapsulation.None

@@ -6,11 +6,16 @@ import { UserFormComponent } from '../shared/user-dialog/user-dialog.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DeleteConfirmationDialogComponent } from '../shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
-
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,UserFormComponent],
+  imports: [ 
+    CommonModule,
+    ReactiveFormsModule,
+    UserFormComponent,
+    TranslateModule
+  ],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
