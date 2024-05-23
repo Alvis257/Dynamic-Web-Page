@@ -1,3 +1,5 @@
+
+
 <mat-card>
   <mat-card-content>
     <button style="margin-bottom: 20px;" mat-mini-fab color="primary" aria-label="Add new document"
@@ -6,8 +8,21 @@
     </button>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>{{ 'search.label' | translate }}</mat-label>
-      <input matInput [placeholder]="'search.placeholder' | translate">
+      <input matInput #searchInput placeholder="{{ 'search.placeholder' | translate }}"
+        (keyup)="applyFilter(searchInput.value)">
     </mat-form-field>
+    <div>
+      <mat-form-field appearance="fill">
+          <mat-label>{{ 'table.creationTime' | translate }}</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate #start placeholder="Start date" (dateChange)="onDateRangeChange($event.value, 'start')">
+              <input matEndDate #end placeholder="End date" (dateChange)="onDateRangeChange($event.value, 'end')">
+          </mat-date-range-input>
+          <mat-icon matSuffix class="clear-icon" matDatepickerToggleIcon (click)="clearDateRange(start, end, $event)">clear</mat-icon>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </div>
     <div class="button-group">
       <button mat-raised-button
         [ngClass]="{'selected': selectedButton === 'myDocuments', 'not-selected': selectedButton !== 'myDocuments'}"
@@ -22,48 +37,53 @@
   <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
 
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.id' | translate }}</th>
-      <td mat-cell *matCellDef="let element">{{element.id}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.id' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{element.id}}</td>
     </ng-container>
 
     <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.type' | translate }}</th>
-      <td mat-cell *matCellDef="let element">{{element.type}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.type' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{element.type}}</td>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.name' | translate }}</th>
-      <td mat-cell *matCellDef="let element">{{element.name}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.name' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
     </ng-container>
 
     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.status' | translate }}</th>
-      <td mat-cell *matCellDef="let element">{{element.status}}</td>
+        <th mat-header-cell *matHeaderCellDef class="status-header">{{ 'table.status' | translate }}
+            <div class="select-container">
+                <mat-select style="width: 135px" (selectionChange)="onStatusChange($event.value)">
+                    <mat-option value="">None</mat-option>
+                    <mat-option *ngFor="let status of statusList" [value]="status">{{status}}</mat-option>
+                </mat-select>
+            </div>
+        </th>
+        <td mat-cell *matCellDef="let element">{{element.status}}</td>
     </ng-container>
 
     <ng-container matColumnDef="creationTime">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.creationTime' | translate }}</th>
-      <td mat-cell *matCellDef="let element">{{element.creationTime}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.creationTime' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{element.creationTime}}</td>
     </ng-container>
 
     <ng-container matColumnDef="responsible">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.responsible' | translate }}</th>
-      <td mat-cell *matCellDef="let element">{{element.responsible}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'table.responsible' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{element.responsible}}</td>
     </ng-container>
 
     <ng-container matColumnDef="options">
-      <th mat-header-cell style="text-align: center;" *matHeaderCellDef>{{ 'table.options' | translate }}</th>
-      <td mat-cell style="text-align: center;" *matCellDef="let element">
-        <button mat-button (click)="view(element)" *ngIf="hasReadRights(element.id,element.Owner)">{{ 'table.view' |
-          translate }}</button>
-        <button mat-button (click)="delete(element)" *ngIf="hasDeleteRights(element.id,element.Owner)">{{ 'table.delete'
-          | translate }}</button>
-      </td>
-    </ng-container>
-
+        <th mat-header-cell style = "text-align: center;" *matHeaderCellDef >{{ 'table.options' | translate }}</th>
+        <td mat-cell style="text-align: center;" *matCellDef="let element">
+          <button mat-button (click)="view(element)" *ngIf="hasReadRights(element.id,element.Owner)">{{ 'table.view' | translate }}</button>
+          <button mat-button (click)="delete(element)" *ngIf="hasDeleteRights(element.id,element.Owner)">{{ 'table.delete' | translate }}</button>
+        </td>
+      </ng-container>
+    
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+</table>
   <mat-paginator #paginator [length]="100" [pageSizeOptions]="[5, 10, 20]" label="f" aria-label="select page"
     showFirstLastButtons>
   </mat-paginator>

@@ -1,0 +1,12 @@
+{
+    "status":{
+        "Active": "Active",
+        "Inactive": "Inactive",
+        "Created": "Created",
+        "Approved": "Approved",
+        "Rejected": "Rejected",
+        "In Procces" : "In Procces",
+        "Completed" : "Completed",
+        "Cancelled" : "Cancelled"
+    }
+}

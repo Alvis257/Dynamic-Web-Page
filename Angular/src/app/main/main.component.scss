@@ -12,6 +12,24 @@
 //   border: 2px solid #ccc;
 //   border-radius: 4px;
 // }
+
+
+.clear-icon {
+  color:grey;
+  border: transparent;
+  border-spacing:round($number: 4);
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
+}
+.status-select {
+  width: fit-content !important;
+}
+.clear-icon:hover, .clear-icon:active {
+  color: red;
+  background-color: rgba(141, 140, 140, 0.26); 
+}
+
 .example-full-width {
   width: 90%;
   margin-top:20px;
