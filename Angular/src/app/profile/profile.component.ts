@@ -28,6 +28,7 @@ export class ProfileComponent  implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
+    console.log(this.user);
     if (!this.user) {
       this.router.navigate(['/login']);
       return;
@@ -53,7 +54,7 @@ export class ProfileComponent  implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const username = this.userService.getCurrentUser()?.username;
+        const username = this.userService.getCurrentUser()?.userName;
         if (username) {
           this.changeUserPassword(username, result);
         }

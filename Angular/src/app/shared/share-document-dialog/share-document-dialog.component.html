@@ -10,7 +10,7 @@
       <mat-form-field>
         <mat-select id="sharedUsers" [(value)]="selectedSharedUser" (selectionChange)="onSharedUserChange($event.value)">
           <mat-option [value]="null">{{ 'documentSharing.none' | translate }}</mat-option>
-          <mat-option *ngFor="let user of sharedUsers" [value]="user.userID">{{ user.username }}</mat-option>
+          <mat-option *ngFor="let user of sharedUsers" [value]="user.userID">{{ user.userName }}</mat-option>
         </mat-select>
       </mat-form-field>
     </p>
@@ -18,7 +18,7 @@
       <label for="users">{{ 'documentSharing.users' | translate }}</label>
       <mat-form-field>
         <mat-select id="users" multiple [(value)]="selectedUsers">
-          <mat-option *ngFor="let user of users" [value]="user.userID">{{ user.username }}</mat-option>
+          <mat-option *ngFor="let user of users" [value]="user.userID">{{ user.userName }}</mat-option>
         </mat-select>
       </mat-form-field>
     </p>

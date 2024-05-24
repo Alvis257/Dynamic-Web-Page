@@ -24,7 +24,7 @@
     <div class="config-buttons-container">
         <div class="left-side">
           <button *ngIf="!disableJsonView  && hasAdminAccess()" type="button" class="viewJson-button" (click)="openJsonView()">{{ 'form.viewJsonButton' | translate }}</button>
-          <button *ngIf="isOwner() || hasShareRights()" type="button" class="viewJson-button" (click)="ShareDocument()">{{ 'form.shareDocumentButton' | translate }}</button>
+          <button *ngIf="(isOwner() || hasShareRights()) && !configMode" type="button" class="viewJson-button" (click)="ShareDocument()">{{ 'form.shareDocumentButton' | translate }}</button>
         </div>
         <div class="right-side">
           <button type="button" class="config-button" *ngIf="!configMode  && hasAdminAccess()" (click)="openConfig()">{{ 'form.configButton' | translate }}</button>

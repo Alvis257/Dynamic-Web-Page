@@ -1,68 +1,67 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { UserService } from './user.service';
 import { User } from '../Interface/User';
 import * as emailjs from 'emailjs-com';
-import { Console } from 'console';
+import { Observable, lastValueFrom } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // private users = [
-  //   { username: 'simple', password: 'password', role: 'user', resetCode:'', email: 'simple@example.com' },
-  //   { username: 'admin', password: 'password', role: 'admin', resetCode:'',email: 'admin@example.com' }
-  // ];
+
   languageChange: EventEmitter<string> = new EventEmitter();
-  constructor(private userService: UserService) { 
+  private apiUrl = 'http://localhost:5257/api/user';
+  constructor(private http: HttpClient) {
     emailjs.init('LHO-vWp0D8DksFeYw');
   }
 
-  login(username: string, password: string): Promise<boolean> {
-    const users = this.userService.getUsers();
-    return new Promise((resolve, reject) => {
-      const user = users.find(u => u.username === username && u.password === password);
-      if (user) {
-        sessionStorage.setItem('username', user.username);
-        sessionStorage.setItem('rights', JSON.stringify(user.rights));
-        resolve(true);
-      } else {
-        resolve(false);
-      }
-    });
+  login(userName: string, password: string): Promise<boolean> {
+    return lastValueFrom(this.http.post<any>(`${this.apiUrl}/login`, { userName, password }))
+      .then(user => {
+        if (user) {
+          sessionStorage.setItem('username', user.userName);
+          sessionStorage.setItem('rights', JSON.stringify(user.rights));
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .catch(() => false);
   }
 
   logout(): void {
-    sessionStorage.removeItem('currentUser');
+    sessionStorage.removeItem('username');
     clearTimeout(Number(localStorage.getItem('sessionTimeoutId')));
   }
 
-  getUserByEmail(email: string): User | null {
-    const users = this.userService.getUsers();
-    const user = users.find(u => u.email === email);
-    return user || null;
+  checkIfUserExsists(email: string): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/getByEmail/${email}`);
   }
 
   async sendResetCode(email: string): Promise<{ resetCode: string; resetSent: boolean; } | null> {
-    const users = this.userService.getUsers();
-    const user = users.find(u => u.email === email);
+    const user = await lastValueFrom(this.checkIfUserExsists(email));
     if (user) {
-      // Generate a reset code and return it
       const resetCode = Math.random().toString(36).substring(2, 15);
       const resetSent = await this.sendEmail(email, resetCode);
       if (resetSent) {
-        this.userService.updateResetCode(user.username, resetCode);
+        const response = await lastValueFrom(this.http.post(`${this.apiUrl}/updateResetCode`, { userName: user.userName, resetCode: resetCode }, { observe: 'response' }));
+        if (response && response.status === 200) {
+          return { resetCode, resetSent };
+        } else {
+          console.error('Failed to update reset code');
+        }
       }
-      return { resetCode, resetSent };
     }
     return null;
   }
-  
+
   sendEmail(to: string, resetCode: string): Promise<any> {
     const templateParams = {
       to_name: to,
       message: resetCode,
-      from_name:"DGS Automate",
+      from_name: "DGS Automate",
     };
-    
+    console.log(templateParams);
     return emailjs.send('service_vdx73bk', 'template_21x2swq', templateParams)
       .then(response => {
         console.log('Email successfully sent!', response);
@@ -74,21 +73,9 @@ export class AuthService {
       });
   }
 
-  resetPassword(username: string, resetCode: string, newPassword: string): boolean {
-    const users = this.userService.getUsers();
-    const user = users.find(u => u.username === username);
-    if (user && this.checkResetCode(user.email, resetCode)) {
-      return this.userService.changePassword(username, newPassword);
-    }
-    return false;
+  async resetPassword(username: string, resetCode: string, newPassword: string): Promise<boolean> {
+    const response = await lastValueFrom(this.http.post(`${this.apiUrl}/resetPassword`, { userName: username, resetCode: resetCode, newPassword: newPassword }, { observe: 'response' }));
+    return response.status == 200 ? true : false;
   }
-  
-  checkResetCode(email: string, resetCode: string): boolean {
-    const users = this.userService.getUsers();
-    const user = users.find(u => u.email === email);
-    if (user && user.resetCode === resetCode) {
-      return true;
-    }
-    return false;
-  }
+
 }

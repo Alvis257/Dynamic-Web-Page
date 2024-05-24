@@ -16,7 +16,7 @@ export class UserService {
                 surname: 'User',
                 createdDate: new Date(),
                 lastUpdatedDate: new Date(),
-                username: 'simple',
+                userName: 'simple',
                 password: 'password',
                 role: 'user',
                 email: 'simple@example.com',
@@ -31,14 +31,14 @@ export class UserService {
               },
               {
                 userID:2,
-                username: 'admin',
+                userName: 'admin',
                 name: 'Admin User',
                 surname: 'User',
                 createdDate: new Date(),
                 lastUpdatedDate: new Date(),
                 password: 'password',
                 role: 'admin',
-                email: 'admin@example.com',
+                email: 'pastarsalvis@gmail.com',
                 resetCode:'',
                 rights: {
                   admin: true,
@@ -60,16 +60,19 @@ export class UserService {
   getCurrentUser(): User | null {
     const currentUsername = sessionStorage.getItem('username');
     if (currentUsername) {
-      const user = this.users.find(u => u.username === currentUsername);
+      const user = this.users.find(u => u.userName === currentUsername);
       return user || null;
     }
     return null;
   }
   
-  getUserByEmail(email: string): User | null {
-    const user = this.users.find(u => u.email === email);
-    return user || null;
-  }
+  // getUserByEmail(email: string): User | null {
+  //   console.log("User",email);
+  //   console.log("User1",this.users);
+  //   const user = this.users.find(u => u.email === email);
+  //   console.log("User2",user);
+  //   return user || null;
+  // }
   addUser(user: User): void {
     const maxUserId = Math.max(...this.users.map(u => u.userID), 0);
     user.userID = maxUserId + 1;
@@ -84,7 +87,7 @@ export class UserService {
   }
 
   updateResetCode(username: string, resetCode: string): boolean {
-    const user = this.users.find(u => u.username === username);
+    const user = this.users.find(u => u.userName === username);
     if (user) {
       user.resetCode = resetCode;
       localStorage.setItem('users', JSON.stringify(this.users));
@@ -99,7 +102,7 @@ export class UserService {
   }
   
   changePassword(username: string, newPassword: string): boolean {
-    const user = this.users.find(u => u.username === username);
+    const user = this.users.find(u => u.userName === username);
     if (user) {
       user.password = newPassword;
       localStorage.setItem('users', JSON.stringify(this.users));

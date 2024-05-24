@@ -48,6 +48,7 @@
           },
           "configurations": {
             "production": {
+              "allowedCommonJsDependencies": ["moment"],
               "budgets": [
                 {
                   "type": "initial",

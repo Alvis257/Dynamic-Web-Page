@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../Service/authService.service';
 import { FormsModule } from '@angular/forms';
@@ -31,10 +31,12 @@ export class ForgotPasswordComponent {
       newPassword: ['', Validators.required]
     });
   }
-
+ // pastarsalvis@gmail.com
   async sendResetCode(): Promise<void> {
     const email = this.forgotPasswordForm.get('email')?.value;
+    console.log(email);
     const reset = await this.authService.sendResetCode(email);
+    console.log(reset);
     if (reset) {
       this.resetCode = reset.resetCode;
       this.userExists = true;
@@ -59,18 +61,21 @@ export class ForgotPasswordComponent {
       const email = this.forgotPasswordForm.get('email')?.value;
       const code = this.forgotPasswordForm.get('code')?.value;
       const newPassword = this.forgotPasswordForm.get('newPassword')?.value;
-      const user = this.authService.getUserByEmail(email);
-      if (user) {
-        const passwordChanged = this.authService.resetPassword(user.username, code, newPassword);
-        if (passwordChanged) {
-          console.log('Password changed successfully');
-          this.router.navigate(['/login']); // Navigate to the login form
+  
+      this.authService.checkIfUserExsists(email).subscribe(user => {
+        if (user) {
+          this.authService.resetPassword(user.userName, code, newPassword).then(passwordChanged => {
+            if (passwordChanged) {
+              console.log('Password changed successfully');
+              this.router.navigate(['/login']); // Navigate to the login form
+            } else {
+              console.error('Failed to change password');
+            }
+          });
         } else {
-          console.error('Failed to change password');
+          console.error('User not found');
         }
-      } else {
-        console.error('User not found');
-      }
+      });
     } else {
       console.error('Reset code not verified');
     }

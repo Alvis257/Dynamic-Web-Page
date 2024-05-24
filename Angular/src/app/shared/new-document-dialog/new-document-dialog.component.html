@@ -15,7 +15,7 @@
     <label>{{ 'newDocument.responsible' | translate }}</label>
     <mat-form-field>
       <mat-select [(ngModel)]="responsible" name="responsible" placeholder="{{ 'newDocument.responsible' | translate }}">
-        <mat-option *ngFor="let user of users" [value]="user.username">{{user.username}}</mat-option>
+        <mat-option *ngFor="let user of users" [value]="user.userName">{{user.userName}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

@@ -80,7 +80,7 @@ export class ApplicationDataService {
   getApplications(user: User): DataStructure[] {
 
     const applications = this.getAllApplications();
-    return applications.filter(app => app.Owner === user.username);
+    return applications.filter(app => app.Owner === user.userName);
   }
 
   getApplicationById(id: number): any {
@@ -187,7 +187,7 @@ export class ApplicationDataService {
   addApplication(application: MinimalDataStructure): void {
     const applications = this.getAllApplications();
     const newId = applications.length > 0 ? Math.max(...applications.map(a => a.id)) + 1 : 1;
-    const currentUser = this.userService.getCurrentUser()?.username;
+    const currentUser = this.userService.getCurrentUser()?.userName;
     if (!currentUser) {
       console.log(currentUser);
       alert(currentUser);

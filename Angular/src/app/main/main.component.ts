@@ -137,7 +137,7 @@ export class MainComponent {
 
   hasReadRights(id: number, Owner: string): boolean {
     const currentUserID = this.userService.getCurrentUser()?.userID;
-    const UserName = this.userService.getCurrentUser()?.username;
+    const UserName = this.userService.getCurrentUser()?.userName;
     const isOwner = Owner === UserName;
     if (!currentUserID) return false;
 
@@ -151,7 +151,7 @@ export class MainComponent {
 
   hasDeleteRights(id: number, Owner: string): boolean {
     const currentUserID = this.userService.getCurrentUser()?.userID;
-    const UserName = this.userService.getCurrentUser()?.username;
+    const UserName = this.userService.getCurrentUser()?.userName;
     const isOwner = Owner === UserName;
 
     if (!currentUserID) return false;

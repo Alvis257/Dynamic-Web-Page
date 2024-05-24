@@ -32,7 +32,7 @@ import { AppModule } from '../../app.module';
 export class UserFormComponent {
   userForm: FormGroup = this.fb.group({
     userID: [''],
-    username: ['', Validators.required],
+    userName: ['', Validators.required],
     name: [''],
     surname: [''],
     email: ['', [Validators.required, Validators.email]],

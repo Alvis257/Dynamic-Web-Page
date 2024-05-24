@@ -120,7 +120,7 @@ export class FormsComponent implements OnInit {
 
   hasWriteOrAdminAccess(): boolean {
     const currentUserID = this.userService.getCurrentUser()?.userID;
-    const currentUser = this.userService.getCurrentUser()?.username; 
+    const currentUser = this.userService.getCurrentUser()?.userName; 
     const isOwner = JSON.parse(this.jsonData).Owner === currentUser;
     if(!currentUserID) return false;  
     console.log('Current User ID:',this.jsonData);
@@ -151,7 +151,7 @@ export class FormsComponent implements OnInit {
   }
 
   isOwner(): any {
-    const currentUser = this.userService.getCurrentUser()?.username; 
+    const currentUser = this.userService.getCurrentUser()?.userName; 
     const isAdmin = this.rights?.admin;
     if(this.jsonData === undefined || this.jsonData === null){
       console.info('isAdmin',isAdmin);
