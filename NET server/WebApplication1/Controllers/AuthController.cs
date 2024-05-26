@@ -10,11 +10,11 @@ namespace WebApplication1.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public UserController(ApplicationDbContext context)
+        public AuthController(ApplicationDbContext context)
         {
             _context = context;
         }

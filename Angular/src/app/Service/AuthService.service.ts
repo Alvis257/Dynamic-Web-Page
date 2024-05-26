@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
 
   languageChange: EventEmitter<string> = new EventEmitter();
-  private apiUrl = 'http://localhost:5257/api/user';
+  private apiUrl = 'http://localhost:5257/api/Auth';
   constructor(private http: HttpClient) {
     emailjs.init('LHO-vWp0D8DksFeYw');
   }
