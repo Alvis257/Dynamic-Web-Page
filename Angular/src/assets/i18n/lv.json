@@ -68,6 +68,7 @@
     "buttonName": "Pogas nosaukums",
     "name": "Nosaukums",
     "dataPath": "Datu Ceļš",
+    "filePath": "Fila atrašanās vieta",
     "style": "Stils",
     "value": "Vērtība",
     "cancelButton": "Atcelt",

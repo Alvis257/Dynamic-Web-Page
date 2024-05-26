@@ -1,6 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { User } from '../Interface/User';
-import * as emailjs from 'emailjs-com';
 import { Observable, lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -11,9 +10,7 @@ export class AuthService {
 
   languageChange: EventEmitter<string> = new EventEmitter();
   private apiUrl = 'http://localhost:5257/api/Auth';
-  constructor(private http: HttpClient) {
-    emailjs.init('LHO-vWp0D8DksFeYw');
-  }
+  constructor(private http: HttpClient) {}
 
   login(userName: string, password: string): Promise<boolean> {
     return lastValueFrom(this.http.post<any>(`${this.apiUrl}/login`, { userName, password }))

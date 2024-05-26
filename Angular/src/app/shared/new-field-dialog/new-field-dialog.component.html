@@ -1,9 +1,8 @@
 <h1 mat-dialog-title>{{ 'addField.title' | translate }}</h1>
 <div mat-dialog-content>
   <mat-form-field>
-    <mat-label>{{ 'addField.type' | translate }}</mat-label>
     <mat-select class="mat-select" [(ngModel)]="type">
-        <mat-option *ngFor="let type of types" [value]="type.value">{{type.label}}</mat-option>
+      <mat-option *ngFor="let type of types" [value]="type.value">{{type.label}}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field *ngIf="type === 'saveButton' || type === 'cancelButton'">
@@ -14,9 +13,13 @@
     <mat-label>{{ 'addField.name' | translate }}</mat-label>
     <input matInput [(ngModel)]="name">
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field *ngIf="type !== 'generateButton'">
     <mat-label>{{ 'addField.dataPath' | translate }}</mat-label>
     <input matInput [(ngModel)]="dataPath">
+  </mat-form-field>
+  <mat-form-field *ngIf="type === 'generateButton'">
+    <mat-label>{{ 'addField.filePath' | translate }}</mat-label>
+    <input matInput [(ngModel)]="filePath">
   </mat-form-field>
   <mat-form-field>
     <mat-label>{{ 'addField.style' | translate }}</mat-label>

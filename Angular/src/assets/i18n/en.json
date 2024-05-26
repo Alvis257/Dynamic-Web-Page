@@ -68,6 +68,7 @@
     "buttonName": "Button Name",
     "name": "Name",
     "dataPath": "Data Path",
+    "filePath": "File Path",
     "style": "Style",
     "value": "Value",
     "cancelButton": "Cancel",

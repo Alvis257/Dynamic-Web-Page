@@ -37,11 +37,14 @@ export class NewFieldDialogComponent {
     { value: 'label_dynamic', label: 'Dynamic Label' },
     { value: 'checkbox', label: 'Checkbox' },
     { value: 'text', label: 'Input' },
+    { value: 'generateButton', label: 'Generate Document' },
+
     // add more types here
   ];
   type = '';
   name = '';
   dataPath = '';
+  filePath = '';
   style = '';
   value = '';
   label = '';
@@ -65,6 +68,7 @@ export class NewFieldDialogComponent {
       style: this.style,
       value: this.value,
       label: this.label,
+      filePath: this.filePath,
       position: -1,
     };
 

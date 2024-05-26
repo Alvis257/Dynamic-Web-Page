@@ -177,3 +177,25 @@ mat-icon:hover {
 mat-icon:active {
   background-color: #b3b3b3; /* Dark gray */
 }
+
+.generate {
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 5px;
+  background-color: rgb(55, 55, 247);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.generate:hover {
+  background-color: rgb(23, 193, 88)
+}
+
+.generate:disabled {
+  background-color: rgb(86, 86, 86)
+}

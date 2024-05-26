@@ -16,6 +16,11 @@ import { FormService } from '../Service/form.service';
 import { UserService } from '../Service/user.service';
 import { ShareDocumentService } from '../Service/shareDocument.service';
 import { ApplicationDataService } from '../Service/aplicationData.service';
+import { GenerateDocumentService } from '../Service/generateDocument.service';
+import { MatFormField } from '@angular/material/form-field';
+import { MatSelect } from '@angular/material/select';
+import { MatLabel } from '@angular/material/form-field';
+import { MatOption } from '@angular/material/select';
 
 @Component({
   selector: 'app-forms',
@@ -27,7 +32,11 @@ import { ApplicationDataService } from '../Service/aplicationData.service';
     CommonModule, 
     MatIconModule, 
     FormsModule,
-    TranslateModule
+    TranslateModule,
+    MatFormField,
+    MatSelect,
+    MatLabel,
+    MatOption
   ],
   encapsulation: ViewEncapsulation.None
 })
@@ -65,7 +74,8 @@ export class FormsComponent implements OnInit {
     private shareDocumentService: ShareDocumentService,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private generateDocumentService: GenerateDocumentService
     ) { 
       
       const navigation = this.router.getCurrentNavigation();
@@ -539,7 +549,12 @@ export class FormsComponent implements OnInit {
 
       this.jsonData = JSON.stringify(jsonDataObject);
       this.applicationDataService.updateApplication(jsonDataObject);
+      window.location.reload();
     }
+  }
+
+  onGenerate(filetype:string,filePath:string):void{  
+    this.generateDocumentService.generateDocument(filePath, filetype ,this.jsonData).then((response) => {});
   }
 
   onCancel():void{
