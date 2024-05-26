@@ -31,30 +31,33 @@ export class ForgotPasswordComponent {
       newPassword: ['', Validators.required]
     });
   }
- // pastarsalvis@gmail.com
+
   async sendResetCode(): Promise<void> {
     const email = this.forgotPasswordForm.get('email')?.value;
     console.log(email);
     const reset = await this.authService.sendResetCode(email);
-    console.log(reset);
     if (reset) {
-      this.resetCode = reset.resetCode;
-      this.userExists = true;
+        this.userExists = true;
     } else {
-      console.error('User not found');
-      this.userExists = false;
+        console.error('User not found');
+        this.userExists = false;
     }
   }
 
   verifyResetCode(): void {
+    const email = this.forgotPasswordForm.get('email')?.value;
     const code = this.forgotPasswordForm.get('code')?.value;
-    if (code === this.resetCode) {
-      this.isResetCodeVerified = true;
-    } else {
-      console.error('Invalid reset code');
-      this.isResetCodeVerified = false;
-    }
+    console.log('Verifying reset code for ' + email);
+    console.log('Code: ' + code);
+    this.authService.checkResetCode(email, code).then(isResetCodeVerified => {
+        this.isResetCodeVerified = isResetCodeVerified;
+        console.log('Reset code verified: ' + isResetCodeVerified);
+        if (!isResetCodeVerified) {
+            console.error('Invalid reset code');
+        }
+    });
   }
+
 
   resetPassword(): void {
     if (this.isResetCodeVerified) {

@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Classes;
-using System.Linq;
-using System.Threading.Tasks;
+using MimeKit;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using static Azure.Core.HttpHeader;
 
 namespace WebApplication1.Controllers
 {
@@ -91,24 +93,12 @@ namespace WebApplication1.Controllers
             }
         }
 
-        [HttpPost("updateResetCode")]
-        public async Task<IActionResult> UpdateResetCode([FromBody] UpdateResetCodeModel model)
-        {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.userName == model.userName);
-            if (user != null)
-            {
-                user.resetCode = model.resetCode;
-                await _context.SaveChangesAsync();
-                return Ok();
-            }
-            return NotFound();
-        }
 
         [HttpPost("resetPassword")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordModel model)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.userName == model.userName);
-            if (user != null && await CheckResetCode(user.email, model.resetCode))
+            if (user != null && await CheckResetCodeFunction(user.email, model.resetCode))
             {
                 user.password = model.newPassword;
                 await _context.SaveChangesAsync();
@@ -117,7 +107,36 @@ namespace WebApplication1.Controllers
             return NotFound();
         }
 
-        private async Task<bool> CheckResetCode(string email, string resetCode)
+        [HttpPost("sendResetCode")]
+        public async Task<IActionResult> SendResetCode([FromBody] request request)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.email == request.email);
+            if (user != null)
+            {
+                var resetCode = Guid.NewGuid().ToString();
+                user.resetCode = resetCode;
+                await _context.SaveChangesAsync();
+
+                var emailSent = await SendEmail(user.name + user.surname, user.email, resetCode);
+                if (emailSent)
+                {
+                    return Ok();
+                }
+            }
+            return NotFound();
+        }
+
+        [HttpPost("checkResetCode")]
+        public async Task<IActionResult> CheckResetCode(CheckCode checkCode)
+        {
+            if (await CheckResetCodeFunction(checkCode.email, checkCode.resetCode) )
+            {
+                return Ok();
+            }
+            return NotFound() ;
+        }
+
+        private async Task<bool> CheckResetCodeFunction(string email, string resetCode)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.email == email);
             if (user != null && user.resetCode == resetCode)
@@ -125,6 +144,32 @@ namespace WebApplication1.Controllers
                 return true;
             }
             return false;
+        }
+
+        private async Task<bool> SendEmail(string name, string to, string resetCode)
+        {
+            try
+            {
+                var email = new MimeMessage();
+                email.From.Add(new MailboxAddress("DGS", "automateddgs@gmail.com"));
+                email.To.Add(new MailboxAddress(name, to));
+                email.Subject = "Reset Code";
+                email.Body = new TextPart("plain") { Text = $"Your reset code is {resetCode}" };
+
+                using (var client = new MailKit.Net.Smtp.SmtpClient())
+                {
+                    await client.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+                    await client.AuthenticateAsync("automatdgs@gmail.com", "rgfnwhjaurnbbifz").ConfigureAwait(false);
+                    await client.SendAsync(email);
+                    await client.DisconnectAsync(true);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

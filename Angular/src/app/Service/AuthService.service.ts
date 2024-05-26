@@ -35,42 +35,24 @@ export class AuthService {
   }
 
   checkIfUserExsists(email: string): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/getByEmail/${email}`);
+    return this.http.get<any>(`${this.apiUrl}/getByEmail/${email}` );
   }
 
-  async sendResetCode(email: string): Promise<{ resetCode: string; resetSent: boolean; } | null> {
-    const user = await lastValueFrom(this.checkIfUserExsists(email));
-    if (user) {
-      const resetCode = Math.random().toString(36).substring(2, 15);
-      const resetSent = await this.sendEmail(email, resetCode);
-      if (resetSent) {
-        const response = await lastValueFrom(this.http.post(`${this.apiUrl}/updateResetCode`, { userName: user.userName, resetCode: resetCode }, { observe: 'response' }));
-        if (response && response.status === 200) {
-          return { resetCode, resetSent };
-        } else {
-          console.error('Failed to update reset code');
-        }
-      }
+  async sendResetCode(email: string): Promise<{ resetSent: boolean; } | null> {
+    console.info('Sending reset code to ' + email);
+    const response = await lastValueFrom(this.http.post(`${this.apiUrl}/sendResetCode`, {email: email}, { observe: 'response' }));
+    if (response && response.status === 200) {
+        return { resetSent: true };
+    } else {
+        console.error('Failed to send reset code');
+        return null;
     }
-    return null;
   }
-
-  sendEmail(to: string, resetCode: string): Promise<any> {
-    const templateParams = {
-      to_name: to,
-      message: resetCode,
-      from_name: "DGS Automate",
-    };
-    console.log(templateParams);
-    return emailjs.send('service_vdx73bk', 'template_21x2swq', templateParams)
-      .then(response => {
-        console.log('Email successfully sent!', response);
-        return response;
-      })
-      .catch(err => {
-        console.error('Failed to send email:', err);
-        throw err;
-      });
+  
+  checkResetCode(email: string, resetCode: string): Promise<boolean> {
+    return lastValueFrom(this.http.post<any>(`${this.apiUrl}/checkResetCode`, { email: email,resetCode: resetCode },{ observe: 'response' }))
+      .then(response => response.status === 200 )
+      .catch(() => false);
   }
 
   async resetPassword(username: string, resetCode: string, newPassword: string): Promise<boolean> {

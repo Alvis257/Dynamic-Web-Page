@@ -5,7 +5,7 @@ namespace WebApplication1.Classes
     public class UserfromTable
     {
         [Key]
-        public  int userId { get; set; } 
+        public int userId { get; set; }
         public string name { get; set; }
         public string surname { get; set; }
         public DateTime createdDate { get; set; }
@@ -61,4 +61,17 @@ namespace WebApplication1.Classes
         public string resetCode { get; set; }
         public string newPassword { get; set; }
     }
+
+    public class CheckCode
+    {
+        public string email { get; set; }
+        public string resetCode { get; set; }
+    }
+
+    public class request
+    {
+        public string email { get; set; }
+    }
+
 }
+
