@@ -11,7 +11,6 @@ export class FormService {
     constructor(private http: HttpClient,private typeService: TypeService) { }
     
     getForm(type: string, formId: string): Observable<any> {
-        // Assuming you have a types array in the service
         let Id = parseInt(formId);
         const types = this.typeService.getTypes();
         const correctType = types.find(t => t.formType === type);
@@ -24,7 +23,6 @@ export class FormService {
             throw new Error(`Form with ID ${formId} does not exist in type ${type}`);
         }
 
-        // Return an observable of the form data
         return of(correctForm.fields);
     }
 
@@ -35,16 +33,10 @@ export class FormService {
             throw new Error(`Type ${typeName} does not exist`);
         }
 
-        // Find the maximum formId in type.forms
         const maxFormId = Math.max(...type.forms.map((f: { formId: any; }) => f.formId), 0);
-
-        // Create a new form with id = maxFormId + 1, name = formName, and an empty fields array
         const newForm = { formId: maxFormId + 1, name: formName, fields: [] };
-
-        // Add the new form to type.forms
+       
         type.forms.push(newForm);
-
-        // Save the updated type
         this.typeService.saveType(type);
     }
     saveForm(typeName: string, form: any, types: { name: string, formType: string, forms: any, showForms: boolean }[]) {
@@ -55,14 +47,11 @@ export class FormService {
         
         const formIndex = types[typeIndex].forms.findIndex((f: { formId:number }) => f.formId === form.id);
         if (formIndex !== -1) {
-            // If the form exists, replace it
             types[typeIndex].forms[formIndex].fields = form.data;
         } else {
-            // If the form doesn't exist, add it
             types[typeIndex].forms.push(form);
         }
         
-        // Set showForms to false for all types
         types.forEach(type => type.showForms = false);
         
         this.typeService.saveType(types[typeIndex]);

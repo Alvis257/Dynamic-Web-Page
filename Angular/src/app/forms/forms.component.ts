@@ -363,8 +363,8 @@ export class FormsComponent implements OnInit {
     if(style === undefined || style === null) return {};
     const styleObject: { [key: string]: string } = {};
     const properties = style.split(';');
-    const minSizePx = 165; // minimum size in pixels
-    const minSizePercent = 15; // minimum size in percent
+    const minSizePx = 165;
+    const minSizePercent = 15; 
     if (type !== 'savebutton'&& type !== 'cancelbutton'&& type !== 'button') {
       if (!styleObject['width']) {
         styleObject['width'] = '100%';
@@ -422,7 +422,7 @@ export class FormsComponent implements OnInit {
   openConfig(): void {
     this.configMode = true;
     this.originalFormData = JSON.parse(JSON.stringify(this.formData));
-    this.displayData = JSON.parse(JSON.stringify(this.formData)); // Update displayData
+    this.displayData = JSON.parse(JSON.stringify(this.formData)); 
   }
 
 
@@ -443,7 +443,7 @@ export class FormsComponent implements OnInit {
       });
     }
   
-    // If jsonData is present, start the process of loading jsonData into the fields
+
     if (this.jsonData) {
       this.formData.forEach((field: any) => {
         if (field.dataPath) {
@@ -468,7 +468,7 @@ export class FormsComponent implements OnInit {
     if(this.fromSelector){
       this.router.navigate(['formas'], { state: { editedType: this.type, editedForm: {id:this.formsId,formName:this.formName,data:this.formData} } });
     }else  if (this.type && this.formsId) {
-      this.formService.saveFormFields(this.type, this.formsId, this.formData); // Save form fields using form.service
+      this.formService.saveFormFields(this.type, this.formsId, this.formData); 
     } else {
       throw new Error('Type or Form ID is undefined');
     }
@@ -478,7 +478,7 @@ export class FormsComponent implements OnInit {
   cancelConfig(): void {
     this.formData = this.originalFormData;
     this.configMode = false;
-    this.displayData = JSON.parse(JSON.stringify(this.formData)); // Update displayData
+    this.displayData = JSON.parse(JSON.stringify(this.formData)); 
     this.createForm();
   }
 
@@ -571,7 +571,7 @@ export class FormsComponent implements OnInit {
       const downloadURL = window.URL.createObjectURL(data);
       const link = document.createElement('a');
       link.href = downloadURL;
-      link.download = 'filename.docx'; // set filename here
+      link.download = 'filename.docx'; 
       link.click();
   });
   }

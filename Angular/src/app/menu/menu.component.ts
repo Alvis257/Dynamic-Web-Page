@@ -49,7 +49,7 @@ export class MenuComponent {
     if (this.selectedLanguage !== language) {
       this.selectedLanguage = language;
       this.translate.use(language);
-      sessionStorage.setItem('selectedLanguage', language); // store the selected language in the session storage
+      sessionStorage.setItem('selectedLanguage', language);
       this.authService.languageChange.emit(language);
     }
   }

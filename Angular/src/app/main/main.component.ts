@@ -87,7 +87,6 @@ export class MainComponent {
 
 
   ngAfterViewInit() {
-    // Use the service to get the data
     const data = this.applicationDataService.getAllApplications();
     this.dataSource = new MatTableDataSource(data);
     if (this.paginator) {

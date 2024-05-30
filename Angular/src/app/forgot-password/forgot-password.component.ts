@@ -70,7 +70,7 @@ export class ForgotPasswordComponent {
           this.authService.resetPassword(user.userName, code, newPassword).then(passwordChanged => {
             if (passwordChanged) {
               console.log('Password changed successfully');
-              this.router.navigate(['/login']); // Navigate to the login form
+              this.router.navigate(['/login']);
             } else {
               console.error('Failed to change password');
             }

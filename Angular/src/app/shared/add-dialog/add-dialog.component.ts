@@ -56,12 +56,10 @@ export class AddDialogComponent {
   }
 
   validateName(): string {
-    // If the name is empty or contains numbers, return an empty string
     if (!this.name || /\d/.test(this.name)) {
       return '';
     }
 
-    // Otherwise, return the name
     return this.name;
   }
 }
