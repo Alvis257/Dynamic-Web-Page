@@ -11,7 +11,10 @@ export class GenerateDocumentService {
 private apiUrl = 'http://localhost:5257/api/Auth';
   constructor(private http: HttpClient) { }
 
-    generateDocument(documentPath:string,documentType:string, jsonData:string): Promise<any> {
-        return lastValueFrom(this.http.post<any>(`${this.apiUrl}/GenerateDocument`,{filePath:documentPath,type:documentType,data:jsonData}));
+    generateDocument(documentPath:string,documentType:string, jsonData:string): Observable<Blob> {
+        return this.http.post<Blob>(`${this.apiUrl}/GenerateDocument`, 
+        { filePath: documentPath, type: documentType, data: jsonData }, 
+        { responseType: 'blob' as 'json' }
+      );
     }
 }

@@ -23,7 +23,7 @@ import { NewDocumentDialogComponent } from '../shared/new-document-dialog/new-do
 import { TypeService } from '../Service/type.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatDateRangePicker, MatDatepickerModule, MatEndDate, MatStartDate } from '@angular/material/datepicker';
-import { StatusService } from '../Service/status.service';
+import { ParameterService } from '../Service/parameter.service';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -90,9 +90,9 @@ export class MyDocumentsComponent {
     private applicationDataService: ApplicationDataService,
     private userService: UserService,
     private shareDocumentService: ShareDocumentService,
-    private statusService: StatusService) {
+    private parameterService: ParameterService) {
 
-    this.statusService.getStatus().subscribe(data => {
+    this.parameterService.getStatus().subscribe(data => {
       this.statusList = Object.keys(data.status);
     });
 

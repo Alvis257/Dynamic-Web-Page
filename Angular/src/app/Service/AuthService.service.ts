@@ -36,7 +36,6 @@ export class AuthService {
   }
 
   async sendResetCode(email: string): Promise<{ resetSent: boolean; } | null> {
-    console.info('Sending reset code to ' + email);
     const response = await lastValueFrom(this.http.post(`${this.apiUrl}/sendResetCode`, {email: email}, { observe: 'response' }));
     if (response && response.status === 200) {
         return { resetSent: true };

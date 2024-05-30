@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System.Globalization;
+using Serilog;
+using Serilog.Filters;
 using WebApplication1.Classes;
+using WebApplication1.Controllers;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
-CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
@@ -24,9 +25,17 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Configure Serilog
+builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
+{
+    loggerConfiguration
+        .ReadFrom.Configuration(hostingContext.Configuration)
+        .WriteTo.File("Aspose/logs/.log", rollingInterval: RollingInterval.Day)
+        .WriteTo.Logger(lc => lc.Filter.ByIncludingOnly(Matching.FromSource<AuthController>())
+                                  .WriteTo.File("Logs/UserController/.log", rollingInterval: RollingInterval.Day));
+});
+
 var app = builder.Build();
-
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -37,7 +46,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("AllowMyOrigin"); // Add this line
+app.UseCors("AllowMyOrigin");
 
 app.UseAuthorization();
 
@@ -47,8 +56,8 @@ app.Run();
 
 public class ApplicationDbContext : DbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
-    {}
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
     public DbSet<UserfromTable> Users { get; set; }
 }
+
+

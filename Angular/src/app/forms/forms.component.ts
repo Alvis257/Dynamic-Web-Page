@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { FieldConfigDialogComponent } from '../shared/field-configuration-dialog/field-configuration-dialog.component';
 import { DeleteConfirmationDialogComponent } from '../shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { NewFieldDialogComponent } from '../shared/new-field-dialog/new-field-dialog.component';
@@ -21,6 +23,8 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatSelect } from '@angular/material/select';
 import { MatLabel } from '@angular/material/form-field';
 import { MatOption } from '@angular/material/select';
+import { ParameterService } from '../Service/parameter.service';
+
 
 @Component({
   selector: 'app-forms',
@@ -31,6 +35,8 @@ import { MatOption } from '@angular/material/select';
     ReactiveFormsModule,
     CommonModule, 
     MatIconModule, 
+    MatDatepickerModule,
+    MatNativeDateModule,
     FormsModule,
     TranslateModule,
     MatFormField,
@@ -56,6 +62,7 @@ export class FormsComponent implements OnInit {
   formChangesSubscription: Subscription | undefined;
   disableJsonView = true;
   fromSelector = false;
+  statusList: string[] = [];
   formsId: number | undefined;
   formName: string | undefined;
   public rights!: {
@@ -75,9 +82,12 @@ export class FormsComponent implements OnInit {
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
-    private generateDocumentService: GenerateDocumentService
+    private generateDocumentService: GenerateDocumentService,
+    private parameterService: ParameterService
     ) { 
-      
+      this.parameterService.getStatus().subscribe(data => {
+        this.statusList = Object.keys(data.status);
+      });
       const navigation = this.router.getCurrentNavigation();
       if (navigation && navigation.extras.state) {
         const typeObject = navigation.extras.state['type'];
@@ -91,13 +101,14 @@ export class FormsComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    let group: any = {};
     const rightsItem = sessionStorage.getItem('rights');
+
     if (rightsItem !== null) {
       this.rights = JSON.parse(rightsItem);
     }
 
-    let group: any = {};
+
 
     this.route.queryParams.subscribe(params => {
       if(!this.fromSelector){
@@ -122,8 +133,9 @@ export class FormsComponent implements OnInit {
         this.formData.forEach((field: any) => {
           group[field.name] = new FormControl({value: field.value, disabled: !this.hasWriteOrAdminAccess()});
         });
-      
+        
         this.form = new FormGroup(group);
+        this.updateFormControlValues();
       }
     });
   }
@@ -133,7 +145,6 @@ export class FormsComponent implements OnInit {
     const currentUser = this.userService.getCurrentUser()?.userName; 
     const isOwner = JSON.parse(this.jsonData).Owner === currentUser;
     if(!currentUserID) return false;  
-    console.log('Current User ID:',this.jsonData);
     if(JSON.parse(this.jsonData).id === undefined || JSON.parse(this.jsonData).id === null) return false;
     const sharedRights = this.shareDocumentService.getUserRights(currentUserID, JSON.parse(this.jsonData).id);
 
@@ -164,7 +175,6 @@ export class FormsComponent implements OnInit {
     const currentUser = this.userService.getCurrentUser()?.userName; 
     const isAdmin = this.rights?.admin;
     if(this.jsonData === undefined || this.jsonData === null){
-      console.info('isAdmin',isAdmin);
       return isAdmin;
     }else{
       return JSON.parse(this.jsonData).Owner === currentUser || isAdmin;
@@ -181,14 +191,13 @@ export class FormsComponent implements OnInit {
     if (type === undefined || formId === undefined) {
       throw new Error('Type and Form ID must be defined');
     }
+
     this.formService.getForm(type, formId).subscribe(data => {
       this.formData = data;
       this.processFormData();
       this.originalFormData = JSON.parse(JSON.stringify(data));
       this.createForm();
-      if (this.form) {
-        this.updateFormControlValues();
-      }
+      this.updateFormControlValues();
     });
   }
   
@@ -262,12 +271,13 @@ export class FormsComponent implements OnInit {
     let fieldValue = field.value ? field.value : '';
     let displayValue = '';
 
-    if (field.type == 'label') {
-      displayValue = fieldValue.toString();
-    } else if (((field.type !== 'button' && field.type !== 'savebutton'&& field.type !== 'cancelbutton') || field.type === 'label_dynamic' ) && this.jsonData && dataPath && !this.configMode) {
+
+    if (((field.type !== 'button' && field.type !== 'savebutton'&& field.type !== 'cancelbutton') || field.type === 'label_dynamic' ) && this.jsonData && dataPath && !this.configMode) {
       let value = dataPath.split('.').reduce((obj: any, part: string) => obj && obj[part] !== undefined ? obj[part] : '', JSON.parse(this.jsonData));
       displayValue = value !== '' ? value : fieldValue;
-    } else {
+    } else if (field.type == 'label') {
+      displayValue = fieldValue.toString();
+    } else  {
       displayValue = fieldValue;
     }
 
@@ -486,7 +496,7 @@ export class FormsComponent implements OnInit {
       width: '500px',
       data: data
     });
-    console.log('Field:',data);
+
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const originalField = this.formData.find((f: any) => f.name === field.name);
@@ -533,28 +543,37 @@ export class FormsComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form) {
-      let jsonDataObject = this.jsonData ? JSON.parse(JSON.stringify(JSON.parse(this.jsonData))) : {};
+      let jsonDataObject = this.jsonData ? JSON.parse(this.jsonData) : {};
 
+      
       Object.keys(this.form.controls).forEach(key => {
-          if (this.form) {
-              const control = this.form.get(key);
-              if (control) {
-                  const field = this.formData.find((field: any) => field.name === key);
-                  if (field && field.dataPath) {
-                      this.updateJsonData(field.dataPath, control.value, jsonDataObject, field.type);
-                  }
-              }
+        if (this.form) {
+          const control = this.form.get(key);
+          if (control) {
+            const field = this.formData.find((field: any) => field.name === key);
+            if (field && field.dataPath) {
+              this.updateJsonData(field.dataPath, control.value, jsonDataObject, field.type);
+            }
           }
+        }
       });
 
       this.jsonData = JSON.stringify(jsonDataObject);
+      this.updateFormControlValues();
+
+      
       this.applicationDataService.updateApplication(jsonDataObject);
-      window.location.reload();
     }
   }
 
   onGenerate(filetype:string,filePath:string):void{  
-    this.generateDocumentService.generateDocument(filePath, filetype ,this.jsonData).then((response) => {});
+    this.generateDocumentService.generateDocument(filePath, filetype, this.jsonData).subscribe((data: Blob) => {
+      const downloadURL = window.URL.createObjectURL(data);
+      const link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = 'filename.docx'; // set filename here
+      link.click();
+  });
   }
 
   onCancel():void{

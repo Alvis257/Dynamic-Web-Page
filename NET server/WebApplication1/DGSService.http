@@ -1,0 +1,12 @@
+@WebApplication1_HostAddress = http://localhost:5257
+
+POST {{WebApplication1_HostAddress}}/GenerateDocument
+Content-Type: application/json
+Accept: application/json, application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document
+
+{
+    "filePath": "<your-file-path>",
+    "type": "<your-document-type>",
+    "data": "<your-json-data>"
+}
+###

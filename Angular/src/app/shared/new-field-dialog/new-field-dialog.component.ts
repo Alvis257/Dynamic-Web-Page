@@ -38,6 +38,8 @@ export class NewFieldDialogComponent {
     { value: 'checkbox', label: 'Checkbox' },
     { value: 'text', label: 'Input' },
     { value: 'generateButton', label: 'Generate Document' },
+    { value: 'statusDropdown', label: 'Dropdown for status' },
+    { value: 'date', label: 'Date picker' },
 
     // add more types here
   ];

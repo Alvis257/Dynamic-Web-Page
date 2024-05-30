@@ -12,7 +12,7 @@ import { ApplicationDataService } from '../Service/aplicationData.service';
 import { DeleteConfirmationDialogComponent } from '../shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../Service/user.service';
-import { StatusService } from '../Service/status.service';
+import { ParameterService } from '../Service/parameter.service';
 import { ShareDocumentService } from '../Service/shareDocument.service';
 import { MatEndDate, MatStartDate } from '@angular/material/datepicker';
 
@@ -58,7 +58,7 @@ export class MainComponent {
     private applicationDataService: ApplicationDataService,
     private userService: UserService,
     private shareDocumentService: ShareDocumentService,
-    private statusService: StatusService
+    private parameterService: ParameterService
   ) { }
 
   ngOnInit(): void {
@@ -70,7 +70,7 @@ export class MainComponent {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
-    this.statusService.getStatus().subscribe(data => {
+    this.parameterService.getStatus().subscribe(data => {
       this.statusList = Object.keys(data.status);
     });
 
@@ -163,8 +163,8 @@ export class MainComponent {
   }
   view(element: any): void {
     const entry = this.applicationDataService.getApplicationById(element.id);
-    console.log('element', element.type);
     console.log('Entry', entry);
+    console.log('Element', element);
     this.router.navigate(['/form-viewer', element.type], { queryParams: { type: element.type, jsonData: JSON.stringify(entry), id: element.id } });
   }
   delete(element: any): void {

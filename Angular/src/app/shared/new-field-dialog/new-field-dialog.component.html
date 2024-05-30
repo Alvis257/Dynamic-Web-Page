@@ -9,11 +9,11 @@
     <mat-label>{{ 'addField.buttonName' | translate }}</mat-label>
     <input matInput [(ngModel)]="label">
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field *ngIf="type !== 'generateButton' && type !== 'saveButton' && type !== 'cancelButton'">
     <mat-label>{{ 'addField.name' | translate }}</mat-label>
     <input matInput [(ngModel)]="name">
   </mat-form-field>
-  <mat-form-field *ngIf="type !== 'generateButton'">
+  <mat-form-field *ngIf="type !== 'generateButton' && type !== 'saveButton' && type !== 'cancelButton'">
     <mat-label>{{ 'addField.dataPath' | translate }}</mat-label>
     <input matInput [(ngModel)]="dataPath">
   </mat-form-field>

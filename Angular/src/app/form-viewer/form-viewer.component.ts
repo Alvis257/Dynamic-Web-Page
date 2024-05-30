@@ -47,7 +47,8 @@ export class FormViewerComponent implements OnInit {
       this.type = params['type'];
       this.jsonData = params['jsonData'] ? JSON.parse(params['jsonData']) : null;
       this.menuData = [];
-      console.log(params);
+      const storedFormId = localStorage.getItem('selectedFormId');
+
       if (this.type) {
         const types = this.typeService.getTypes();
         const data = types.filter(t => t.formType === this.type);
@@ -60,7 +61,9 @@ export class FormViewerComponent implements OnInit {
           });
         }
       }
-      const storedFormId = localStorage.getItem('selectedFormId');
+
+      
+
       if (storedFormId) {
         this.loadFormById(Number(storedFormId));
       } else if (!this.hasLoadedFirstForm) {
@@ -71,14 +74,12 @@ export class FormViewerComponent implements OnInit {
     });
   }
   onReload() {
-    // Load the form from local storage if it exists
     const storedFormId = localStorage.getItem('selectedFormId');
     if (storedFormId) {
       this.loadFormById(Number(storedFormId));
     }
   }
   view(form: Form): void {
-    console.log(this.jsonData);
     this.router.navigate([form.name], { 
       relativeTo: this.route, 
       queryParams: { 
@@ -88,6 +89,7 @@ export class FormViewerComponent implements OnInit {
         jsonData: JSON.stringify(this.jsonData)
       } 
     });
+
   }
 
   loadFormById(id: number): void {

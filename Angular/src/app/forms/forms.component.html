@@ -7,6 +7,12 @@
         <input *ngIf="field.type === 'text' || field.type === 'email' || field.type === 'password'" type="{{field.type}}" [formControlName]="field.name">
         <input *ngIf="field.type === 'checkbox'" type="checkbox" [formControlName]="field.name">
         <button *ngIf="field.type === 'saveButton'" [ngStyle]="fieldStyleToObject(field.style)" (click)="onSubmit()">{{ 'form.saveButton' | translate }}</button>
+        <select *ngIf="field.type === 'statusDropdown'" [ngStyle]="fieldStyleToObject(field.style)" [formControlName]="field.name" class="my-dropdown">
+          <option *ngFor="let option of statusList | keyvalue" [value]="option.value">
+            {{ option.value }}
+          </option>
+        </select>
+        <input *ngIf="field.type === 'date'" type="date" [value]="field.value" [formControlName]="field.name">
         <button *ngIf="field.type === 'cancelButton'" [ngStyle]="fieldStyleToObject(field.style)" (click)="onCancel()">{{ 'form.cancelButton' | translate }}</button>
           <button class = "generate"  *ngIf="field.type === 'generateButton'" appearance="fill">
             <mat-label>{{field.name}}</mat-label>

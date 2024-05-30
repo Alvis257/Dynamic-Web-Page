@@ -45,6 +45,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Aspose.Words": {
+              "target": "Package",
+              "version": "[24.5.0, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[4.6.0, )"

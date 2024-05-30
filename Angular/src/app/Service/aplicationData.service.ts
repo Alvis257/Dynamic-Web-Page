@@ -11,59 +11,60 @@ import { ShareDocumentService } from "./shareDocument.service";
 export class ApplicationDataService {
 
   private localStorageKey = 'element_data';
-  private loadDefaultData = false;
+  private loadDefaultData = true;
 
   constructor(private http: HttpClient, private userService: UserService, private shareDocumentService: ShareDocumentService, private router: Router) {
+    localStorage.removeItem(this.localStorageKey); 
     if (this.loadDefaultData) {
       const ELEMENT_DATA: DataStructure[] = [
         {
-          id: 1, name: 'Item 1', status: 'Active', creationTime: new Date('2022-01-01'), responsible: 'Test_User', type: 'first-type',
-          JsonData: { id: 1, name: 'Item 1', status: 'Active', creationTime: new Date('2022-01-01'), responsible: 'Test_User', type: 'first-type', Owner: "Test_User" },
+          id: 1, name: 'Item 1', status: 'Active', creationTime: new Date('2022-01-01').toISOString().slice(0, 10), responsible: 'Test_User', type: 'first-type',
+          JsonData: { id: 1, name: 'Item 1', status: 'Active', creationTime: new Date('2022-01-01').toISOString().slice(0, 10), responsible: 'Test_User', type: 'first-type', Owner: "Test_User" },
           Owner: "Test_User"
         },
         {
-          id: 2, name: 'Item 2', status: 'Inactive', creationTime: new Date('2022-01-02'), responsible: 'admin', type: 'first-type',
-          JsonData: { id: 2, name: 'Item 2', status: 'Inactive', creationTime: new Date('2022-01-02'), responsible: 'admin', type: 'first-type', Owner: "admin" },
+          id: 2, name: 'Item 2', status: 'Inactive', creationTime: new Date('2022-01-02').toISOString().slice(0, 10), responsible: 'admin', type: 'first-type',
+          JsonData: { id: 2, name: 'Item 2', status: 'Inactive', creationTime: new Date('2022-01-02').toISOString().slice(0, 10), responsible: 'admin', type: 'first-type', Owner: "admin" },
           Owner: "admin"
         },
         {
-          id: 3, name: 'Item 3', status: 'Active', creationTime: new Date('2022-01-03'), responsible: 'admin', type: 'first-type',
-          JsonData: { id: 3, name: 'Item 3', status: 'Active', creationTime: new Date('2022-01-03'), responsible: 'admin', type: 'first-type', Owner: "admin" },
+          id: 3, name: 'Item 3', status: 'Active', creationTime: new Date('2022-01-03').toISOString().slice(0, 10), responsible: 'admin', type: 'first-type',
+          JsonData: { id: 3, name: 'Item 3', status: 'Active', creationTime: new Date('2022-01-03').toISOString().slice(0, 10), responsible: 'admin', type: 'first-type', Owner: "admin" },
           Owner: "admin"
         },
         {
-          id: 4, name: 'Item 4', status: 'Inactive', creationTime: new Date('2022-01-04'), responsible: 'Test_User', type: 'second-type',
-          JsonData: { id: 4, name: 'Item 4', status: 'Inactive', creationTime: new Date('2022-01-04'), responsible: 'Test_User', type: 'second-type', Owner: "Test_User" },
+          id: 4, name: 'Item 4', status: 'Inactive', creationTime: new Date('2022-01-04').toISOString().slice(0, 10), responsible: 'Test_User', type: 'second-type',
+          JsonData: { id: 4, name: 'Item 4', status: 'Inactive', creationTime: new Date('2022-01-04').toISOString().slice(0, 10), responsible: 'Test_User', type: 'second-type', Owner: "Test_User" },
           Owner: "Test_User"
         },
         {
-          id: 5, name: 'Item 5', status: 'Active', creationTime: new Date('2022-01-05'), responsible: 'Test_User', type: 'second-type',
-          JsonData: { id: 5, name: 'Item 5', status: 'Active', creationTime: new Date('2022-01-05'), responsible: 'Test_User', type: 'second-type', Owner: "Test_User" },
+          id: 5, name: 'Item 5', status: 'Active', creationTime: new Date('2022-01-05').toISOString().slice(0, 10), responsible: 'Test_User', type: 'second-type',
+          JsonData: { id: 5, name: 'Item 5', status: 'Active', creationTime: new Date('2022-01-05').toISOString().slice(0, 10), responsible: 'Test_User', type: 'second-type', Owner: "Test_User" },
           Owner: "Test_User"
         },
         {
-          id: 6, name: 'Item 6', status: 'Inactive', creationTime: new Date('2022-01-06'), responsible: 'Test_User', type: 'first-type',
-          JsonData: { id: 6, name: 'Item 6', status: 'Inactive', creationTime: new Date('2022-01-06'), responsible: 'Test_User', type: 'first-type', Owner: "Test_User" },
+          id: 6, name: 'Item 6', status: 'Inactive', creationTime: new Date('2022-01-06').toISOString().slice(0, 10), responsible: 'Test_User', type: 'first-type',
+          JsonData: { id: 6, name: 'Item 6', status: 'Inactive', creationTime: new Date('2022-01-06').toISOString().slice(0, 10), responsible: 'Test_User', type: 'first-type', Owner: "Test_User" },
           Owner: "Test_User"
         },
         {
-          id: 7, name: 'Item 7', status: 'Active', creationTime: new Date('2022-01-07'), responsible: 'Test_User', type: 'first-type',
-          JsonData: { id: 7, name: 'Item 7', status: 'Active', creationTime: new Date('2022-01-07'), responsible: 'Test_User', type: 'first-type', Owner: "Test_User" },
+          id: 7, name: 'Item 7', status: 'Active', creationTime: new Date('2022-01-07').toISOString().slice(0, 10), responsible: 'Test_User', type: 'first-type',
+          JsonData: { id: 7, name: 'Item 7', status: 'Active', creationTime: new Date('2022-01-07').toISOString().slice(0, 10), responsible: 'Test_User', type: 'first-type', Owner: "Test_User" },
           Owner: "Test_User"
         },
         {
-          id: 8, name: 'Item 8', status: 'Inactive', creationTime: new Date('2022-01-08'), responsible: 'Test_User', type: 'second-type',
-          JsonData: { id: 8, name: 'Item 8', status: 'Inactive', creationTime: new Date('2022-01-08'), responsible: 'Test_User', type: 'second-type', Owner: "Test_User" },
+          id: 8, name: 'Item 8', status: 'Inactive', creationTime: new Date('2022-01-08').toISOString().slice(0, 10), responsible: 'Test_User', type: 'second-type',
+          JsonData: { id: 8, name: 'Item 8', status: 'Inactive', creationTime: new Date('2022-01-08').toISOString().slice(0, 10), responsible: 'Test_User', type: 'second-type', Owner: "Test_User" },
           Owner: "Test_User"
         },
         {
-          id: 9, name: 'Item 9', status: 'Active', creationTime: new Date('2022-01-09'), responsible: 'Test_User', type: 'first-type',
-          JsonData: { id: 9, name: 'Item 9', status: 'Active', creationTime: new Date('2022-01-09'), responsible: 'Test_User', type: 'first-type', Owner: "Test_User" },
+          id: 9, name: 'Item 9', status: 'Active', creationTime: new Date('2022-01-09').toISOString().slice(0, 10), responsible: 'Test_User', type: 'first-type',
+          JsonData: { id: 9, name: 'Item 9', status: 'Active', creationTime: new Date('2022-01-09').toISOString().slice(0, 10), responsible: 'Test_User', type: 'first-type', Owner: "Test_User" },
           Owner: "Test_User"
         },
         {
-          id: 10, name: 'Item 10', status: 'Inactive', creationTime: new Date('2022-01-10'), responsible: 'Test_User', type: 'second-type',
-          JsonData: { id: 10, name: 'Item 10', status: 'Inactive', creationTime: new Date('2022-01-10'), responsible: 'Test_User', type: 'second-type', Owner: "Test_User" },
+          id: 10, name: 'Item 10', status: 'Inactive', creationTime: new Date('2022-01-10').toISOString().slice(0, 10), responsible: 'Test_User', type: 'second-type',
+          JsonData: { id: 10, name: 'Item 10', status: 'Inactive', creationTime: new Date('2022-01-10').toISOString().slice(0, 10), responsible: 'Test_User', type: 'second-type', Owner: "Test_User" },
           Owner: "Test_User"
         }
       ];
@@ -86,7 +87,6 @@ export class ApplicationDataService {
   getApplicationById(id: number): any {
     const applications = this.getAllApplications();
     const application = applications.find(app => app.id === id);
-    console.log('application', application);
     return application ? application.JsonData : null;
   }
 
@@ -196,7 +196,7 @@ export class ApplicationDataService {
         return;
       }
     }
-    const formattedDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    const formattedDate = new Date().toISOString().slice(0, 10);
     const newApplication: DataStructure = {
       ...application,
       id: newId,
@@ -225,15 +225,22 @@ export class ApplicationDataService {
     let applications = this.getAllApplications();
     const index = applications.findIndex(app => app.id === jsonData.id);
     if (index !== -1) {
-      const { id, Owner, creationTime, type, ...updatableFields } = jsonData;
+      const { id, name, Owner, status, creationTime, type, responsible, ...otherFields } = jsonData;
       const updatedApplication: DataStructure = {
         ...applications[index],
-        ...updatableFields,
+        id,
+        name,
+        Owner,
+        status,
+        creationTime,
+        type,
+        responsible,
         JsonData: {
           ...applications[index].JsonData,
           ...jsonData
         }
       };
+      console.log('Updated Application', updatedApplication);
       applications[index] = updatedApplication;
       localStorage.setItem(this.localStorageKey, JSON.stringify(applications));
     } else {
