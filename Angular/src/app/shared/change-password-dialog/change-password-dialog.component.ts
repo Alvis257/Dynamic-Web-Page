@@ -30,11 +30,13 @@ export class ChangePasswordDialogComponent {
   password = '';
   errorMessage = '';
   hidePassword = true;
+  language = 'lv'; 
   constructor(
     private translate: TranslateService,
     public dialogRef: MatDialogRef<ChangePasswordDialogComponent>) {
     const storedLanguage = sessionStorage.getItem('selectedLanguage');
     const languageToUse = storedLanguage ? storedLanguage : 'lv';
+    this.language = languageToUse;
     this.translate.use(languageToUse);
   }
 
@@ -48,7 +50,11 @@ export class ChangePasswordDialogComponent {
 
   validatePassword(): void {
     if (!this.isValidPassword(this.password)) {
-      this.errorMessage = 'Invalid password. It must contain at least one uppercase letter, two digits, and one special character.';
+      if(this.language === 'lv'){
+        this.errorMessage = 'Nederīga parole. Tai jāsatur vismaz viena lielā burtu, divi cipari un viens speciālais simbols.';
+      }else{
+        this.errorMessage = 'Invalid password. It must contain at least one uppercase letter, two digits, and one special character.';
+      }
     } else {
       this.errorMessage = '';
     }

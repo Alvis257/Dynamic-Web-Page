@@ -1,0 +1,6 @@
+2024-06-01 13:47:48.502 +03:00 [ERR] An error occurred while sending reset code.
+System.ArgumentNullException: Value cannot be null. (Parameter 'address')
+   at MimeKit.MailboxAddress..ctor(Encoding encoding, String name, String address)
+   at MimeKit.MailboxAddress..ctor(String name, String address)
+   at DGSService.Service.EmailService.SendEmailAsync(String name, String to, String resetCode) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\EmailService.cs:line 24
+   at WebApplication1.Controllers.AuthController.SendResetCode(request request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\AuthController.cs:line 150

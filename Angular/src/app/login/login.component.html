@@ -9,7 +9,10 @@
     </mat-form-field>
     <mat-form-field appearance="fill" class="login-field">
       <mat-label>{{ 'login.password' | translate }}</mat-label>
-      <input matInput [(ngModel)]="password" type="password">
+      <input matInput [(ngModel)]="password" [type]="hidePassword ? 'password' : 'text'">
+      <button mat-icon-button class="visibal-Icon" matSuffix (click)="hidePassword = !hidePassword">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
     </mat-form-field>
   </mat-card-content>
   <mat-card-actions align="end">

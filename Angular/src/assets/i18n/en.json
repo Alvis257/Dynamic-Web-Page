@@ -69,6 +69,7 @@
     "name": "Name",
     "dataPath": "Data Path",
     "filePath": "File Path",
+    "fieldType": "Field Type",  
     "style": "Style",
     "value": "Value",
     "cancelButton": "Cancel",

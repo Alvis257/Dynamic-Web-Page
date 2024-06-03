@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using WebApplication1.Classes;
-using DGSService.Classes;
-
+using DGSService.Service;
 
 [ApiController]
 [Route("[controller]")]
 public class DocumentController : ControllerBase
 {
     private readonly ILogger<DocumentController> _logger;
-
-    public DocumentController(ILogger<DocumentController> logger)
+    private readonly ReportService _reportService;
+    public DocumentController(ILogger<DocumentController> logger, ReportService reportService)
     {
         _logger = logger;
+        _reportService = reportService;
     }
 
     [HttpPost("GenerateDocument")]
@@ -24,8 +24,7 @@ public class DocumentController : ControllerBase
 
             if (data != null)
             {
-                ReportGenerator generator = new ReportGenerator();
-                var documentBytes = generator.GenerateDocumentFromTemplate($"Aspose/{request.FilePath}", data, request.Type.ToLower() == "pdf");
+                var documentBytes = _reportService.GenerateDocumentFromTemplate($"Aspose/{request.FilePath}", data, request.Type.ToLower() == "pdf");
 
                 return File(documentBytes, "application/octet-stream", $"output.{request.Type}");
             }
@@ -41,5 +40,5 @@ public class DocumentController : ControllerBase
         }
     }
 
-
 }
+

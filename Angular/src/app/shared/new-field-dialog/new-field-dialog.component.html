@@ -1,9 +1,9 @@
 <h1 mat-dialog-title>{{ 'addField.title' | translate }}</h1>
 <div mat-dialog-content>
-  <mat-form-field>
-    <mat-select class="mat-select" [(ngModel)]="type">
+  <mat-form-field class="mat-select">
+    <mat-select [(ngModel)]="type" placeholder="{{ 'addField.fieldType' | translate }}">
       <mat-option *ngFor="let type of types" [value]="type.value">{{type.label}}</mat-option>
-    </mat-select>
+  </mat-select>
   </mat-form-field>
   <mat-form-field *ngIf="type === 'saveButton' || type === 'cancelButton'">
     <mat-label>{{ 'addField.buttonName' | translate }}</mat-label>

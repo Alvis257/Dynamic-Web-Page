@@ -11,10 +11,9 @@ import { ShareDocumentService } from "./shareDocument.service";
 export class ApplicationDataService {
 
   private localStorageKey = 'element_data';
-  private loadDefaultData = true;
+  private loadDefaultData = false;
 
   constructor(private http: HttpClient, private userService: UserService, private shareDocumentService: ShareDocumentService, private router: Router) {
-    localStorage.removeItem(this.localStorageKey); 
     if (this.loadDefaultData) {
       const ELEMENT_DATA: DataStructure[] = [
         {
@@ -103,7 +102,7 @@ export class ApplicationDataService {
     let results = [];
 
     for (let item of data) {
-      if (String(item.id).includes(searchKey) || item.name.includes(searchKey) || String(item.type).includes(searchKey) || item.responsible.includes(searchKey)) {
+      if (String(item.id).includes(searchKey.toLowerCase()) || item.name.toLowerCase().includes(searchKey.toLowerCase()) || String(item.type.toLowerCase()).includes(searchKey.toLowerCase()) || item.responsible.toLowerCase().includes(searchKey.toLowerCase())) {
         results.push(item);
       }
     }
@@ -117,7 +116,7 @@ export class ApplicationDataService {
     let results: DataStructure[] = [];
 
     for (let item of data) {
-      if (String(item.id).includes(searchKey) || item.name.includes(searchKey) || String(item.type).includes(searchKey) || item.responsible.includes(searchKey)) {
+      if (String(item.id).includes(searchKey.toLowerCase()) || item.name.toLowerCase().includes(searchKey.toLowerCase()) || String(item.type.toLowerCase()).includes(searchKey.toLowerCase()) || item.responsible.toLowerCase().includes(searchKey.toLowerCase())) {
         results.push(item);
       }
     }
@@ -131,7 +130,7 @@ export class ApplicationDataService {
     let data = this.getApplicationListById(sharedDocumentid);
 
     for (let item of data) {
-      if (String(item.id).includes(searchKey) || item.name.includes(searchKey) || String(item.type).includes(searchKey) || item.responsible.includes(searchKey)) {
+      if (String(item.id).includes(searchKey.toLowerCase()) || item.name.toLowerCase().includes(searchKey.toLowerCase()) || String(item.type.toLowerCase()).includes(searchKey.toLowerCase()) || item.responsible.toLowerCase().includes(searchKey.toLowerCase())) {
         results.push(item);
       }
     }
@@ -140,7 +139,7 @@ export class ApplicationDataService {
   }
   searchByStatus(status: string): DataStructure[] {
     const data = this.getAllApplications();
-    return data.filter(item => item.status === status);
+    return data.filter(item => item.status.toLowerCase() === status.toLowerCase());
   }
 
   searchByCreationTime(startDate: Date, endDate: Date | undefined): DataStructure[] {
@@ -154,7 +153,7 @@ export class ApplicationDataService {
 
   searchOwnedDocumentsByStatus(status: string, user: User): DataStructure[] {
     const data = this.getApplications(user);
-    return data.filter(item => item.status === status);
+    return data.filter(item => item.status.toLowerCase() === status.toLowerCase());
   }
 
   searchOwnedDocumentsByCreationTime(startDate: Date, endDate: Date | undefined, user: User): DataStructure[] {
@@ -201,13 +200,13 @@ export class ApplicationDataService {
       ...application,
       id: newId,
       Owner: currentUser,
-      status: 'created',
+      status: 'Created',
       creationTime: formattedDate,
       JsonData: {
         ...application,
         id: newId,
         Owner: currentUser,
-        status: 'created',
+        status: 'Created',
         creationTime: formattedDate
       }
     };

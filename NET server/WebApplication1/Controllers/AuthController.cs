@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication1.Classes;
 using MimeKit;
 using MailKit.Security;
+using DGSService.Service;
 
 namespace WebApplication1.Controllers
 {
@@ -11,12 +12,14 @@ namespace WebApplication1.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly EmailService _emailService;
         private readonly ILogger<AuthController> _logger;
 
-        public AuthController(ApplicationDbContext context, ILogger<AuthController> logger)
+        public AuthController(ApplicationDbContext context, EmailService emailService, ILogger<AuthController> logger)
         {
             _context = context;
             _logger = logger;
+            _emailService = emailService;
         }
 
         [HttpPost("login")]
@@ -144,7 +147,7 @@ namespace WebApplication1.Controllers
                     user.resetCode = resetCode;
                     await _context.SaveChangesAsync();
 
-                    var emailSent = await SendEmail(user.name + user.surname, user.email, resetCode);
+                    var emailSent = await _emailService.SendEmailAsync(user.name + " " + user.surname, user.email, resetCode);
                     if (emailSent)
                     {
                         return Ok();
@@ -196,31 +199,31 @@ namespace WebApplication1.Controllers
             }
         }
 
-        private async Task<bool> SendEmail(string name, string to, string resetCode)
-        {
-            try
-            {
-                var email = new MimeMessage();
-                email.From.Add(new MailboxAddress("DGS", "automateddgs@gmail.com"));
-                email.To.Add(new MailboxAddress(name, to));
-                email.Subject = "Reset Code";
-                email.Body = new TextPart("plain") { Text = $"Your reset code is {resetCode}" };
+        //private async Task<bool> SendEmail(string name, string to, string resetCode)
+        //{
+        //    try
+        //    {
+        //        var email = new MimeMessage();
+        //        email.From.Add(new MailboxAddress("DGS", "automateddgs@gmail.com"));
+        //        email.To.Add(new MailboxAddress(name, to));
+        //        email.Subject = "Reset Code";
+        //        email.Body = new TextPart("plain") { Text = $"Your reset code is {resetCode}" };
 
-                using (var client = new MailKit.Net.Smtp.SmtpClient())
-                {
-                    await client.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-                    await client.AuthenticateAsync("automatdgs@gmail.com", "rgfnwhjaurnbbifz").ConfigureAwait(false);
-                    await client.SendAsync(email);
-                    await client.DisconnectAsync(true);
-                }
+        //        using (var client = new MailKit.Net.Smtp.SmtpClient())
+        //        {
+        //            await client.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+        //            await client.AuthenticateAsync("automatdgs@gmail.com", "rgfnwhjaurnbbifz").ConfigureAwait(false);
+        //            await client.SendAsync(email);
+        //            await client.DisconnectAsync(true);
+        //        }
 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occurred while sending email.");
-                throw;
-            }
-        }
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "An error occurred while sending email.");
+        //        throw;
+        //    }
+        //}
     }
 }

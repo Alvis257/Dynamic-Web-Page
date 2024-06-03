@@ -6,6 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
 import { TypeService } from '../Service/type.service';
 import { TranslateModule } from '@ngx-translate/core';
+
 interface DataItem {
   formType: string;
   id:number;
@@ -35,7 +36,7 @@ export class FormViewerComponent implements OnInit {
   type: string | undefined;
   jsonData: any;
   hasLoadedFirstForm = false;
-
+  selectedForm: any;
   constructor(
     private typeService: TypeService,
     private router: Router, 
@@ -80,6 +81,7 @@ export class FormViewerComponent implements OnInit {
     }
   }
   view(form: Form): void {
+    this.selectedForm = form;
     this.router.navigate([form.name], { 
       relativeTo: this.route, 
       queryParams: { 

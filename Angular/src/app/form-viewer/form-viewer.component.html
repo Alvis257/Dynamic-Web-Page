@@ -1,14 +1,16 @@
 <mat-sidenav-container class="example-container">
-    <mat-sidenav mode="side" opened>
-      <mat-nav-list>
-        <div *ngFor="let node of menuData">
-          <h3 matSubheader>{{ node.type }}</h3>
-          <a mat-list-item *ngFor="let form of node.forms" (click)="view(form)">{{ form.name }}</a>
-        </div>
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
-    
+  <mat-sidenav mode="side" opened>
+    <mat-nav-list>
+      <div *ngFor="let node of menuData" class="menu-node">
+        <h3 matSubheader>{{ node.type }}</h3>
+        <a mat-list-item *ngFor="let form of node.forms" 
+           (click)="selectedForm = form; view(form)" 
+           [class.selected]="selectedForm === form" 
+           class="menu-item">{{ form.name }}</a>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+      <router-outlet></router-outlet>
+  </mat-sidenav-content>
 </mat-sidenav-container>

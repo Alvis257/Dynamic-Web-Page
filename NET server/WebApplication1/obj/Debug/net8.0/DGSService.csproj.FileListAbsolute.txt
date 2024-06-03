@@ -50,16 +50,11 @@ C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtime
 C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\osx\native\libSkiaSharp.dylib
 C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\win-arm64\native\libSkiaSharp.dll
 C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\win-x64\native\libSkiaSharp.dll
 C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\win-x86\native\libSkiaSharp.dll
-C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
-C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
-C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\pasta\Documents\DGS\NET server\WebApplication1\obj\Debug\net8.0\DGSService.csproj.AssemblyReference.cache
 C:\Users\pasta\Documents\DGS\NET server\WebApplication1\obj\Debug\net8.0\DGSService.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\pasta\Documents\DGS\NET server\WebApplication1\obj\Debug\net8.0\DGSService.AssemblyInfoInputs.cache
@@ -96,3 +91,9 @@ C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtime
 C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\linux-arm64\native\libSkiaSharp.so
 C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\linux-musl-x64\native\libSkiaSharp.so
 C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\linux-x64\native\libSkiaSharp.so
+C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\Aspose.PDF.dll
+C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\pasta\Documents\DGS\NET server\WebApplication1\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Windows.Extensions.dll

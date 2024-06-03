@@ -69,6 +69,7 @@
     "name": "Nosaukums",
     "dataPath": "Datu Ceļš",
     "filePath": "Fila atrašanās vieta",
+    "fieldType": "Lauka Tips",  
     "style": "Stils",
     "value": "Vērtība",
     "cancelButton": "Atcelt",

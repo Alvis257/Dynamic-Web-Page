@@ -2,7 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Filters;
 using WebApplication1.Classes;
+using DGSService.Service;
 using WebApplication1.Controllers;
+using NETCore.MailKit.Core;
+using DGSService.Classes;
 
 
 
@@ -25,6 +28,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddScoped<DGSService.Service.EmailService>();
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 // Configure Serilog
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
 {
@@ -53,6 +58,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
 
 public class ApplicationDbContext : DbContext
 {
