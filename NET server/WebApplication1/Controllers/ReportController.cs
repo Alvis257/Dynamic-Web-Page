@@ -4,7 +4,7 @@ using WebApplication1.Classes;
 using DGSService.Service;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class DocumentController : ControllerBase
 {
     private readonly ILogger<DocumentController> _logger;
@@ -22,16 +22,35 @@ public class DocumentController : ControllerBase
         {
             var data = JsonSerializer.Deserialize<Dictionary<string, object>>(request.Data);
 
-            if (data != null)
-            {
+            //var convertedData = new Dictionary<string, object>();
+            //foreach (var item in data)
+            //{
+            //    switch (item.Value.ValueKind)
+            //    {
+            //        case JsonValueKind.String:
+            //            convertedData.Add(item.Key, item.Value.GetString());
+            //            break;
+            //        case JsonValueKind.Number:
+            //            convertedData.Add(item.Key, item.Value.GetDouble()); // or GetInt32(), etc.
+            //            break;
+            //        case JsonValueKind.True:
+            //        case JsonValueKind.False:
+            //            convertedData.Add(item.Key, item.Value.GetBoolean());
+            //            break;
+            //            // handle other types as needed
+            //    }
+            //}
+
+            //if (convertedData.Count > 0)
+            //{
                 var documentBytes = _reportService.GenerateDocumentFromTemplate($"Aspose/{request.FilePath}", data, request.Type.ToLower() == "pdf");
 
                 return File(documentBytes, "application/octet-stream", $"output.{request.Type}");
-            }
-            else
-            {
-                return BadRequest("The data parameter cannot be null or malformed.");
-            }
+            //}
+            //else
+            //{
+            //    return BadRequest("The data parameter cannot be null or malformed.");
+            //}
         }
         catch (Exception ex)
         {

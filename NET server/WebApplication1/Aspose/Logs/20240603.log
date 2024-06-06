@@ -1,2 +1,1338 @@
 2024-06-03 00:10:09.698 +03:00 [WRN] Failed to determine the https port for redirect.
 2024-06-03 02:13:09.480 +03:00 [WRN] Failed to determine the https port for redirect.
+2024-06-03 11:55:03.667 +03:00 [WRN] Failed to determine the https port for redirect.
+2024-06-03 11:55:03.713 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'DGSService.Service.ReportService' while attempting to activate 'DocumentController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-06-03 11:56:17.139 +03:00 [WRN] Failed to determine the https port for redirect.
+2024-06-03 11:56:17.169 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'DGSService.Service.ReportService' while attempting to activate 'DocumentController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-06-03 11:58:13.702 +03:00 [WRN] Failed to determine the https port for redirect.
+2024-06-03 11:58:13.788 +03:00 [ERR] An error occurred while generating the document.
+System.Text.Json.JsonException: 's' is an invalid start of a value. Path: $ | LineNumber: 0 | BytePositionInLine: 0.
+ ---> System.Text.Json.JsonReaderException: 's' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadFirstToken(Byte first)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack& state, JsonReaderException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 23
+2024-06-03 11:58:24.795 +03:00 [ERR] An error occurred while generating the document.
+System.IO.FileNotFoundException: The template file could not be found.
+File name: 'Aspose/MainDocuments/New Microsoft Word Document.docx'
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 14
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 27
+2024-06-03 12:00:10.653 +03:00 [ERR] An error occurred while generating the document.
+System.IO.FileNotFoundException: The template file could not be found.
+File name: 'Aspose/MainDocuments/New Microsoft Word Document.docx'
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 14
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 27
+2024-06-03 12:00:18.840 +03:00 [ERR] An error occurred while generating the document.
+System.IO.FileNotFoundException: The template file could not be found.
+File name: 'Aspose/MainDocuments/New Microsoft Word Document.docx'
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 14
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 27
+2024-06-03 12:03:44.257 +03:00 [WRN] Failed to determine the https port for redirect.
+2024-06-03 12:03:44.353 +03:00 [ERR] An error occurred while generating the document.
+System.ArgumentNullException: Value cannot be null. (Parameter 'path1')
+   at System.ArgumentNullException.Throw(String paramName)
+   at System.IO.Path.Combine(String path1, String path2)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 19
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 27
+2024-06-03 12:05:02.986 +03:00 [ERR] An error occurred while generating the document.
+System.ArgumentNullException: Value cannot be null. (Parameter 'path1')
+   at System.ArgumentNullException.Throw(String paramName)
+   at System.IO.Path.Combine(String path1, String path2)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 19
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 27
+2024-06-03 12:05:50.890 +03:00 [ERR] An error occurred while generating the document.
+System.ArgumentNullException: Value cannot be null. (Parameter 'path1')
+   at System.ArgumentNullException.Throw(String paramName)
+   at System.IO.Path.Combine(String path1, String path2)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 19
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 27
+2024-06-03 12:06:22.950 +03:00 [WRN] Failed to determine the https port for redirect.
+2024-06-03 12:06:23.027 +03:00 [ERR] An error occurred while generating the document.
+System.IO.FileNotFoundException: The template file could not be found.
+File name: 'Aspose/MainDocuments/New Microsoft Word Document.docx'
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 22
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 27
+2024-06-03 12:07:24.943 +03:00 [WRN] Failed to determine the https port for redirect.
+2024-06-03 12:07:41.168 +03:00 [ERR] An error occurred while generating the document.
+System.IO.FileNotFoundException: The template file could not be found.
+File name: '../Aspose/MainDocuments/New Microsoft Word Document.docx'
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 22
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 27
+2024-06-03 12:08:55.034 +03:00 [WRN] Failed to determine the https port for redirect.
+2024-06-03 12:09:00.158 +03:00 [ERR] An error occurred while generating the document.
+System.IO.FileNotFoundException: The template file could not be found.
+File name: 'Aspose/MainDocuments/New Microsoft Word Document.docx'
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 22
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 27
+2024-06-03 12:09:18.195 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'InvoiceNumber]>'. Can not get the value of member 'InvoiceNumber' on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFd(fD d, Char v)
+   at ip.B()
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 27
+2024-06-03 12:11:18.525 +03:00 [WRN] Failed to determine the https port for redirect.
+2024-06-03 12:11:18.997 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'date]>'. Can not get the value of member 'date' on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFd(fD d, Char v)
+   at ip.B()
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 27
+2024-06-03 12:12:06.144 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'date]>'. Can not get the value of member 'date' on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFd(fD d, Char v)
+   at ip.B()
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 27
+2024-06-03 12:15:35.531 +03:00 [WRN] Failed to determine the https port for redirect.
+2024-06-03 12:15:36.009 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'date]>'. Can not get the value of member 'date' on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFd(fD d, Char v)
+   at ip.B()
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:20:33.329 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'InvoiceNumber]>'. Can not get the value of member 'InvoiceNumber' on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFd(fD d, Char v)
+   at ip.B()
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:21:49.554 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: Expression tag is not well-formed. Tag end is unexpected.
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:23:35.354 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: Tag 'if' is not well-formed. A conditional expression should return a Boolean value.
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:26:49.143 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: Tag 'if' is not well-formed. Character '<' is unexpected.
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:27:16.909 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: Tag 'if' is not well-formed. Character '=' is unexpected.
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:29:54.270 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression '[["date"]] = '. Can not resolve an indexer on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFd(fD d, Char v)
+   at ip.B()
+   at fp.R()
+   at fp.B()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:30:05.305 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression '[["date"]] == '. Can not resolve an indexer on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFd(fD d, Char v)
+   at ip.B()
+   at fp.R()
+   at fp.B()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:31:35.131 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'variables.get("'. Can not get the value of member 'variables' on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFd(fD d, Char v)
+   at ip.B()
+   at fp.R()
+   at fp.B()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:32:23.786 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: Tag 'endif' is not well-formed. Token 'endif' is unexpected.
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:33:42.452 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered while evaluating the expression or statement '["check"]]>'. The given key 'check' was not present in the dictionary.
+ ---> System.Collections.Generic.KeyNotFoundException: The given key 'check' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at _69bfbb759770475d913309e67ef801ea.ajiFd(Zj, Object, Object, Object)
+   at Zj.d(Object d, Object v)
+   at xt.d(Zj d, st v, st[] c)
+   at wt.ytiFd()
+   at KD.ytiFd()
+   --- End of inner exception stack trace ---
+   at KD.ytiFd()
+   at qp.vpiFd(xD d, Sp v, IDictionary c, kp t)
+   at vp.d(xD d, IDictionary v, kp c)
+   at cp.d(xD d, IDictionary v, kp c)
+   at yp.vpiFd(xD d, Sp v, IDictionary c, kp t)
+   at vp.d(xD d, IDictionary v, kp c)
+   at cp.d(xD d, IDictionary v, kp c)
+   at Mp.vpiFd(xD d, Sp v, IDictionary c, kp t)
+   at vp.d(xD d, IDictionary v, kp c)
+   at cp.d(xD d, IDictionary v, kp c)
+   at Pp.PpiFd(xD d)
+   at Gp.d(SD d, xD v)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:48:28.437 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression '[["check"]] == '. Can not resolve an indexer on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFd(fD d, Char v)
+   at ip.B()
+   at fp.R()
+   at fp.B()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:56:12.651 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: Tag 'if' is not well-formed. Character '=' is unexpected.
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:57:01.333 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'in items]>'. Can not get the value of member 'items' on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:58:00.684 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'in ["items"]]>'. Can not iterate over an instance of type 'System.Object'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:58:00.825 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'in ["items"]]>'. Can not iterate over an instance of type 'System.Object'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:58:29.306 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'in [["items"]]]>'. Can not resolve an indexer on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:58:44.227 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression '["item1"]]>'. Can not resolve an indexer on type 'System.Char'.
+   at ND.d(v d, fD v, Char c)
+   at ip.B()
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 12:59:34.301 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'a.["item1"]'. Can not get the value of member '[' on type 'System.Char'.
+   at ND.d(v d, fD v, Char c)
+   at ip.B()
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:00:11.830 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: Tag 'a' is not well-formed. Token 'a' is unexpected.
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:00:22.816 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression '["item1"]]>'. Can not resolve an indexer on type 'System.Char'.
+   at ND.d(v d, fD v, Char c)
+   at ip.B()
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:00:44.997 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression '[a."item1"]]'. Can not get the value of member 'item1' on type 'System.Char'.
+   at ND.d(v d, fD v, Char c)
+   at ip.B()
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:01:03.228 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression '["a.item1"]]>'. Can not resolve an indexer on type 'System.Char'.
+   at ND.d(v d, fD v, Char c)
+   at ip.B()
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:02:18.721 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'a.item1]>'. Can not get the value of member 'item1' on type 'System.Char'.
+   at ND.d(v d, fD v, Char c)
+   at ip.B()
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:04:07.845 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'a.[item1]'. Can not get the value of member '[' on type 'System.Char'.
+   at ND.d(v d, fD v, Char c)
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:04:57.896 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'a."[item1]"]>'. Can not get the value of member '[item1]' on type 'System.Char'.
+   at ND.d(v d, fD v, Char c)
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:05:29.993 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'a.["item1"]'. Can not get the value of member '[' on type 'System.Char'.
+   at ND.d(v d, fD v, Char c)
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:05:45.377 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'a.[["'. Can not get the value of member '[' on type 'System.Char'.
+   at ND.d(v d, fD v, Char c)
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:06:13.893 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'a.[item1]'. Can not get the value of member '[' on type 'System.Char'.
+   at ND.d(v d, fD v, Char c)
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:06:29.066 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'a.item1]>'. Can not get the value of member 'item1' on type 'System.Char'.
+   at ND.d(v d, fD v, Char c)
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:07:52.934 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'a in <<['. An expression is expected.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:08:07.420 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'a in ["items"]]>'. Can not iterate over an instance of type 'System.Object'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:08:17.982 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression ' in ["items"]]>'. Can not iterate over an instance of type 'System.Object'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:08:31.250 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression ' in ["items"]]>'. Can not iterate over an instance of type 'System.Object'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:09:04.612 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression ' in [["items"]]]>'. Can not resolve an indexer on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:09:14.963 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression ' in [[items]]'. Can not get the value of member 'items' on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:12:58.152 +03:00 [WRN] Failed to determine the https port for redirect.
+2024-06-03 13:13:49.794 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression '[["check"] ]== '. Can not resolve an indexer on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFd(fD d, Char v)
+   at ip.B()
+   at fp.R()
+   at fp.B()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:14:31.513 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: Tag 'if' is not well-formed. Character '=' is unexpected.
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:16:32.382 +03:00 [ERR] An error occurred while generating the document.
+System.IO.IOException: The process cannot access the file 'C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Aspose\MainDocuments\Test.docx' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.File.OpenRead(String path)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v, Boolean c)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v)
+   at Aspose.Words.Document..ctor(String fileName, LoadOptions loadOptions)
+   at Aspose.Words.Document..ctor(String fileName)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 25
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:16:37.040 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'in ["items"]]>'. Can not iterate over an instance of type 'System.Object'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:27:33.818 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'in items]>'. Can not get the value of member 'items' on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:28:30.192 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'in ["items"].item1>>'. Can not get the value of member 'item1' on type 'System.Object'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:28:56.428 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'item in ["items"]>>value<</'. Can not get the value of member 'value' on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:49:14.740 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression '[i'. Keyword 'in' is expected.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:49:39.291 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression '[i'. Keyword 'in' is expected.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:51:10.555 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression '[i'. Keyword 'in' is expected.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:51:42.009 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression '[i'. Keyword 'in' is expected.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:52:10.301 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression '[i'. Keyword 'in' is expected.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:52:52.334 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression '[i'. Keyword 'in' is expected.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:53:20.069 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'item in [items]]'. Can not get the value of member 'items' on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:53:39.971 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'item in ["items"]]>'. Can not iterate over an instance of type 'System.Object'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:54:01.768 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'item in <<['. An expression is expected.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 13:56:34.579 +03:00 [ERR] An error occurred while generating the document.
+System.Text.Json.JsonException: ':' is invalid after a value. Expected either ',', '}', or ']'. Path: $.items | LineNumber: 0 | BytePositionInLine: 152.
+ ---> System.Text.Json.JsonReaderException: ':' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 0 | BytePositionInLine: 152.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextToken(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.TryParseValue(Utf8JsonReader& reader, JsonDocument& document, Boolean shouldThrow, Boolean useArrayPools)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonDictionaryConverter`3.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, TDictionary& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack& state, JsonReaderException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 23
+2024-06-03 13:56:43.846 +03:00 [ERR] An error occurred while generating the document.
+System.Text.Json.JsonException: ':' is invalid after a value. Expected either ',', '}', or ']'. Path: $.items | LineNumber: 0 | BytePositionInLine: 152.
+ ---> System.Text.Json.JsonReaderException: ':' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 0 | BytePositionInLine: 152.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextToken(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.TryParseValue(Utf8JsonReader& reader, JsonDocument& document, Boolean shouldThrow, Boolean useArrayPools)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonDictionaryConverter`3.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, TDictionary& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack& state, JsonReaderException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 23
+2024-06-03 13:57:19.345 +03:00 [ERR] An error occurred while generating the document.
+System.Text.Json.JsonException: ':' is invalid after a value. Expected either ',', '}', or ']'. Path: $.items | LineNumber: 0 | BytePositionInLine: 152.
+ ---> System.Text.Json.JsonReaderException: ':' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 0 | BytePositionInLine: 152.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextToken(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.TryParseValue(Utf8JsonReader& reader, JsonDocument& document, Boolean shouldThrow, Boolean useArrayPools)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonDictionaryConverter`3.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, TDictionary& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack& state, JsonReaderException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 23
+2024-06-03 13:59:27.245 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: Tag 'for' is not well-formed. Token 'for' is unexpected.
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 14:00:04.624 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'item in [items] '. Can not get the value of member 'items' on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 14:00:06.184 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'item in [items] '. Can not get the value of member 'items' on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 14:00:50.402 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'item in ["items"] ]>'. Can not iterate over an instance of type 'System.Object'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 14:03:19.062 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression 'item in ["items"]]>'. Can not iterate over an instance of type 'System.Object'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFv(fD d, Char v)
+   at ip.b()
+   at fp.n()
+   at fp.t()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 14:58:27.051 +03:00 [ERR] An error occurred while generating the document.
+System.IO.IOException: The process cannot access the file 'C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Aspose\MainDocuments\Reikins.docx' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.File.OpenRead(String path)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v, Boolean c)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v)
+   at Aspose.Words.Document..ctor(String fileName, LoadOptions loadOptions)
+   at Aspose.Words.Document..ctor(String fileName)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 25
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 14:59:12.077 +03:00 [ERR] An error occurred while generating the document.
+System.IO.IOException: The process cannot access the file 'C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Aspose\MainDocuments\Reikins.docx' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.File.OpenRead(String path)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v, Boolean c)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v)
+   at Aspose.Words.Document..ctor(String fileName, LoadOptions loadOptions)
+   at Aspose.Words.Document..ctor(String fileName)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 25
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 14:59:36.478 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: Tag 'if' is not well-formed. A conditional expression should return a Boolean value.
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 15:01:27.910 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered while evaluating the expression or statement '["TotalAmount"]]>'. The given key 'TotalAmount' was not present in the dictionary.
+ ---> System.Collections.Generic.KeyNotFoundException: The given key 'TotalAmount' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at _0159a7b234914264b45edb6b5fe6e366.ajiFd(Zj, Object, Object, Object)
+   at Zj.d(Object d, Object v)
+   at xt.d(Zj d, st v, st[] c)
+   at wt.ytiFd()
+   at KD.ytiFd()
+   --- End of inner exception stack trace ---
+   at KD.ytiFd()
+   at qp.vpiFd(xD d, Sp v, IDictionary c, kp t)
+   at vp.d(xD d, IDictionary v, kp c)
+   at cp.d(xD d, IDictionary v, kp c)
+   at Pp.PpiFd(xD d)
+   at Gp.d(SD d, xD v)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 15:06:48.988 +03:00 [WRN] Failed to determine the https port for redirect.
+2024-06-03 15:06:49.069 +03:00 [ERR] An error occurred while generating the document.
+System.IO.FileNotFoundException: The template file could not be found.
+File name: 'Aspose/pdf'
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 22
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 17:26:39.773 +03:00 [ERR] An error occurred while generating the document.
+System.IO.IOException: The process cannot access the file 'C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Aspose\MainDocuments\Test.docx' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.File.OpenRead(String path)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v, Boolean c)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v)
+   at Aspose.Words.Document..ctor(String fileName, LoadOptions loadOptions)
+   at Aspose.Words.Document..ctor(String fileName)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 25
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 17:26:55.861 +03:00 [ERR] An error occurred while generating the document.
+System.IO.IOException: The process cannot access the file 'C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Aspose\MainDocuments\Test.docx' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.File.OpenRead(String path)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v, Boolean c)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v)
+   at Aspose.Words.Document..ctor(String fileName, LoadOptions loadOptions)
+   at Aspose.Words.Document..ctor(String fileName)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 25
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 17:27:03.193 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered at the end of expression '[ToDate]]'. Can not get the value of member 'ToDate' on type 'System.Collections.Generic.Dictionary`2[System.String,System.Object]'.
+   at ND.d(v d, fD v, Char c)
+   at ND.NDiFd(fD d, Char v)
+   at ip.B()
+   at fp.v()
+   at fp.d()
+   at fp.ipiFd()
+   at ip.d(eD d, RD v, xD c, uj t, Boolean n, Rp B, Boolean b)
+   at ip.ipiFd(eD d, RD v, xD c, uj t, Boolean n)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 17:28:26.261 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered while evaluating the expression or statement '[" InvoiceNumber"]]>'. The given key ' InvoiceNumber' was not present in the dictionary.
+ ---> System.Collections.Generic.KeyNotFoundException: The given key ' InvoiceNumber' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at _b15567229f7d4288937e932fa31ef685.ajiFd(Zj, Object, Object, Object)
+   at Zj.d(Object d, Object v)
+   at xt.d(Zj d, st v, st[] c)
+   at wt.ytiFd()
+   at KD.ytiFd()
+   --- End of inner exception stack trace ---
+   at KD.ytiFd()
+   at qp.vpiFd(xD d, Sp v, IDictionary c, kp t)
+   at vp.d(xD d, IDictionary v, kp c)
+   at cp.d(xD d, IDictionary v, kp c)
+   at Pp.PpiFd(xD d)
+   at Gp.d(SD d, xD v)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 17:29:05.656 +03:00 [ERR] An error occurred while generating the document.
+System.InvalidOperationException: An error has been encountered while evaluating the expression or statement '[" ReciverAdress"]]>'. The given key ' ReciverAdress' was not present in the dictionary.
+ ---> System.Collections.Generic.KeyNotFoundException: The given key ' ReciverAdress' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at _b15567229f7d4288937e932fa31ef685.ajiFd(Zj, Object, Object, Object)
+   at Zj.d(Object d, Object v)
+   at xt.d(Zj d, st v, st[] c)
+   at wt.ytiFd()
+   at KD.ytiFd()
+   --- End of inner exception stack trace ---
+   at KD.ytiFd()
+   at qp.vpiFd(xD d, Sp v, IDictionary c, kp t)
+   at vp.d(xD d, IDictionary v, kp c)
+   at cp.d(xD d, IDictionary v, kp c)
+   at Pp.PpiFd(xD d)
+   at Gp.d(SD d, xD v)
+   at Gp.d(String[] d, Object[] v, aD c, eD t, RD n, xD B)
+   at Gp.d(String[] d, Object[] v, RD c, xD t)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object[] dataSources, String[] dataSourceNames)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource, String dataSourceName)
+   at Aspose.Words.Reporting.ReportingEngine.BuildReport(Document document, Object dataSource)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 28
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 17:57:45.706 +03:00 [ERR] An error occurred while generating the document.
+System.IO.IOException: The process cannot access the file 'C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Aspose\MainDocuments\Test.docx' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.File.OpenRead(String path)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v, Boolean c)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v)
+   at Aspose.Words.Document..ctor(String fileName, LoadOptions loadOptions)
+   at Aspose.Words.Document..ctor(String fileName)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 25
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 19:49:56.992 +03:00 [ERR] An error occurred while generating the document.
+System.IO.IOException: The process cannot access the file 'C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Aspose\MainDocuments\Test.docx' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.File.OpenRead(String path)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v, Boolean c)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v)
+   at Aspose.Words.Document..ctor(String fileName, LoadOptions loadOptions)
+   at Aspose.Words.Document..ctor(String fileName)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 25
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46
+2024-06-03 19:50:12.437 +03:00 [ERR] An error occurred while generating the document.
+System.IO.IOException: The process cannot access the file 'C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Aspose\MainDocuments\Test.docx' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.File.OpenRead(String path)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v, Boolean c)
+   at Aspose.Words.Document.d(String d, IResourceLoadingCallback v)
+   at Aspose.Words.Document..ctor(String fileName, LoadOptions loadOptions)
+   at Aspose.Words.Document..ctor(String fileName)
+   at DGSService.Service.ReportService.GenerateDocumentFromTemplate(String templatePath, Object jsonData, Boolean outputToPDF) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Service\ReportService.cs:line 25
+   at DocumentController.GenerateDocument(DocumentRequest request) in C:\Users\pasta\Documents\DGS\NET server\WebApplication1\Controllers\ReportController.cs:line 46

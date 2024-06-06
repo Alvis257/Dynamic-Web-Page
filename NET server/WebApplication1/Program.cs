@@ -29,6 +29,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<DGSService.Service.EmailService>();
+builder.Services.AddScoped<ReportService>();
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 // Configure Serilog
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>

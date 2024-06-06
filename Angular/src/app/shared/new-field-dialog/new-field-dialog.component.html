@@ -5,11 +5,11 @@
       <mat-option *ngFor="let type of types" [value]="type.value">{{type.label}}</mat-option>
   </mat-select>
   </mat-form-field>
-  <mat-form-field *ngIf="type === 'saveButton' || type === 'cancelButton'">
+  <mat-form-field *ngIf="type === 'generateButton' || type === 'saveButton' || type === 'cancelButton'">
     <mat-label>{{ 'addField.buttonName' | translate }}</mat-label>
     <input matInput [(ngModel)]="label">
   </mat-form-field>
-  <mat-form-field *ngIf="type !== 'generateButton' && type !== 'saveButton' && type !== 'cancelButton'">
+  <mat-form-field>
     <mat-label>{{ 'addField.name' | translate }}</mat-label>
     <input matInput [(ngModel)]="name">
   </mat-form-field>

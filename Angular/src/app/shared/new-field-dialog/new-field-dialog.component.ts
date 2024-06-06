@@ -39,6 +39,7 @@ export class NewFieldDialogComponent {
     { value: 'text', label: 'Input' },
     { value: 'generateButton', label: 'Generate Document' },
     { value: 'statusDropdown', label: 'Dropdown for status' },
+    { value: 'typeDropdown', label: 'Dropdown for types' },
     { value: 'date', label: 'Date picker' },
 
     // add more types here

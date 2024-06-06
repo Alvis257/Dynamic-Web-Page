@@ -13,7 +13,9 @@ import { AppModule } from '../../app.module';
   <div mat-dialog-content>
     <p class="field-config-text">{{ 'fieldConfig.type' | translate }}: {{data.type}}</p>
     <p class="field-config-text">{{ 'fieldConfig.name' | translate }}: <input [(ngModel)]="data.name"></p>
-    <p class="field-config-text">{{ 'fieldConfig.dataPath' | translate }}: <input [(ngModel)]="data.dataPath"></p>
+    <p *ngIf="data.type === 'generateButton' || data.type === 'saveButton' || data.type === 'cancelButton'" class="field-config-text">{{ 'fieldConfig.label' | translate }}: <input [(ngModel)]="data.label"></p>
+    <p *ngIf="data.type !== 'generateButton' || data.type === 'saveButton' || data.type === 'cancelButton'" class="field-config-text">{{ 'fieldConfig.dataPath' | translate }}: <input [(ngModel)]="data.dataPath"></p>
+    <p *ngIf="data.type === 'generateButton'" class="field-config-text">{{ 'fieldConfig.filePath' | translate }}: <input [(ngModel)]="data.filePath"></p>
     <p class="field-config-text">{{ 'fieldConfig.position' | translate }}: <input [(ngModel)]="data.position" type="number"></p>
     <p class="field-config-text" *ngIf="IsLabel()">{{ 'fieldConfig.value' | translate }}: <input [(ngModel)]="data.value"></p>
     <p class="field-config-text">{{ 'fieldConfig.style' | translate }}: <input [(ngModel)]="data.style"></p>
@@ -48,7 +50,9 @@ export class FieldConfigDialogComponent {
   ngOnInit() {
     this.data.type = this.convertToString(this.data.type);
     this.data.name = this.convertToString(this.data.name);
+    this.data.label = this.convertToString(this.data.label);
     this.data.dataPath = this.convertToString(this.data.dataPath);
+    this.data.filePath = this.convertToString(this.data.filePath);
     this.data.value = this.convertToString(this.data.value);
     this.data.style = this.convertToString(this.data.style, '');
     this.data.position = this.convertToNumber(this.data.position);

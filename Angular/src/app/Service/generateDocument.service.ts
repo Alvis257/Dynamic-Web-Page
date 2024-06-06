@@ -8,7 +8,7 @@ import { Observable , lastValueFrom } from 'rxjs';
 
 
 export class GenerateDocumentService {
-private apiUrl = 'http://localhost:5257/api/Auth';
+private apiUrl = 'http://localhost:5257/api/Document';
   constructor(private http: HttpClient) { }
 
     generateDocument(documentPath:string,documentType:string, jsonData:string): Observable<Blob> {

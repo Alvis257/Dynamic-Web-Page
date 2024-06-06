@@ -12,12 +12,17 @@
            {{ option.value }}
           </option>
         </select>
+        <select *ngIf="field.type === 'typeDropdown'" [ngStyle]="fieldStyleToObject(field.style)" [formControlName]="field.name" class="my-dropdown">
+          <option *ngFor="let option of TypeList | keyvalue" [value]="option.value">
+           {{ option.value }}
+          </option>
+        </select>
         <input *ngIf="field.type === 'date'" type="date" [value]="field.value" [formControlName]="field.name">
         <button *ngIf="field.type === 'cancelButton'" [ngStyle]="fieldStyleToObject(field.style)" (click)="onCancel()">{{ 'form.cancelButton' | translate }}</button>
-        <button class="generate" *ngIf="field.type === 'generateButton'" mat-button [matMenuTriggerFor]="menu" appearance="fill">{{field.name}}</button>
+        <button class="generate" *ngIf="field.type === 'generateButton'" mat-button [matMenuTriggerFor]="menu" appearance="fill">{{field.label}}</button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="onGenerate(field.filePath, 'word')"><mat-icon>picture_as_pdf</mat-icon> PDF</button>
-          <button mat-menu-item (click)="onGenerate(field.filePath, 'pdf')"><mat-icon>description</mat-icon> Word</button>
+          <button mat-menu-item (click)="onGenerate(field.filePath, 'pdf')"><mat-icon>picture_as_pdf</mat-icon> PDF</button>
+          <button mat-menu-item (click)="onGenerate(field.filePath, 'docx')"><mat-icon>description</mat-icon> Word</button>
         </mat-menu>
         <div class="field-icons" *ngIf="configMode  && hasAdminAccess()">
           <mat-icon (click)="openFieldConfig(field)">settings</mat-icon> 

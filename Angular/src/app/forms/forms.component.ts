@@ -64,6 +64,7 @@ export class FormsComponent implements OnInit {
   disableJsonView = true;
   fromSelector = false;
   statusList: string[] = [];
+  TypeList: string[] = [];
   formsId: number | undefined;
   formName: string | undefined;
   public rights!: {
@@ -88,6 +89,7 @@ export class FormsComponent implements OnInit {
   ) {
     this.parameterService.getStatus().subscribe(data => {
       this.statusList = Object.keys(data.status);
+      this.TypeList = Object.keys(data.SendingTypes);
     });
     const navigation = this.router.getCurrentNavigation();
     if (navigation && navigation.extras.state) {
@@ -490,6 +492,8 @@ export class FormsComponent implements OnInit {
       dataPath: field.dataPath,
       position: field.position,
       style: field.style,
+      label: field.label,
+      filePath: field.filePath,
       value: field.type === 'label' ? field.value : '',
     };
 
@@ -499,6 +503,7 @@ export class FormsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
       if (result) {
         const originalField = this.formData.find((f: any) => f.name === field.name);
         if (originalField) {
@@ -521,7 +526,9 @@ export class FormsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        result.position = this.formData.length;
+        console.log(result);
+        result.id = this.formData.length + 1;
+        result.position = this.formData.length + 1;
         this.formData.push(result);
         this.displayData = JSON.parse(JSON.stringify(this.formData));
         this.createForm();
@@ -567,12 +574,12 @@ export class FormsComponent implements OnInit {
     }
   }
 
-  onGenerate(filetype: string, filePath: string): void {
+  onGenerate( filePath: string,filetype: string): void {
     this.generateDocumentService.generateDocument(filePath, filetype, this.jsonData).subscribe((data: Blob) => {
       const downloadURL = window.URL.createObjectURL(data);
       const link = document.createElement('a');
       link.href = downloadURL;
-      link.download = `output.${filetype}`;
+      link.download = `${JSON.parse(this.jsonData).name}.${filetype}`;
       link.click();
     },
       (error) => {

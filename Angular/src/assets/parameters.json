@@ -8,5 +8,9 @@
         "In Procces" : "In Procces",
         "Completed" : "Completed",
         "Cancelled" : "Cancelled"
+    },
+    "SendingTypes":{
+        "Ar pārskaitijumu":"Ar pārskaitijumu",
+        "Ar skaidru naudu":"Ar skaidru naudu"
     }
 }

@@ -7,8 +7,16 @@ namespace DGSService.Service
 {
     public class ReportService
     {
+        private readonly IWebHostEnvironment _env;
+
+        public ReportService(IWebHostEnvironment env)
+        {
+            _env = env;
+        }
+
         public byte[] GenerateDocumentFromTemplate(string templatePath, object jsonData, bool outputToPDF)
         {
+
             if (string.IsNullOrEmpty(templatePath) || !File.Exists(templatePath))
             {
                 throw new FileNotFoundException("The template file could not be found.", templatePath);
